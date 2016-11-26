@@ -1,6 +1,6 @@
 package org.gradle.domain;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 public class CardDeck {
@@ -10,10 +10,10 @@ public class CardDeck {
 	private static final int CARD_COUNT = 13;
 	
 	public CardDeck(){
-		cards = new ArrayList<Card>();
+		cards = new LinkedList<Card>();
 		for(String pattern : PATTERNS){
 			for(int i = 1; i <= CARD_COUNT; i++){
-				String denomination = "";
+				String denomination;
 				if(i == 1){
 					denomination = "A";
 				} else if(i == 11){
@@ -23,7 +23,7 @@ public class CardDeck {
 				} else if(i == 13){
 					denomination = "K";
 				} else {
-					denomination += i;
+					denomination = String.valueOf(i);
 				}
 				cards.add(new Card(pattern, denomination));
 			}
@@ -31,6 +31,15 @@ public class CardDeck {
 	}
 	
 	public Card draw(){
-		return null;
+		int select = selector();
+		Card card = cards.get(select);
+		cards.remove(select);
+		
+		return card;
+	}
+	
+	private int selector(){
+		int size = cards.size();
+		return (int)(Math.random() * size);
 	}
 }

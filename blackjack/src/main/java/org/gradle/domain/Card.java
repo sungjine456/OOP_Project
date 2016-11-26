@@ -4,8 +4,6 @@ public class Card {
 	private String pattern;
 	private String denomination;
 	
-	public Card(){
-	}
 	public Card(String pattern, String denominaton){
 		this.pattern = pattern;
 		this.denomination = denominaton;
