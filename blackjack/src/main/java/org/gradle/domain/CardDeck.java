@@ -10,24 +10,7 @@ public class CardDeck {
 	private static final int CARD_COUNT = 13;
 	
 	public CardDeck(){
-		cards = new LinkedList<Card>();
-		for(String pattern : PATTERNS){
-			for(int i = 1; i <= CARD_COUNT; i++){
-				String denomination;
-				if(i == 1){
-					denomination = "A";
-				} else if(i == 11){
-					denomination = "J";
-				} else if(i == 12){
-					denomination = "Q";
-				} else if(i == 13){
-					denomination = "K";
-				} else {
-					denomination = String.valueOf(i);
-				}
-				cards.add(new Card(pattern, denomination));
-			}
-		}
+		cards = makeCardDeck();
 	}
 	
 	public Card draw(){
@@ -41,5 +24,32 @@ public class CardDeck {
 	private int selector(){
 		int size = cards.size();
 		return (int)(Math.random() * size);
+	}
+	
+	private List<Card> makeCardDeck(){
+		List<Card> cards = new LinkedList<Card>();
+		for(String pattern : PATTERNS){
+			for(int i = 1; i <= CARD_COUNT; i++){
+				cards.add(makeCard(pattern, i));
+			}
+		}
+		return cards;
+	}
+	
+	private Card makeCard(String pattern, int cardNumber){
+		String denomination;
+		if(cardNumber == 1){
+			denomination = "A";
+		} else if(cardNumber == 11){
+			denomination = "J";
+		} else if(cardNumber == 12){
+			denomination = "Q";
+		} else if(cardNumber == 13){
+			denomination = "K";
+		} else {
+			denomination = String.valueOf(cardNumber);
+		}
+		
+		return new Card(pattern, denomination);
 	}
 }
