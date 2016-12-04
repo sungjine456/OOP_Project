@@ -10,7 +10,7 @@ public class CardDeck {
 	private static final int CARD_COUNT = 13;
 	
 	public CardDeck(){
-		cards = makeCardDeck();
+		this.cards = makeCardDeck();
 	}
 	
 	public Card draw(){
@@ -27,16 +27,16 @@ public class CardDeck {
 	}
 	
 	private List<Card> makeCardDeck(){
-		List<Card> cards = new LinkedList<Card>();
+		List<Card> cardDeck = new LinkedList<Card>();
 		for(String pattern : PATTERNS){
 			for(int i = 1; i <= CARD_COUNT; i++){
-				cards.add(makeCard(pattern, i));
+				cardDeck.add(new Card(pattern, numberToDenomination(i)));
 			}
 		}
-		return cards;
+		return cardDeck;
 	}
 	
-	private Card makeCard(String pattern, int cardNumber){
+	private String numberToDenomination(int cardNumber){
 		String denomination;
 		if(cardNumber == 1){
 			denomination = "A";
@@ -50,6 +50,6 @@ public class CardDeck {
 			denomination = String.valueOf(cardNumber);
 		}
 		
-		return new Card(pattern, denomination);
+		return denomination;
 	}
 }
