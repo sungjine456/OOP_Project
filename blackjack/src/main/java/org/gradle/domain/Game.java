@@ -27,4 +27,12 @@ public class Game {
 			gamer.receiveCard(cardDeck.draw());
 		}
 	}
+	
+	private void initPhase(CardDeck cardDeck, Gamer gamer, Dealer dealer){
+		System.out.println("처음 2장을 뽑겠습니다.");
+		for(int i = 0; i < 2; i++){
+			gamer.receiveCard(cardDeck.draw());
+			dealer.receiveCard(cardDeck.draw());
+		}
+	}
 }

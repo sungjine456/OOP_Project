@@ -30,26 +30,9 @@ public class CardDeck {
 		List<Card> cardDeck = new LinkedList<Card>();
 		for(String pattern : PATTERNS){
 			for(int i = 1; i <= CARD_COUNT; i++){
-				cardDeck.add(new Card(pattern, numberToDenomination(i)));
+				cardDeck.add(new Card(pattern, i));
 			}
 		}
 		return cardDeck;
-	}
-	
-	private String numberToDenomination(int cardNumber){
-		String denomination;
-		if(cardNumber == 1){
-			denomination = "A";
-		} else if(cardNumber == 11){
-			denomination = "J";
-		} else if(cardNumber == 12){
-			denomination = "Q";
-		} else if(cardNumber == 13){
-			denomination = "K";
-		} else {
-			denomination = String.valueOf(cardNumber);
-		}
-		
-		return denomination;
 	}
 }
