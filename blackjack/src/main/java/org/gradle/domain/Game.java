@@ -3,6 +3,8 @@ package org.gradle.domain;
 import java.util.Scanner;
 
 public class Game {
+	private static final int INIT_RECEIVE_CARD_COUNT = 2;
+	
 	public void play(){
 		System.out.println("Hello Blackjack Game");
 		Scanner sc = new Scanner(System.in);
@@ -12,6 +14,7 @@ public class Game {
 		Rule rule = new Rule();
 		
 		Card card = cardDeck.draw();
+		initPhase(cardDeck, gamer, dealer);
 		playingPhase(sc, cardDeck, gamer);
 	}
 	
@@ -30,7 +33,7 @@ public class Game {
 	
 	private void initPhase(CardDeck cardDeck, Gamer gamer, Dealer dealer){
 		System.out.println("처음 2장을 뽑겠습니다.");
-		for(int i = 0; i < 2; i++){
+		for(int i = 0; i < INIT_RECEIVE_CARD_COUNT; i++){
 			gamer.receiveCard(cardDeck.draw());
 			dealer.receiveCard(cardDeck.draw());
 		}

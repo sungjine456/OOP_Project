@@ -2,28 +2,20 @@ package org.gradle.domain;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Stack;
 
 public class CardDeck {
-	private List<Card> cards;
+	private Stack<Card> cards;
 	
 	private static final String[] PATTERNS = {"spade", "heart", "diamond", "club"};
 	private static final int CARD_COUNT = 13;
 	
 	public CardDeck(){
-		this.cards = makeCardDeck();
+		this.cards = shuffle(makeCardDeck());
 	}
 	
 	public Card draw(){
-		int select = selector();
-		Card card = cards.get(select);
-		cards.remove(select);
-		
-		return card;
-	}
-	
-	private int selector(){
-		int size = cards.size();
-		return (int)(Math.random() * size);
+		return cards.pop();
 	}
 	
 	private List<Card> makeCardDeck(){
@@ -34,5 +26,19 @@ public class CardDeck {
 			}
 		}
 		return cardDeck;
+	}
+	
+	private Stack<Card> shuffle(List<Card> cardDeck){
+		int cardDeckSize = cardDeck.size();
+		Stack<Card> shuffleCardDeck = new Stack<Card>();
+		while(cardDeckSize > 0){
+			int changeIndex = (int)(Math.random() * cardDeckSize);
+			
+			shuffleCardDeck.push(cardDeck.get(changeIndex));
+			cardDeck.remove(changeIndex);
+			
+			cardDeckSize--;
+		}
+		return shuffleCardDeck;
 	}
 }

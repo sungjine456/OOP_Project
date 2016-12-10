@@ -12,11 +12,26 @@ public class Dealer {
 	}
 	
 	public void receiveCard(Card card){
-		if(this.getPointSum() <= CAN_RECEIVE_POINT){
+		if(receivableCard()){
 			this.cards.add(card);
 		} else {
 			System.out.println("카드를 받을 수 없습니다.");
 		}
+	}
+	
+	public void showCards(){
+		StringBuilder sb = new StringBuilder();
+		sb.append("보유 중인 카드");
+		sb.append("\n");
+		for(Card card : cards){
+			sb.append(card.toString());
+			sb.append("\n");
+		}
+		System.out.print(sb.toString());
+	}
+	
+	public List<Card> openCards(){
+		return cards;
 	}
 	
 	private int getPointSum(){
@@ -28,7 +43,7 @@ public class Dealer {
 		return sum;
 	}
 	
-	public List<Card> openCards(){
-		return null;
+	private boolean receivableCard(){
+		return getPointSum() <= CAN_RECEIVE_POINT;
 	}
 }
