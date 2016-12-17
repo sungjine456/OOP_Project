@@ -3,6 +3,7 @@ package org.gradle.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 public class Game {
 	private static final int INIT_RECEIVE_CARD_COUNT = 2;
@@ -53,10 +54,10 @@ public class Game {
 	
 	private void initPhase(CardDeck cardDeck, List<Player> players){
 		System.out.println("처음 2장을 뽑겠습니다.");
-		for(Player player : players){
-			for(int i = 0; i < INIT_RECEIVE_CARD_COUNT; i++){
+		players.forEach(player -> {
+			IntStream.range(0, INIT_RECEIVE_CARD_COUNT).forEach(i -> {
 				player.receiveCard(cardDeck.draw());
-			}
-		}
+			});
+		});
 	}
 }

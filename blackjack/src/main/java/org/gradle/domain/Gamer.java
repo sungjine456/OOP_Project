@@ -20,10 +20,10 @@ public class Gamer implements Player {
 	public void showCards(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("보유 중인 카드\n");
-		for(Card card : cards){
+		cards.forEach(card -> {
 			sb.append(card.toString());
 			sb.append("\n");
-		}
+		});
 		System.out.print(sb.toString());
 	}
 	

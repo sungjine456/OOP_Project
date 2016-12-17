@@ -25,10 +25,10 @@ public class Dealer implements Player {
 	public void showCards(){
 		StringBuilder sb = new StringBuilder();
 		sb.append("보유 중인 카드\n");
-		for(Card card : cards){
+		cards.forEach(card -> {
 			sb.append(card.toString());
 			sb.append("\n");
-		}
+		});
 		System.out.print(sb.toString());
 	}
 	
@@ -38,12 +38,7 @@ public class Dealer implements Player {
 	}
 	
 	private int getPointSum(){
-		int sum = 0;
-		for(Card card : this.cards){
-			sum += card.getPoint();
-		}
-		
-		return sum;
+		return cards.stream().mapToInt(card -> card.getPoint()).sum();
 	}
 	
 	private boolean receivableCard(){

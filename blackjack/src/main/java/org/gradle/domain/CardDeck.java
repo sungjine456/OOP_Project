@@ -3,6 +3,8 @@ package org.gradle.domain;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Stack;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class CardDeck {
 	private Stack<Card> cards;
@@ -20,25 +22,23 @@ public class CardDeck {
 	
 	private List<Card> makeCardDeck(){
 		List<Card> cardDeck = new LinkedList<Card>();
-		for(String pattern : PATTERNS){
-			for(int i = 1; i <= CARD_COUNT; i++){
+		Stream.of(PATTERNS).forEach(pattern ->{
+			IntStream.rangeClosed(1, CARD_COUNT).forEach(i -> {
 				cardDeck.add(new Card(pattern, i));
-			}
-		}
+			});
+		});
 		return cardDeck;
 	}
 	
 	private Stack<Card> shuffle(List<Card> cardDeck){
 		int cardDeckSize = cardDeck.size();
 		Stack<Card> shuffleCardDeck = new Stack<Card>();
-		while(cardDeckSize > 0){
-			int changeIndex = (int)(Math.random() * cardDeckSize);
+		IntStream.iterate(cardDeckSize, i -> i - 1).limit(cardDeckSize).forEach(i -> {
+			int changeIndex = (int)(Math.random() * i);
 			
 			shuffleCardDeck.push(cardDeck.get(changeIndex));
 			cardDeck.remove(changeIndex);
-			
-			cardDeckSize--;
-		}
+		});
 		return shuffleCardDeck;
 	}
 }
