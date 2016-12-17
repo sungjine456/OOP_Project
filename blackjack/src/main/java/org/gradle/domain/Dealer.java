@@ -15,6 +15,7 @@ public class Dealer implements Player {
 	public void receiveCard(Card card){
 		if(receivableCard()){
 			this.cards.add(card);
+			showCards();
 		} else {
 			System.out.println("카드를 받을 수 없습니다.");
 		}
