@@ -6,14 +6,30 @@ public class Game {
 	public void start(){
 		System.out.println("Start Number BaseBall Game");
 		Scanner sc = new Scanner(System.in);
-		System.out.println("숫자의 수를 정해주세요");
-		int numberSize = sc.nextInt();
-		Referee referee = new Referee(numberSize);
 		
-		playing(sc, numberSize, referee);
+		while(true){
+			boolean finish = false;
+			System.out.println("게임을 선택해 주세요.\n1. 1인용\n0. 게임 종료(1, 2를 제외한 모든 숫자)");
+			int i = changeStringIsNumber(sc, sc.next());
+			switch (i) {
+				case 1:
+					playingOnePerson(sc);
+					break;
+				default:
+					finish = true;
+					break;
+			}
+			if(finish){
+				break;
+			}
+		}
 	}
 	
-	private void playing(Scanner sc, int numberSize, Referee referee){
+	private void playingOnePerson(Scanner sc){
+		System.out.println("숫자의 수를 정해주세요");
+		int numberSize = changeStringIsNumber(sc, sc.next());
+		Referee referee = new Referee(numberSize);
+		
 		while(true){
 			System.out.println("숫자를 입력해주세요. ex) 1234");
 			String[] numbersStr = sc.next().split("");
@@ -45,5 +61,13 @@ public class Game {
 			}
 		}
 		return false;
+	}
+	
+	private int changeStringIsNumber(Scanner sc, String str){
+		try {
+			return Integer.parseInt(str);
+		} catch(NumberFormatException e) {
+			return changeStringIsNumber(sc, sc.nextLine());
+		}
 	}
 }
