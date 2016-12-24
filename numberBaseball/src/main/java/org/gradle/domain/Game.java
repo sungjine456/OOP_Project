@@ -3,6 +3,7 @@ package org.gradle.domain;
 import java.util.Scanner;
 
 public class Game {
+	static int numberSize;
 	public void start(){
 		System.out.println("Start Number BaseBall Game");
 		Scanner sc = new Scanner(System.in);
@@ -30,79 +31,66 @@ public class Game {
 	
 	private void playingTwoPeople(Scanner sc){
 		System.out.println("숫자의 수를 정해주세요");
-		int numberSize = changeStringIsNumber(sc, sc.next());
-		Member memeber1 = new Member(numberSize);
-		Member memeber2 = new Member(numberSize);
-		
+		numberSize = changeStringIsNumber(sc, sc.next());
+		Player[] players = {new Member(numberSize), new Member(numberSize)};
+		int playersLength = players.length;
 		int win = 0;
-		while(true){
-			System.out.println("1인 숫자를 입력해주세요. ex) 1234");
-			String[] numbersStr = sc.next().split("");
-			if("a".equals(numbersStr[0])){
-				System.out.println("memeber1 : " + memeber1.showAnswer(numberSize));
-				continue;
+		while(win == 0){
+			for(int i = 1; i <= playersLength; i++){
+				System.out.println(i + "인 숫자를 입력해주세요. ex) 1234");
+				String[] numbersStr = sc.next().split("");
+				if(inputNumberConfirm(sc, players[i], numbersStr, i)){
+					break;
+				}
+				if(players[i].confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
+					System.out.println(i + "인 성공 !!");
+					win += i;
+				}
 			}
-			if(confirmInputIsNotNumber(numberSize, numbersStr)){
-				System.out.print("다시 ");
-			}
-			System.out.println(memeber1.confirmAnswer(numbersStr));
-			if(memeber1.confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
-				System.out.println("1인 성공 !!");
-				win += 1;
-			}
-			
-			System.out.println("2인 숫자를 입력해주세요. ex) 1234");
-			numbersStr = sc.next().split("");
-			if("a".equals(numbersStr[0])){
-				System.out.println("memeber1 : " + memeber2.showAnswer(numberSize));
-				continue;
-			}
-			if(confirmInputIsNotNumber(numberSize, numbersStr)){
-				System.out.print("다시 ");
-			}
-			System.out.println(memeber2.confirmAnswer(numbersStr));
-			if(memeber2.confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
-				System.out.println("2인 성공 !!");
-				win += 2;
-			}
-			if(win != 0){
+			switch (win) {
+			case 1:
+				System.out.println("1인 승리!");
+				break;
+			case 2:
+				System.out.println("2인 승리!");
+				break;
+			case 3:
+				System.out.println("무승부");
 				break;
 			}
-		}
-		switch (win) {
-		case 1:
-			System.out.println("1인 승리!");
-			break;
-		case 2:
-			System.out.println("2인 승리!");
-			break;
-		default:
-			System.out.println("무승부");
-			break;
 		}
 	}
 	
 	private void playingOnePerson(Scanner sc){
 		System.out.println("숫자의 수를 정해주세요");
-		int numberSize = changeStringIsNumber(sc, sc.next());
-		Referee referee = new Referee(numberSize);
+		numberSize = changeStringIsNumber(sc, sc.next());
+		Player player = new Referee(numberSize);
 		
 		while(true){
 			System.out.println("숫자를 입력해주세요. ex) 1234");
 			String[] numbersStr = sc.next().split("");
-			if("a".equals(numbersStr[0])){
-				System.out.println(referee.showAnswer(numberSize));
+			if(inputNumberConfirm(sc, player, numbersStr, 0)){
 				continue;
 			}
-			if(confirmInputIsNotNumber(numberSize, numbersStr)){
-				System.out.print("다시 ");
-			}
-			System.out.println(referee.confirmAnswer(numbersStr));
-			if(referee.confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
+			if(player.confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
 				System.out.println("성공 !!");
 				break;
 			}
 		}
+	}
+	
+	private boolean inputNumberConfirm(Scanner sc, Player player, String[] numbersStr, int i){
+		if("a".equals(numbersStr[0])){
+			System.out.println(i==0?"answer : " + player.showAnswer(numberSize)
+									:"memeber" + i + " answer : " + player.showAnswer(numberSize));
+			return true;
+		}
+		if(confirmInputIsNotNumber(numberSize, numbersStr)){
+			System.out.print("다시 ");
+			return true;
+		}
+		System.out.println(player.confirmAnswer(numbersStr));
+		return false;
 	}
 	
 	private boolean confirmInputIsNotNumber(int numberSize, String[] numbersStr){
@@ -124,7 +112,8 @@ public class Game {
 		try {
 			return Integer.parseInt(str);
 		} catch(NumberFormatException e) {
-			return changeStringIsNumber(sc, sc.nextLine());
+			System.out.println("다시 입력해 주세요.");
+			return changeStringIsNumber(sc, sc.next());
 		}
 	}
 }

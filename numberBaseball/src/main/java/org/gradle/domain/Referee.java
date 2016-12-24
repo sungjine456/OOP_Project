@@ -4,13 +4,14 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Referee {
+public class Referee implements Player {
 	private List<Integer> numberList = new LinkedList<Integer>();
 	
 	public Referee(int numberSize){
 		makeNumberList(numberSize);
 	}
 	
+	@Override
 	public String confirmAnswer(String[] numbersStr){
 		int len = numbersStr.length;
 		int s = 0;
@@ -28,6 +29,7 @@ public class Referee {
 		return s + "S " + (f - s) + "F";
 	}
 	
+	@Override
 	public String showAnswer(int len){
 		StringBuilder sb = new StringBuilder();
 		for(int i = 0; i < len; i++){
