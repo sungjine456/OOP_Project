@@ -4,12 +4,12 @@ import java.util.Scanner;
 
 public class Game {
 	static int numberSize;
+	static boolean start = false;
 	public void start(){
 		System.out.println("Start Number BaseBall Game");
 		Scanner sc = new Scanner(System.in);
-		
-		while(true){
-			boolean finish = false;
+		boolean finish = true;
+		while(finish){
 			System.out.println("게임을 선택해 주세요.\n1. 1인용\n2. 2인용\n3. 3인 이상\n0. 게임 종료(1, 2를 제외한 모든 숫자)");
 			int i = changeStringIsNumber(sc, sc.next());
 			switch (i) {
@@ -29,18 +29,27 @@ public class Game {
 					}
 					break;
 				default:
-					finish = true;
+					finish = false;
 					break;
-			}
-			if(finish){
-				break;
 			}
 		}
 	}
 	
-	private void playingNotOnePerson(Scanner sc, int numberOfPeople){
-		System.out.println("숫자의 수를 정해주세요");
+	private void setNumber(Scanner sc){
+		System.out.println("숫자의 수를 정해주세요. ex) 3이상 9이하의 수를 입력해주세요");
 		numberSize = changeStringIsNumber(sc, sc.next());
+		if(numberSize < 3 || numberSize > 9){
+			System.out.print("다시 ");
+			setNumber(sc);
+		}
+		if(!start){
+			System.out.println("게임 시작!!");
+			start = true;
+		}
+	}
+	
+	private void playingNotOnePerson(Scanner sc, int numberOfPeople){
+		setNumber(sc);
 		Player[] players = new Player[numberOfPeople];
 		for(int i = 0; i < numberOfPeople; i++){
 			players[i] = new Member(numberSize);
@@ -61,12 +70,12 @@ public class Game {
 				}
 			}
 		}
+		start = false;
 		System.out.println(count!=numberOfPeople?resultAnnouncement(win):"무승부!!");
 	}
 	
 	private void playingOnePerson(Scanner sc){
-		System.out.println("숫자의 수를 정해주세요");
-		numberSize = changeStringIsNumber(sc, sc.next());
+		setNumber(sc);
 		Player player = new Referee(numberSize);
 		
 		while(true){
@@ -80,6 +89,7 @@ public class Game {
 				break;
 			}
 		}
+		start = false;
 	}
 	
 	private boolean inputNumberConfirm(Scanner sc, Player player, String[] numbersStr, int i){
@@ -88,7 +98,7 @@ public class Game {
 									:"memeber" + i + " answer : " + player.showAnswer(numberSize));
 			return true;
 		}
-		if(confirmInputIsNotNumber(numberSize, numbersStr)){
+		if(confirmInputIsNotNumber(numbersStr)){
 			System.out.print("다시 ");
 			return true;
 		}
@@ -96,7 +106,7 @@ public class Game {
 		return false;
 	}
 	
-	private boolean confirmInputIsNotNumber(int numberSize, String[] numbersStr){
+	private boolean confirmInputIsNotNumber(String[] numbersStr){
 		int len = numbersStr.length;
 		if(numberSize != len){
 			return true;
