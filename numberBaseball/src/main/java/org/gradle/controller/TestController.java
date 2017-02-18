@@ -7,7 +7,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class TestController {
 	@RequestMapping("/test.do")
 	public String test(){
-		System.out.println("test controller");
 		return "test.html";
+	}
+	
+	@RequestMapping("/jspTest.do")
+	public String jspTest(){
+		return "test";
 	}
 }
