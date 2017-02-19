@@ -13,7 +13,7 @@
 	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>
-    		index.html
+    		index.jsp
     	</welcome-file>
 	</welcome-file-list>
 	<filter>

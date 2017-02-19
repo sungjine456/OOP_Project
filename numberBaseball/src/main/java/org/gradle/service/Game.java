@@ -1,6 +1,10 @@
-package org.gradle.domain;
+package org.gradle.service;
 
 import java.util.Scanner;
+
+import org.gradle.domain.Member;
+import org.gradle.domain.Player;
+import org.gradle.domain.Referee;
 
 public class Game {
 	static int numberSize;

@@ -1,6 +1,6 @@
 package org.gradle;
 
-import org.gradle.domain.Game;
+import org.gradle.service.Game;
 
 public class Application {
 	public static void main(String[] args){
