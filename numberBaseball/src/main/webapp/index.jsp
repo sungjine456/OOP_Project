@@ -7,10 +7,10 @@
 	<body>
 		<form method="get" id="form">
 			<div style="width: 125; height: 30; margin: auto;">
-				<label> 숫자 야구 게임!! </label></br></br>
-				<button type="button" class="indexBtn" id="oneStart">1. 1인 용</button></br></br>
-				<button type="button" class="indexBtn" id="twoStart">2. 2인 용</button></br></br>
-				<button type="button" class="indexBtn" id="manyStart">3. 다인 용</button></br></br>
+				<label> 숫자 야구 게임!! </label><br/><br/>
+				<button type="button" class="indexBtn" id="oneStart">1. 1인 용</button><br/><br/>
+				<button type="button" class="indexBtn" id="twoStart">2. 2인 용</button><br/><br/>
+				<button type="button" class="indexBtn" id="manyStart">3. 다인 용</button><br/><br/>
 				<button type="button" class="indexBtn" id="finish">4. 게임 종료</button>
 			</div>
 		</form>
