@@ -7,14 +7,16 @@ import org.gradle.domain.Player;
 import org.gradle.domain.Referee;
 
 public class Game {
-	static int numberSize;
-	static boolean start = false;
+	private static final int MAX_NUMBER_SIZE = 9;
+	private static final int MIN_NUMBER_SIZE = 3;
+	private static int numberSize;
+	private static boolean start = false;
 	public void start(){
 		System.out.println("Start Number BaseBall Game");
 		Scanner sc = new Scanner(System.in);
 		boolean finish = true;
 		while(finish){
-			System.out.println("°ÔÀÓÀ» ¼±ÅÃÇØ ÁÖ¼¼¿ä.\n1. 1ÀÎ¿ë\n2. 2ÀÎ¿ë\n3. 3ÀÎ ÀÌ»ó\n0. °ÔÀÓ Á¾·á(1, 2¸¦ Á¦¿ÜÇÑ ¸ğµç ¼ıÀÚ)");
+			System.out.println("ê²Œì„ì„ ì„ íƒí•´ ì£¼ì„¸ìš”.\n1. 1ì¸ìš©\n2. 2ì¸ìš©\n3. 3ì¸ ì´ìƒ\n0. ê²Œì„ ì¢…ë£Œ(1, 2ë¥¼ ì œì™¸í•œ ëª¨ë“  ìˆ«ì)");
 			int i = changeStringIsNumber(sc, sc.next());
 			switch (i) {
 				case 1:
@@ -24,7 +26,7 @@ public class Game {
 					playingNotOnePerson(sc, 2);
 					break;
 				case 3:
-					System.out.println("»ç¶÷ ¼ö¸¦ Á¤ÇØÁÖ¼¼¿ä. (1ÀÌÇÏÀÇ ¼öÀÔ·Â½Ã 1ÀÎÀ¸·Î ½ÃÀÛ)");
+					System.out.println("ì‚¬ëŒ ìˆ˜ë¥¼ ì •í•´ì£¼ì„¸ìš”. (1ì´í•˜ì˜ ìˆ˜ì…ë ¥ì‹œ 1ì¸ìœ¼ë¡œ ì‹œì‘)");
 					int numberOfPeople = changeStringIsNumber(sc, sc.next());
 					if(numberOfPeople > 1){
 						playingNotOnePerson(sc, numberOfPeople);
@@ -40,14 +42,14 @@ public class Game {
 	}
 	
 	private void setNumber(Scanner sc){
-		System.out.println("¼ıÀÚÀÇ ¼ö¸¦ Á¤ÇØÁÖ¼¼¿ä. ex) 3ÀÌ»ó 9ÀÌÇÏÀÇ ¼ö¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä");
+		System.out.println("ìˆ«ìì˜ ìˆ˜ë¥¼ ì •í•´ì£¼ì„¸ìš”. ex) "+MIN_NUMBER_SIZE+"ì´ìƒ "+MAX_NUMBER_SIZE+"ì´í•˜ì˜ ìˆ˜ë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”");
 		numberSize = changeStringIsNumber(sc, sc.next());
-		if(numberSize < 3 || numberSize > 9){
-			System.out.print("´Ù½Ã ");
+		if(numberSize < MIN_NUMBER_SIZE || numberSize > MAX_NUMBER_SIZE){
+			System.out.print("ë‹¤ì‹œ ");
 			setNumber(sc);
 		}
 		if(!start){
-			System.out.println("°ÔÀÓ ½ÃÀÛ!!");
+			System.out.println("ê²Œì„ ì‹œì‘!!");
 			start = true;
 		}
 	}
@@ -62,20 +64,20 @@ public class Game {
 		boolean[] win = new boolean[numberOfPeople];
 		while(count == 0){
 			for(int i = 1; i <= numberOfPeople; i++){
-				System.out.println(i + "ÀÎ ¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. ex) 1234");
+				System.out.println(i + "ì¸ ìˆ«ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”. ex) 1234");
 				String[] numbersStr = sc.next().split("");
 				if(inputNumberConfirm(sc, players[i - 1], numbersStr, i)){
 					break;
 				}
 				if(players[i - 1].confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
-					System.out.println(i + "ÀÎ ¼º°ø !!");
+					System.out.println(i + "ì¸ ì„±ê³µ !!");
 					count += 1;
 					win[i - 1] = true;
 				}
 			}
 		}
 		start = false;
-		System.out.println(count!=numberOfPeople?resultAnnouncement(win):"¹«½ÂºÎ!!");
+		System.out.println(count!=numberOfPeople?resultAnnouncement(win):"ë¬´ìŠ¹ë¶€!!");
 	}
 	
 	private void playingOnePerson(Scanner sc){
@@ -83,13 +85,13 @@ public class Game {
 		Player player = new Referee(numberSize);
 		
 		while(true){
-			System.out.println("¼ıÀÚ¸¦ ÀÔ·ÂÇØÁÖ¼¼¿ä. ex) 1234");
+			System.out.println("ìˆ«ìë¥¼ ì…ë ¥í•´ì£¼ì„¸ìš”. ex) 1234");
 			String[] numbersStr = sc.next().split("");
 			if(inputNumberConfirm(sc, player, numbersStr, 0)){
 				continue;
 			}
 			if(player.confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
-				System.out.println("¼º°ø !!");
+				System.out.println("ì„±ê³µ !!");
 				break;
 			}
 		}
@@ -103,7 +105,7 @@ public class Game {
 			return true;
 		}
 		if(confirmInputIsNotNumber(numbersStr)){
-			System.out.print("´Ù½Ã ");
+			System.out.print("ë‹¤ì‹œ ");
 			return true;
 		}
 		System.out.println(player.confirmAnswer(numbersStr));
@@ -129,7 +131,7 @@ public class Game {
 		try {
 			return Integer.parseInt(str);
 		} catch(NumberFormatException e) {
-			System.out.println("´Ù½Ã ÀÔ·ÂÇØ ÁÖ¼¼¿ä.");
+			System.out.println("ë‹¤ì‹œ ì…ë ¥í•´ ì£¼ì„¸ìš”.");
 			return changeStringIsNumber(sc, sc.next());
 		}
 	}
@@ -138,14 +140,14 @@ public class Game {
 		StringBuilder sb = new StringBuilder();
 		int winLength = win.length;
 		if(win[0]){
-			sb.append("1ÀÎ");
+			sb.append("1ì¸");
 		}
 		for(int i = 1; i < winLength; i++){
 			if(win[i]){
-				sb.append(", " + (i + 1) + "ÀÎ");
+				sb.append(", " + (i + 1) + "ì¸");
 			}
 		}
-		sb.append(" ½Â¸®!!");
+		sb.append(" ìŠ¹ë¦¬!!");
 		return sb.toString();
 	}
 }

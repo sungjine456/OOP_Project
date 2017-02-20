@@ -11,17 +11,17 @@ public class GameController {
 	@RequestMapping("/oneStart.do")
 	public String oneStart(){
 		log.debug("oneStart.do");
-		return "index";
+		return "view/main";
 	}
 	@RequestMapping("/twoStart.do")
 	public String twoStart(){
 		log.debug("twoStart.do");
-		return "index";
+		return "view/main";
 	}
 	@RequestMapping("/manyStart.do")
 	public String manyStart(){
 		log.debug("manyStart.do");
-		return "index";
+		return "view/main";
 	}
 	@RequestMapping("/finish.do")
 	public String finish(){
