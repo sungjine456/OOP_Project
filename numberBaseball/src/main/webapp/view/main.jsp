@@ -5,7 +5,9 @@
 		<link rel="stylesheet" href="/css/common.css">
 	</head>
 	<body>
-		<textarea rows="12" cols="50" id="area" style="margin-right:10px; float:left"></textarea>
+		<input type="hidden" id="countNum"/>
+		<input type="hidden" id="num" value=""/>
+		<textarea rows="12" cols="50" id="area" style="margin-right:10px; float:left" readonly="readonly"></textarea>
 		<div>
 			<div>
 				<button type="button" class="numberBtn" value="1">1</button>

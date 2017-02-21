@@ -28,4 +28,9 @@ public class GameController {
 		log.debug("finish.do");
 		return "index";
 	}
+	@RequestMapping("/chooseNumber.do")
+	public String chooseNumber(){
+		log.debug("chooseNumber.do");
+		return "view/chooseNumber";
+	}
 }

@@ -2,36 +2,34 @@ package org.gradle.service;
 
 import java.util.Scanner;
 
+import org.gradle.common.NumberSize;
 import org.gradle.domain.Member;
 import org.gradle.domain.Player;
 import org.gradle.domain.Referee;
 
 public class Game {
-	private static final int MAX_NUMBER_SIZE = 9;
-	private static final int MIN_NUMBER_SIZE = 3;
 	private static int numberSize;
-	private static boolean start = false;
+	private static Scanner sc = new Scanner(System.in);
 	public void start(){
 		System.out.println("Start Number BaseBall Game");
-		Scanner sc = new Scanner(System.in);
 		boolean finish = true;
 		while(finish){
 			System.out.println("게임을 선택해 주세요.\n1. 1인용\n2. 2인용\n3. 3인 이상\n0. 게임 종료(1, 2를 제외한 모든 숫자)");
-			int i = changeStringIsNumber(sc, sc.next());
+			int i = changeStringIsNumber(sc.next());
 			switch (i) {
 				case 1:
-					playingOnePerson(sc);
+					playingOnePerson();
 					break;
 				case 2:
-					playingNotOnePerson(sc, 2);
+					playingNotOnePerson(2);
 					break;
 				case 3:
 					System.out.println("사람 수를 정해주세요. (1이하의 수입력시 1인으로 시작)");
-					int numberOfPeople = changeStringIsNumber(sc, sc.next());
+					int numberOfPeople = changeStringIsNumber(sc.next());
 					if(numberOfPeople > 1){
-						playingNotOnePerson(sc, numberOfPeople);
+						playingNotOnePerson(numberOfPeople);
 					} else {
-						playingOnePerson(sc);
+						playingOnePerson();
 					}
 					break;
 				default:
@@ -41,21 +39,18 @@ public class Game {
 		}
 	}
 	
-	private void setNumber(Scanner sc){
-		System.out.println("숫자의 수를 정해주세요. ex) "+MIN_NUMBER_SIZE+"이상 "+MAX_NUMBER_SIZE+"이하의 수를 입력해주세요");
-		numberSize = changeStringIsNumber(sc, sc.next());
-		if(numberSize < MIN_NUMBER_SIZE || numberSize > MAX_NUMBER_SIZE){
+	private void setNumber(){
+		System.out.println("숫자의 수를 정해주세요. ex) "+NumberSize.MIN_NUMBER_SIZE+"이상 "+NumberSize.MAX_NUMBER_SIZE+"이하의 수를 입력해주세요");
+		numberSize = changeStringIsNumber(sc.next());
+		if(numberSize < NumberSize.MIN_NUMBER_SIZE || numberSize > NumberSize.MAX_NUMBER_SIZE){
 			System.out.print("다시 ");
-			setNumber(sc);
-		}
-		if(!start){
-			System.out.println("게임 시작!!");
-			start = true;
+			setNumber();
 		}
 	}
 	
-	private void playingNotOnePerson(Scanner sc, int numberOfPeople){
-		setNumber(sc);
+	private void playingNotOnePerson(int numberOfPeople){
+		setNumber();
+		System.out.println("게임 시작!!");
 		Player[] players = new Player[numberOfPeople];
 		for(int i = 0; i < numberOfPeople; i++){
 			players[i] = new Member(numberSize);
@@ -66,7 +61,7 @@ public class Game {
 			for(int i = 1; i <= numberOfPeople; i++){
 				System.out.println(i + "인 숫자를 입력해주세요. ex) 1234");
 				String[] numbersStr = sc.next().split("");
-				if(inputNumberConfirm(sc, players[i - 1], numbersStr, i)){
+				if(inputNumberConfirm(players[i - 1], numbersStr, i)){
 					break;
 				}
 				if(players[i - 1].confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
@@ -76,18 +71,18 @@ public class Game {
 				}
 			}
 		}
-		start = false;
 		System.out.println(count!=numberOfPeople?resultAnnouncement(win):"무승부!!");
 	}
 	
-	private void playingOnePerson(Scanner sc){
-		setNumber(sc);
+	private void playingOnePerson(){
+		setNumber();
+		System.out.println("게임 시작!!");
 		Player player = new Referee(numberSize);
 		
 		while(true){
 			System.out.println("숫자를 입력해주세요. ex) 1234");
 			String[] numbersStr = sc.next().split("");
-			if(inputNumberConfirm(sc, player, numbersStr, 0)){
+			if(inputNumberConfirm(player, numbersStr, 0)){
 				continue;
 			}
 			if(player.confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
@@ -95,10 +90,9 @@ public class Game {
 				break;
 			}
 		}
-		start = false;
 	}
 	
-	private boolean inputNumberConfirm(Scanner sc, Player player, String[] numbersStr, int i){
+	private boolean inputNumberConfirm(Player player, String[] numbersStr, int i){
 		if("a".equals(numbersStr[0])){
 			System.out.println(i==0?"answer : " + player.showAnswer(numberSize)
 									:"memeber" + i + " answer : " + player.showAnswer(numberSize));
@@ -127,12 +121,12 @@ public class Game {
 		return false;
 	}
 	
-	private int changeStringIsNumber(Scanner sc, String str){
+	private int changeStringIsNumber(String str){
 		try {
 			return Integer.parseInt(str);
 		} catch(NumberFormatException e) {
 			System.out.println("다시 입력해 주세요.");
-			return changeStringIsNumber(sc, sc.next());
+			return changeStringIsNumber(sc.next());
 		}
 	}
 	

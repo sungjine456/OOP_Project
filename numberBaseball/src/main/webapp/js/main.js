@@ -6,7 +6,12 @@ var main = {
 	numberBtnClickEvent : function(event){
 		var target = $(event.target);
 		var value = target.val();
-		alert(value);
+		var areaVar = this.area.val();
+		if(areaVar!=""){
+			this.area.val(areaVar+ " "+value);
+		} else {
+			this.area.val(value);
+		}
 	},
 	init : function(){
 		var self = this;
