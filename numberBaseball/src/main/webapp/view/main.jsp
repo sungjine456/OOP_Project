@@ -1,13 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%
+	int num = (Integer)request.getAttribute("num");
+%>
 <html>
 	<head>
 		<title>메인 페이지</title>
 		<link rel="stylesheet" href="/css/common.css">
 	</head>
 	<body>
-		<input type="hidden" id="countNum"/>
-		<input type="hidden" id="num" value=""/>
-		<textarea rows="12" cols="50" id="area" style="margin-right:10px; float:left" readonly="readonly"></textarea>
+		<input type="hidden" id="countNum" value="1"/>
+		<input type="hidden" id="maxNum" value="<%=num%>"/>
+		<div style="margin-right:10px; float:left">
+			<div>
+				<c:forEach var="i" begin="1" end="<%=num%>" step="1">
+					<input type="text" class="answerInput" id="answer${i}" readonly="readonly"/>
+				</c:forEach>
+			</div>
+			<textarea rows="12" cols="50" id="area" readonly="readonly"></textarea>
+		</div>
 		<div>
 			<div>
 				<button type="button" class="numberBtn" value="1">1</button>

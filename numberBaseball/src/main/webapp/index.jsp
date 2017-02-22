@@ -5,13 +5,14 @@
 		<link rel="stylesheet" href="/css/common.css">
 	</head>
 	<body>
-		<form method="get" id="form">
+		<form action="chooseNumber.do" method="get" id="form">
+			<input type="hidden" id="nextUrl" name="nextUrl"/>
 			<div style="width: 125; height: 30; margin: auto;">
 				<label> 숫자 야구 게임!! </label><br/><br/>
-				<button type="button" class="indexBtn" id="oneStart">1. 1인 용</button><br/><br/>
-				<button type="button" class="indexBtn" id="twoStart">2. 2인 용</button><br/><br/>
-				<button type="button" class="indexBtn" id="manyStart">3. 다인 용</button><br/><br/>
-				<button type="button" class="indexBtn" id="finish">4. 게임 종료</button>
+				<button type="button" class="indexBtn" value="oneStart">1. 1인 용</button><br/><br/>
+				<button type="button" class="indexBtn" value="twoStart">2. 2인 용</button><br/><br/>
+				<button type="button" class="indexBtn" value="manyStart">3. 다인 용</button><br/><br/>
+				<button type="button" class="indexBtn" value="finish">4. 게임 종료</button>
 			</div>
 		</form>
 	</body>

@@ -1,10 +1,10 @@
 var index = {
 	form : $("#form"),
+	nextUrl : $("#nextUrl"),
 	btn : $(".indexBtn"),
 	btnClickEvent : function(event){
 		var target = $(event.target);
-		var id = target.attr("id")+".do";
-		this.form.attr("action", id);
+		this.nextUrl.val(target.val());
 		this.form.submit();
 		return false;
 	},
