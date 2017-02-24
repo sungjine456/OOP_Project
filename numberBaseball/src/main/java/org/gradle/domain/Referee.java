@@ -3,6 +3,7 @@ package org.gradle.domain;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Referee implements Player {
 	private List<Integer> numberList = new LinkedList<Integer>();
@@ -32,16 +33,12 @@ public class Referee implements Player {
 	@Override
 	public String showAnswer(int len){
 		StringBuilder sb = new StringBuilder();
-		for(int i = 0; i < len; i++){
-			sb.append(numberList.get(i));
-		}
+		IntStream.range(0, len).forEach(i->sb.append(numberList.get(i)));
 		return sb.toString();
 	}
 	
 	private void makeNumberList(int numberSize){
-		for(int i = 0; i < 10; i ++){
-			numberList.add(i);
-		}
+		IntStream.range(0, 10).forEach(i->numberList.add(i));
 		int i = 10;
 		while(numberList.size() > numberSize){
 			int index = (int)(Math.random() * i);

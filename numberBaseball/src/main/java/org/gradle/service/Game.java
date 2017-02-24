@@ -1,6 +1,7 @@
 package org.gradle.service;
 
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 import org.gradle.common.NumberSize;
 import org.gradle.domain.Member;
@@ -52,9 +53,7 @@ public class Game {
 		setNumber();
 		System.out.println("게임 시작!!");
 		Player[] players = new Player[numberOfPeople];
-		for(int i = 0; i < numberOfPeople; i++){
-			players[i] = new Member(numberSize);
-		}
+		IntStream.range(0, numberOfPeople).forEach(i->players[i]=new Member(numberSize));
 		int count = 0;
 		boolean[] win = new boolean[numberOfPeople];
 		while(count == 0){
@@ -111,12 +110,10 @@ public class Game {
 		if(numberSize != len){
 			return true;
 		}
-		for(int i = 0; i < len; i++){
-			try {
-				Integer.parseInt(numbersStr[i]);
-			} catch(NumberFormatException e) {
-				return true;
-			}
+		try {
+			IntStream.range(0, len).forEach(i->Integer.parseInt(numbersStr[i]));
+		} catch(NumberFormatException e) {
+			return true;
 		}
 		return false;
 	}
@@ -136,12 +133,8 @@ public class Game {
 		if(win[0]){
 			sb.append("1인");
 		}
-		for(int i = 1; i < winLength; i++){
-			if(win[i]){
-				sb.append(", " + (i + 1) + "인");
-			}
-		}
-		sb.append(" 승리!!");
+		IntStream.range(1, winLength).filter(i->win[i]).forEach(i->sb.append(", " + (i + 1) + "인"));
+ 		sb.append(" 승리!!");
 		return sb.toString();
 	}
 }
