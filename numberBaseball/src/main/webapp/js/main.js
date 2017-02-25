@@ -5,6 +5,7 @@ var main = {
 	countNum : $("#countNum"),
 	maxNum : $("#maxNum"),
 	area : $("#area"),
+	inputData : $("input[name='inputData']"),
 	numberBtnClickEvent : function(event){
 		var target = $(event.target);
 		var value = parseInt(target.val());
@@ -48,10 +49,32 @@ var main = {
 		}
 		return num;
 	},
+	inputEvent : function(){
+		var num = this.numCheck(this.countNum.val());
+		var max = this.maxNum.val();
+		if(parseInt(num) !== parseInt(max)){
+			alert("숫자를 모두 입력해주세요.");
+			return;
+		}
+		var arr = "";
+		this.inputData.each(function(idx){
+			var value = $(this).val();
+			arr = arr + value;
+		});
+		$.ajax({
+			url : "/inputNum.do",
+			type : "post",
+			data : {"input" : arr},
+			success : function(data){
+				alert(data.confirm)
+			}
+		});
+	},
 	init : function(){
 		var self = this;
 		self.numberBtn.click(function(){self.numberBtnClickEvent(event);});
 		self.cancelBtn.click(function(){self.cancelBtnClickEvent();});
+		self.inputBtn.click(function(){self.inputEvent();});
 	}
 }
 

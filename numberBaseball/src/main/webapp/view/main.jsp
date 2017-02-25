@@ -14,7 +14,7 @@
 		<div style="margin-right:10px; float:left">
 			<div>
 				<c:forEach var="i" begin="1" end="<%=num%>" step="1">
-					<input type="text" class="answerInput" id="answer${i}" readonly="readonly"/>
+					<input type="text" class="answerInput" id="answer${i}" name="inputData" readonly="readonly"/>
 				</c:forEach>
 			</div>
 			<textarea rows="12" cols="50" id="area" readonly="readonly"></textarea>
