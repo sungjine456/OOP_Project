@@ -56,6 +56,7 @@ public class GameController {
 	@RequestMapping(value="/inputNum.do", produces="application/json;charset=UTF-8")
 	public @ResponseBody Map<String, String> inputNum(String input){
 		log.debug("inputNum.do");
+		log.debug("input : " + input);
 		Map<String, String> map = new HashMap<>();
 		map.put("confirm", gameService.inputNum(input));
 		return map;

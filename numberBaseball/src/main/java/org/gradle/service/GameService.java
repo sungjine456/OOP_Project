@@ -15,7 +15,7 @@ public class GameService {
 		this.numberSize = numberSize;
 	}
 	public String inputNum(String num){
-		String[] numbersStr = num.split("");
+		String[] numbersStr = num.split(" ");
 		if(inputNumberConfirm(player, numbersStr, 0)){
 			return "";
 		}

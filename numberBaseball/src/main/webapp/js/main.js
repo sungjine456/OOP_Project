@@ -50,6 +50,7 @@ var main = {
 		return num;
 	},
 	inputEvent : function(){
+		var self = this;
 		var num = this.numCheck(this.countNum.val());
 		var max = this.maxNum.val();
 		if(parseInt(num) !== parseInt(max)){
@@ -59,16 +60,26 @@ var main = {
 		var arr = "";
 		this.inputData.each(function(idx){
 			var value = $(this).val();
-			arr = arr + value;
+			arr += value + " ";
 		});
 		$.ajax({
 			url : "/inputNum.do",
 			type : "post",
 			data : {"input" : arr},
 			success : function(data){
-				alert(data.confirm)
+				self.area.val(self.area.val() + "\n" + arr + " -> " + data.confirm);
+				self.clearEvent();
 			}
 		});
+	},
+	clearEvent : function(){
+		var self = this;
+		self.inputData.each(function(idx){
+			var value = $(this).val();
+			$(this).val("");
+			self.enabledFunction(value);
+		});
+		this.countNum.val(1);
 	},
 	init : function(){
 		var self = this;
