@@ -67,8 +67,12 @@ var main = {
 			type : "post",
 			data : {"input" : arr},
 			success : function(data){
-				self.area.val(self.area.val() + "\n" + arr + " -> " + data.confirm);
-				self.clearEvent();
+				if(data.confirm == "성공!!!"){
+					$(location).attr("href", "/finish.do");
+				} else {
+					self.area.val(self.area.val() + "\n" + arr + " -> " + data.confirm);
+					self.clearEvent();
+				}
 			}
 		});
 	},

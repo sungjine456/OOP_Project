@@ -25,7 +25,6 @@ public class GameController {
 	public String oneStart(int num, HttpSession session, HttpServletRequest req){
 		log.debug("oneStart.do");
 		log.debug(num+"");
-		
 		gameService.makeGame(num);
 		
 		req.setAttribute("num", num);
@@ -44,7 +43,7 @@ public class GameController {
 	@RequestMapping("/finish.do")
 	public String finish(){
 		log.debug("finish.do");
-		return "index";
+		return "view/finish";
 	}
 	@RequestMapping("/chooseNumber.do")
 	public String chooseNumber(String nextUrl, HttpServletRequest req){
@@ -52,7 +51,6 @@ public class GameController {
 		req.setAttribute("nextUrl", nextUrl);
 		return "view/chooseNumber";
 	}
-	
 	@RequestMapping(value="/inputNum.do", produces="application/json;charset=UTF-8")
 	public @ResponseBody Map<String, String> inputNum(String input){
 		log.debug("inputNum.do");
