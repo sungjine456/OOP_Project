@@ -9,6 +9,7 @@
 	<body>
 		<form id="form" action="<%=request.getAttribute("nextUrl")%>.do" method="post">
 			<input type="hidden" id="num" name="num"/>
+			<input type="hidden" name="nextUrl" value="<%=request.getAttribute("nextUrl")%>"/>
 			<div style="width: 1250; height: 30; margin: auto; text-align: center">
 				<h1>수의 크기를 정해주세요</h1>
 				<c:forEach var="i" begin="<%=NumberSize.MIN_NUMBER_SIZE%>" end="<%=NumberSize.MAX_NUMBER_SIZE%>" step="1">

@@ -22,11 +22,13 @@ public class GameController {
 	private GameService gameService;
 	
 	@RequestMapping("/oneStart.do")
-	public String oneStart(int num, HttpSession session, HttpServletRequest req){
+	public String oneStart(int num, String nextUrl, HttpSession session, HttpServletRequest req){
 		log.debug("oneStart.do");
+		log.debug(nextUrl);
 		log.debug(num+"");
 		gameService.makeGame(num);
 		
+		req.setAttribute("nextUrl", nextUrl);
 		req.setAttribute("num", num);
 		return "view/main";
 	}
@@ -41,8 +43,13 @@ public class GameController {
 		return "view/main";
 	}
 	@RequestMapping("/finish.do")
-	public String finish(){
+	public String finish(String nextUrl, Integer num, HttpServletRequest req){
 		log.debug("finish.do");
+		log.debug(nextUrl);
+		log.debug(num + "");
+		
+		req.setAttribute("nextUrl", nextUrl);
+		req.setAttribute("num", num);
 		return "view/finish";
 	}
 	@RequestMapping("/chooseNumber.do")

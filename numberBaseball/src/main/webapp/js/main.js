@@ -5,6 +5,7 @@ var main = {
 	countNum : $("#countNum"),
 	maxNum : $("#maxNum"),
 	area : $("#area"),
+	finishForm : $("#finishForm"),
 	inputData : $("input[name='inputData']"),
 	numberBtnClickEvent : function(event){
 		var target = $(event.target);
@@ -68,7 +69,7 @@ var main = {
 			data : {"input" : arr},
 			success : function(data){
 				if(data.confirm == "성공!!!"){
-					$(location).attr("href", "/finish.do");
+					finishForm.submit();
 				} else {
 					self.area.val(self.area.val() + "\n" + arr + " -> " + data.confirm);
 					self.clearEvent();

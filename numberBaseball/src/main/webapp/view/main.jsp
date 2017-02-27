@@ -41,6 +41,10 @@
 				<button type="button" id="inputBtn" value="input">입력</button>
 			</div>
 		</div>
+		<form action="/finish.do" method="post" id="finishForm">
+			<input type="hidden" name="nextUrl" value="<%=(String)request.getAttribute("nextUrl")%>"/>
+			<input type="hidden" name="num" value="<%=num%>"/>
+		</form>
 	</body>
 	<script type="text/javascript" src="/js/common/jquery-1.12.3.min.js"></script>
 	<script type="text/javascript" src="/js/main.js"></script>
