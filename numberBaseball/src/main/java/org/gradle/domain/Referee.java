@@ -31,9 +31,10 @@ public class Referee implements Player {
 	}
 	
 	@Override
-	public String showAnswer(int len){
+	public String showAnswer(){
 		StringBuilder sb = new StringBuilder();
-		IntStream.range(0, len).forEach(i->sb.append(numberList.get(i)));
+		int size = numberList.size();
+		IntStream.range(0, size).forEach(i->sb.append(numberList.get(i)));
 		return sb.toString();
 	}
 	

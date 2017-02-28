@@ -2,6 +2,7 @@ var main = {
 	numberBtn : $(".numberBtn"),
 	inputBtn : $("#inputBtn"),
 	cancelBtn : $("#cancelBtn"),
+	giveUpBtn : $("#giveUpBtn"),
 	countNum : $("#countNum"),
 	maxNum : $("#maxNum"),
 	area : $("#area"),
@@ -69,6 +70,7 @@ var main = {
 			data : {"input" : arr},
 			success : function(data){
 				if(data.confirm == "성공!!!"){
+					alert("정답입니다 !!");
 					finishForm.submit();
 				} else {
 					self.area.val(self.area.val() + "\n" + arr + " -> " + data.confirm);
@@ -86,11 +88,22 @@ var main = {
 		});
 		this.countNum.val(1);
 	},
+	giveUpEvent : function(){
+		$.ajax({
+			url : "/giveUp.do",
+			type : "post",
+			success : function(data){
+				alert("정답은 "+data.answer+" 이었습니다.");
+				finishForm.submit();
+			}
+		});
+	},
 	init : function(){
 		var self = this;
 		self.numberBtn.click(function(){self.numberBtnClickEvent(event);});
 		self.cancelBtn.click(function(){self.cancelBtnClickEvent();});
 		self.inputBtn.click(function(){self.inputEvent();});
+		self.giveUpBtn.click(function(){self.giveUpEvent();});
 	}
 }
 

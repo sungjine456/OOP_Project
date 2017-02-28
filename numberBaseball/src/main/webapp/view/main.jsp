@@ -40,6 +40,9 @@
 				<button type="button" class="numberBtn" value="0">0</button>
 				<button type="button" id="inputBtn" value="input">입력</button>
 			</div>
+			<div>
+				<button type="button" id="giveUpBtn">항복</button>	
+			</div>
 		</div>
 		<form action="/finish.do" method="post" id="finishForm">
 			<input type="hidden" name="nextUrl" value="<%=(String)request.getAttribute("nextUrl")%>"/>

@@ -66,4 +66,11 @@ public class GameController {
 		map.put("confirm", gameService.inputNum(input));
 		return map;
 	}
+	@RequestMapping("/giveUp.do")
+	public @ResponseBody Map<String, String> giveUp(){
+		log.debug("giveUp.do");
+		Map<String, String> map = new HashMap<>();
+		map.put("answer", gameService.getAnswer());
+		return map;
+	}
 }

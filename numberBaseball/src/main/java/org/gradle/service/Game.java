@@ -93,8 +93,8 @@ public class Game {
 	
 	private boolean inputNumberConfirm(Player player, String[] numbersStr, int i){
 		if("a".equals(numbersStr[0])){
-			System.out.println(i==0?"answer : " + player.showAnswer(numberSize)
-									:"memeber" + i + " answer : " + player.showAnswer(numberSize));
+			System.out.println(i==0?"answer : " + player.showAnswer()
+									:"memeber" + i + " answer : " + player.showAnswer());
 			return true;
 		}
 		if(confirmInputIsNotNumber(numbersStr)){
