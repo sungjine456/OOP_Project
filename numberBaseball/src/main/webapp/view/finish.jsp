@@ -9,7 +9,7 @@
 	</head>
 	<body>
 		<form id="form" action="<%=nextUrl%>.do" method="post">
-			<input type="hidden" name="nextUrl" value="<%=nextUrl%>"/>
+			<input type="hidden" id="nextUrl" name="nextUrl" value="<%=nextUrl%>"/>
 			<input type="hidden" name="num" value="<%=request.getAttribute("num")%>">
 			<div style="width: 125; height: 30; margin: auto;">
 				<label> 숫자 야구 게임!! </label><br/><br/>

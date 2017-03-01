@@ -89,14 +89,17 @@ var main = {
 		this.countNum.val(1);
 	},
 	giveUpEvent : function(){
-		$.ajax({
-			url : "/giveUp.do",
-			type : "post",
-			success : function(data){
-				alert("정답은 "+data.answer+" 이었습니다.");
-				finishForm.submit();
-			}
-		});
+		var result = confirm("항복하시겠습니까?");
+		if(result){
+			$.ajax({
+				url : "/giveUp.do",
+				type : "post",
+				success : function(data){
+					alert("정답은 "+data.answer+" 이었습니다.");
+					finishForm.submit();
+				}
+			});
+		}
 	},
 	init : function(){
 		var self = this;

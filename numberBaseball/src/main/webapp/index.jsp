@@ -9,10 +9,10 @@
 			<input type="hidden" id="nextUrl" name="nextUrl"/>
 			<div style="width: 125; height: 30; margin: auto;">
 				<label> 숫자 야구 게임!! </label><br/><br/>
-				<button type="button" class="indexBtn" value="oneStart">1. 1인 용</button><br/><br/>
-				<button type="button" class="indexBtn" value="twoStart">2. 2인 용</button><br/><br/>
-				<button type="button" class="indexBtn" value="manyStart">3. 다인 용</button><br/><br/>
-				<button type="button" class="indexBtn" value="finish">4. 게임 종료</button>
+				<button type="button" class="indexBtn btn" value="oneStart">1. 1인 용</button><br/><br/>
+				<button type="button" class="indexBtn btn" value="twoStart">2. 2인 용</button><br/><br/>
+				<button type="button" class="indexBtn btn" value="manyStart">3. 다인 용</button><br/><br/>
+				<button type="button" id="finishBtn" class="btn" value="finish">4. 게임 종료</button>
 			</div>
 		</form>
 	</body>

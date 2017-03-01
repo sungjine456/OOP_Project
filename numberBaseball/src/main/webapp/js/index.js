@@ -11,6 +11,7 @@ var index = {
 	init : function(){
 		var self = this;
 		self.btn.click(function(){self.btnClickEvent(event);});
+		self.finishBtn.click(function(){self.finishBtnEvent();});
 	}
 }
 
