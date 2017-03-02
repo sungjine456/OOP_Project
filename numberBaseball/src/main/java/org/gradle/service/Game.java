@@ -7,6 +7,7 @@ import org.gradle.common.NumberSize;
 import org.gradle.domain.Member;
 import org.gradle.domain.Player;
 import org.gradle.domain.Referee;
+import org.gradle.domain.VerdictEnum;
 
 public class Game {
 	private static int numberSize;
@@ -63,7 +64,7 @@ public class Game {
 				if(inputNumberConfirm(players[i - 1], numbersStr, i)){
 					break;
 				}
-				if(players[i - 1].confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
+				if(players[i - 1].confirmAnswer(numbersStr).equals(numberSize + VerdictEnum.STRIKE.getValue() + " 0" + VerdictEnum.BALL.getValue())){
 					System.out.println(i + "인 성공 !!");
 					count += 1;
 					win[i - 1] = true;
@@ -84,7 +85,7 @@ public class Game {
 			if(inputNumberConfirm(player, numbersStr, 0)){
 				continue;
 			}
-			if(player.confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
+			if(player.confirmAnswer(numbersStr).equals(numberSize + VerdictEnum.STRIKE.getValue() + " 0" + VerdictEnum.BALL.getValue())){
 				System.out.println("성공 !!");
 				break;
 			}

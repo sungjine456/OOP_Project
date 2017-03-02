@@ -1,5 +1,6 @@
 package org.gradle.domain;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,16 +17,11 @@ public class Referee implements Player {
 	@Override
 	public String confirmAnswer(String[] numbersStr){
 		int len = numbersStr.length;
-		byte s = (byte)IntStream.range(0, len).filter(i -> Integer.parseInt(numbersStr[i])==numberList.get(i)).count();
-		int f = 0;
-		for(int i = 0; i < len; i++){
-			for(int j = 0; j < len; j++){
-				if(Integer.parseInt(numbersStr[i]) == numberList.get(j)){
-					f += 1;
-				}
-			}
-		}
-		return s + "S " + (f - s) + "B";
+		byte s = (byte) IntStream.range(0, len).filter(i -> Integer.parseInt(numbersStr[i])==numberList.get(i)).count();
+		byte f = (byte) Arrays.stream(numbersStr).mapToLong(i->
+							numberList.stream().filter(j-> Integer.parseInt(i) == j).count()
+						).sum();
+		return s + VerdictEnum.STRIKE.getValue() + " " + (f - s) + VerdictEnum.BALL.getValue();
 	}
 	
 	@Override

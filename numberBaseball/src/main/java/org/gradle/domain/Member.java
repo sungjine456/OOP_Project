@@ -27,7 +27,7 @@ public class Member implements Player {
 				}
 			}
 		}
-		return s + "S " + (f - s) + "F";
+		return s + VerdictEnum.STRIKE.getValue() + " " + (f - s) + VerdictEnum.BALL.getValue();
 	}
 	
 	@Override

@@ -4,6 +4,7 @@ import java.util.stream.IntStream;
 
 import org.gradle.domain.Player;
 import org.gradle.domain.Referee;
+import org.gradle.domain.VerdictEnum;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,7 +22,7 @@ public class GameService {
 		if(inputNumberConfirm(player, numbersStr, 0)){
 			return "";
 		}
-		if(player.confirmAnswer(numbersStr).equals(numberSize + "S 0F")){
+		if(player.confirmAnswer(numbersStr).equals(numberSize + VerdictEnum.STRIKE.getValue() + " 0" + VerdictEnum.BALL.getValue())){
 			return "성공!!!";
 		}
 		return player.confirmAnswer(numbersStr);
