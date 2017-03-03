@@ -8,6 +8,7 @@ var main = {
 	area : $("#area"),
 	finishForm : $("#finishForm"),
 	inputData : $("input[name='inputData']"),
+	count : $("#count"),
 	numberBtnClickEvent : function(event){
 		var target = $(event.target);
 		var value = parseInt(target.val());
@@ -73,7 +74,9 @@ var main = {
 					alert("정답입니다 !!");
 					finishForm.submit();
 				} else {
-					self.area.val(self.area.val() + "\n" + arr + " -> " + data.confirm);
+					var countValue = self.count.val();
+					self.count.val(parseInt(countValue)+1);
+					self.area.val(self.area.val() + countValue + "번 : " + arr + " -> " + data.confirm + "\n");
 					self.clearEvent();
 				}
 			}

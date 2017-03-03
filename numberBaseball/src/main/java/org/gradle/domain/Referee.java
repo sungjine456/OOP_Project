@@ -17,11 +17,11 @@ public class Referee implements Player {
 	@Override
 	public String confirmAnswer(String[] numbersStr){
 		int len = numbersStr.length;
-		byte s = (byte) IntStream.range(0, len).filter(i -> Integer.parseInt(numbersStr[i])==numberList.get(i)).count();
-		byte f = (byte) Arrays.stream(numbersStr).mapToLong(i->
+		byte strike = (byte) IntStream.range(0, len).filter(i -> Integer.parseInt(numbersStr[i])==numberList.get(i)).count();
+		byte ball = (byte) Arrays.stream(numbersStr).mapToLong(i->
 							numberList.stream().filter(j-> Integer.parseInt(i) == j).count()
 						).sum();
-		return s + VerdictEnum.STRIKE.getValue() + " " + (f - s) + VerdictEnum.BALL.getValue();
+		return strike + VerdictEnum.STRIKE.getValue() + " " + (ball - strike) + VerdictEnum.BALL.getValue();
 	}
 	
 	@Override

@@ -11,6 +11,7 @@
 	<body>
 		<input type="hidden" id="countNum" value="1"/>
 		<input type="hidden" id="maxNum" value="<%=num%>"/>
+		<input type="hidden" id="count" value="1"/>
 		<div style="margin-right:10px; float:left">
 			<div>
 				<c:forEach var="i" begin="1" end="<%=num%>" step="1">
