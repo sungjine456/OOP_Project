@@ -5,19 +5,30 @@ import java.util.stream.IntStream;
 import org.gradle.domain.Player;
 import org.gradle.domain.Referee;
 import org.gradle.domain.VerdictEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 @Service
 public class GameService {
-	private Player player;
+	private static final Logger log = LoggerFactory.getLogger(GameService.class);
+	
+	private Player[] players;
 	private int numberSize;
 	
-	public void makeGame(int numberSize){
-		player = new Referee(numberSize);
+	public void makePersonGame(int numberSize){
+		players = new Player[1];
+		players[0] = new Referee(numberSize);
+		this.numberSize = numberSize;
+	}
+	public void makePeopleGame(int numberSize, int peopleSize){
+		players = new Player[peopleSize];
+		IntStream.range(0, peopleSize).forEach(i->players[i] = new Referee(numberSize));
 		this.numberSize = numberSize;
 	}
 	
-	public String inputNum(String num){
+	public String inputNum(int playerNumber, String num){
+		Player player = players[playerNumber];
 		String[] numbersStr = num.split(" ");
 		if(inputNumberConfirm(player, numbersStr, 0)){
 			return "";
@@ -27,21 +38,17 @@ public class GameService {
 		}
 		return player.confirmAnswer(numbersStr);
 	}
-	public String getAnswer(){
-		return player.showAnswer();
+	
+	public String getAnswer(int playerNumber){
+		return players[playerNumber].showAnswer();
 	}
 	
 	private boolean inputNumberConfirm(Player player, String[] numbersStr, int i){
-		if("a".equals(numbersStr[0])){
-			System.out.println(i==0?"answer : " + player.showAnswer()
-									:"memeber" + i + " answer : " + player.showAnswer());
-			return true;
-		}
 		if(confirmInputIsNotNumber(numbersStr)){
-			System.out.print("다시 ");
+			log.debug(" 정확한 숫자를 입력해 주세요. ");
 			return true;
 		}
-		System.out.println(player.confirmAnswer(numbersStr));
+		log.debug(player.confirmAnswer(numbersStr));
 		return false;
 	}
 	

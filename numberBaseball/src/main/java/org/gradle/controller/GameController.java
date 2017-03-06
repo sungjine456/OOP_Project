@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.gradle.service.GameService;
 import org.slf4j.Logger;
@@ -22,19 +21,24 @@ public class GameController {
 	private GameService gameService;
 	
 	@RequestMapping("/oneStart.do")
-	public String oneStart(int num, String nextUrl, HttpSession session, HttpServletRequest req){
+	public String oneStart(int num, String nextUrl, HttpServletRequest req){
 		log.debug("oneStart.do");
 		log.debug(nextUrl);
 		log.debug(num+"");
-		gameService.makeGame(num);
+		gameService.makePersonGame(num);
 		
 		req.setAttribute("nextUrl", nextUrl);
 		req.setAttribute("num", num);
 		return "view/main";
 	}
 	@RequestMapping("/twoStart.do")
-	public String twoStart(){
+	public String twoStart(int num, String nextUrl, HttpServletRequest req){
 		log.debug("twoStart.do");
+		gameService.makePeopleGame(num, 2);
+		
+		req.setAttribute("playerSize", 2);
+		req.setAttribute("nextUrl", nextUrl);
+		req.setAttribute("num", num);
 		return "view/main";
 	}
 	@RequestMapping("/manyStart.do")
@@ -55,22 +59,23 @@ public class GameController {
 	@RequestMapping("/chooseNumber.do")
 	public String chooseNumber(String nextUrl, HttpServletRequest req){
 		log.debug("chooseNumber.do");
+		log.debug("nextUrl : " + nextUrl);
 		req.setAttribute("nextUrl", nextUrl);
 		return "view/chooseNumber";
 	}
 	@RequestMapping(value="/inputNum.do", produces="application/json;charset=UTF-8")
-	public @ResponseBody Map<String, String> inputNum(String input){
+	public @ResponseBody Map<String, String> inputNum(int playerNumber, String input){
 		log.debug("inputNum.do");
 		log.debug("input : " + input);
 		Map<String, String> map = new HashMap<>();
-		map.put("confirm", gameService.inputNum(input));
+		map.put("confirm", gameService.inputNum(playerNumber, input));
 		return map;
 	}
 	@RequestMapping("/giveUp.do")
-	public @ResponseBody Map<String, String> giveUp(){
+	public @ResponseBody Map<String, String> giveUp(int playerNumber){
 		log.debug("giveUp.do");
 		Map<String, String> map = new HashMap<>();
-		map.put("answer", gameService.getAnswer());
+		map.put("answer", gameService.getAnswer(playerNumber));
 		return map;
 	}
 }

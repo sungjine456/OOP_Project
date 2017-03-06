@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	int num = (Integer)request.getAttribute("num");
+	int playerSize = request.getAttribute("playerSize")==null?1:(Integer)request.getAttribute("playerNumber");
 %>
 <html>
 	<head>
@@ -12,6 +13,8 @@
 		<input type="hidden" id="countNum" value="1"/>
 		<input type="hidden" id="maxNum" value="<%=num%>"/>
 		<input type="hidden" id="count" value="1"/>
+		<input type="hidden" id="playerNumber" value="0"/>
+		<input type="hidden" id="playerSize" value=<%=playerSize%>/>
 		<div style="margin-right:10px; float:left">
 			<div>
 				<c:forEach var="i" begin="1" end="<%=num%>" step="1">

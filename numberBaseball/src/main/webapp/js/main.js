@@ -5,6 +5,8 @@ var main = {
 	giveUpBtn : $("#giveUpBtn"),
 	countNum : $("#countNum"),
 	maxNum : $("#maxNum"),
+	playerNumber : $("#playerNumber"),
+	playerSize : $("#playerSize"),
 	area : $("#area"),
 	finishForm : $("#finishForm"),
 	inputData : $("input[name='inputData']"),
@@ -54,6 +56,7 @@ var main = {
 	},
 	inputEvent : function(){
 		var self = this;
+		var playerNumberVal = this.playerNumber.val();
 		var num = this.numCheck(this.countNum.val());
 		var max = this.maxNum.val();
 		if(parseInt(num) !== parseInt(max)){
@@ -68,7 +71,7 @@ var main = {
 		$.ajax({
 			url : "/inputNum.do",
 			type : "post",
-			data : {"input" : arr},
+			data : {"input" : arr, "playerNumber" : playerNumberVal},
 			success : function(data){
 				if(data.confirm == "성공!!!"){
 					alert("정답입니다 !!");
@@ -92,10 +95,12 @@ var main = {
 		this.countNum.val(1);
 	},
 	giveUpEvent : function(){
+		var playerNumberVal = this.playerNumber.val();
 		var result = confirm("항복하시겠습니까?");
 		if(result){
 			$.ajax({
 				url : "/giveUp.do",
+				data : {"playerNumber" : playerNumberVal},
 				type : "post",
 				success : function(data){
 					alert("정답은 "+data.answer+" 이었습니다.");
