@@ -67,6 +67,7 @@ public class GameController {
 	public @ResponseBody Map<String, String> inputNum(int playerNumber, String input){
 		log.debug("inputNum.do");
 		log.debug("input : " + input);
+		log.debug("playerNumber : " + playerNumber);
 		Map<String, String> map = new HashMap<>();
 		map.put("confirm", gameService.inputNum(playerNumber, input));
 		return map;

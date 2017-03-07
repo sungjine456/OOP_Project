@@ -2,7 +2,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%
 	int num = (Integer)request.getAttribute("num");
-	int playerSize = request.getAttribute("playerSize")==null?1:(Integer)request.getAttribute("playerNumber");
+	int playerSize = 1;
+	try {
+		playerSize = (Integer)request.getAttribute("playerSize");
+	} catch(NullPointerException e) {}
 %>
 <html>
 	<head>
@@ -15,13 +18,16 @@
 		<input type="hidden" id="count" value="1"/>
 		<input type="hidden" id="playerNumber" value="0"/>
 		<input type="hidden" id="playerSize" value=<%=playerSize%>/>
+		<input type="hidden" id="turn" value="1"/>
 		<div style="margin-right:10px; float:left">
 			<div>
 				<c:forEach var="i" begin="1" end="<%=num%>" step="1">
 					<input type="text" class="answerInput" id="answer${i}" name="inputData" readonly="readonly"/>
 				</c:forEach>
 			</div>
-			<textarea rows="12" cols="50" id="area" readonly="readonly"></textarea>
+		<c:forEach var="i" begin="1" end="<%=playerSize%>" step="1">
+			<textarea rows="12" cols="50" id="area${i}" class="area" readonly="readonly">Player ${i} </textarea>
+		</c:forEach>
 		</div>
 		<div>
 			<div>

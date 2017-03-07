@@ -30,7 +30,7 @@ public class GameService {
 	public String inputNum(int playerNumber, String num){
 		Player player = players[playerNumber];
 		String[] numbersStr = num.split(" ");
-		if(inputNumberConfirm(player, numbersStr, 0)){
+		if(inputNumberConfirm(player, numbersStr)){
 			return "";
 		}
 		if(player.confirmAnswer(numbersStr).equals(numberSize + VerdictEnum.STRIKE.getValue() + " 0" + VerdictEnum.BALL.getValue())){
@@ -43,7 +43,7 @@ public class GameService {
 		return players[playerNumber].showAnswer();
 	}
 	
-	private boolean inputNumberConfirm(Player player, String[] numbersStr, int i){
+	private boolean inputNumberConfirm(Player player, String[] numbersStr){
 		if(confirmInputIsNotNumber(numbersStr)){
 			log.debug(" 정확한 숫자를 입력해 주세요. ");
 			return true;

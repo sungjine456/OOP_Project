@@ -7,7 +7,7 @@ var main = {
 	maxNum : $("#maxNum"),
 	playerNumber : $("#playerNumber"),
 	playerSize : $("#playerSize"),
-	area : $("#area"),
+	turn : $("#turn"),
 	finishForm : $("#finishForm"),
 	inputData : $("input[name='inputData']"),
 	count : $("#count"),
@@ -44,46 +44,56 @@ var main = {
 		numberClass.attr("class", "numberBtn");
 		numberClass.removeAttr("disabled");
 	},
-	numCheck : function(num){
-		var max = this.maxNum.val();
-		if(num < 1){
-			return 1;
-		}
-		if(num >= max){
-			return max;
-		}
-		return num;
-	},
 	inputEvent : function(){
 		var self = this;
 		var playerNumberVal = this.playerNumber.val();
-		var num = this.numCheck(this.countNum.val());
+		var countValue = this.count.val();
 		var max = this.maxNum.val();
-		if(parseInt(num) !== parseInt(max)){
-			alert("숫자를 모두 입력해주세요.");
-			return;
-		}
+		var myTurn = this.turn.val();
+		var area = $("#area"+myTurn);
 		var arr = "";
+		var inputNubmerCount = 0;
 		this.inputData.each(function(idx){
 			var value = $(this).val();
+			if(value){
+				inputNubmerCount = parseInt(inputNubmerCount) + 1;
+			}
 			arr += value + " ";
 		});
+		if(inputNubmerCount !== parseInt(max)){
+			alert("숫자를 모두 입력해 주세요.");
+			return;
+		}
+		if(parseInt(myTurn) === parseInt(this.playerSize.val())){
+			this.count.val(parseInt(countValue)+1);
+		}
 		$.ajax({
 			url : "/inputNum.do",
 			type : "post",
 			data : {"input" : arr, "playerNumber" : playerNumberVal},
 			success : function(data){
 				if(data.confirm == "성공!!!"){
-					alert("정답입니다 !!");
+					if(parseInt(self.playerSize.val()) === 1){
+						alert("정답입니다 !!");
+					} else {
+						alert("Player " + myTurn + "님이 맞추셨습니다!!");
+					}
 					finishForm.submit();
 				} else {
-					var countValue = self.count.val();
-					self.count.val(parseInt(countValue)+1);
-					self.area.val(self.area.val() + countValue + "번 : " + arr + " -> " + data.confirm + "\n");
+					area.val(area.val() + "\n" + countValue + "번 : " + arr + " -> " + data.confirm);
 					self.clearEvent();
+					self.nextTurn(myTurn);
 				}
 			}
 		});
+	},
+	nextTurn : function(myTurn){
+		myTurn = parseInt(myTurn) + 1;
+		if(myTurn > parseInt(this.playerSize.val())){
+			myTurn = 1;
+		}
+		this.turn.val(myTurn);
+		this.playerNumber.val(parseInt(myTurn)-1);
 	},
 	clearEvent : function(){
 		var self = this;
@@ -108,6 +118,16 @@ var main = {
 				}
 			});
 		}
+	},
+	numCheck : function(num){
+		var max = this.maxNum.val();
+		if(num < 1){
+			return 1;
+		}
+		if(num >= max){
+			return max;
+		}
+		return num;
 	},
 	init : function(){
 		var self = this;
