@@ -21,6 +21,10 @@
 		<input type="hidden" id="turn" value="1"/>
 		<div style="margin-right:10px; float:left">
 			<div>
+				<c:set var="playerSize" value="<%=playerSize%>"/>
+				<c:if test="${playerSize ne 1}">
+					<label id="labelCurrentPlayer">Player 1 님의 순서입니다 : </label>
+				</c:if>
 				<c:forEach var="i" begin="1" end="<%=num%>" step="1">
 					<input type="text" class="answerInput" id="answer${i}" name="inputData" readonly="readonly"/>
 				</c:forEach>

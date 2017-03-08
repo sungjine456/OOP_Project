@@ -1,4 +1,5 @@
 var main = {
+	labelCurrentPlayer : $("#labelCurrentPlayer"),
 	numberBtn : $(".numberBtn"),
 	inputBtn : $("#inputBtn"),
 	cancelBtn : $("#cancelBtn"),
@@ -83,9 +84,15 @@ var main = {
 					area.val(area.val() + "\n" + countValue + "번 : " + arr + " -> " + data.confirm);
 					self.clearEvent();
 					self.nextTurn(myTurn);
+					if(parseInt(playerSize.val()) !== 1){
+						self.labelCurrentPlayerEvent();
+					}
 				}
 			}
 		});
+	},
+	labelCurrentPlayerEvent : function(){
+		this.labelCurrentPlayer.html("Player " + this.turn.val() + " 님의 순서입니다 : ");
 	},
 	nextTurn : function(myTurn){
 		myTurn = parseInt(myTurn) + 1;
@@ -105,15 +112,16 @@ var main = {
 		this.countNum.val(1);
 	},
 	giveUpEvent : function(){
+		var self = this;
 		var playerNumberVal = this.playerNumber.val();
-		var result = confirm("항복하시겠습니까?");
+		var result = confirm("Player " + this.turn.val()  + " 님 항복하시겠습니까?");
 		if(result){
 			$.ajax({
 				url : "/giveUp.do",
 				data : {"playerNumber" : playerNumberVal},
 				type : "post",
 				success : function(data){
-					alert("정답은 "+data.answer+" 이었습니다.");
+					alert("Player " + self.turn.val()  + "님이 맞췄어야 했던 정답은 "+data.answer+" 이었습니다.");
 					finishForm.submit();
 				}
 			});
