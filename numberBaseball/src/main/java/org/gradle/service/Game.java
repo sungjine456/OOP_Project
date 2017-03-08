@@ -4,10 +4,10 @@ import java.util.Scanner;
 import java.util.stream.IntStream;
 
 import org.gradle.common.NumberSize;
+import org.gradle.common.VerdictEnum;
 import org.gradle.domain.Member;
 import org.gradle.domain.Player;
 import org.gradle.domain.Referee;
-import org.gradle.domain.VerdictEnum;
 
 public class Game {
 	private static int numberSize;
@@ -44,7 +44,7 @@ public class Game {
 	private void setNumber(){
 		System.out.println("숫자의 수를 정해주세요. ex) "+NumberSize.MIN_NUMBER_SIZE+"이상 "+NumberSize.MAX_NUMBER_SIZE+"이하의 수를 입력해주세요");
 		numberSize = changeStringIsNumber(sc.next());
-		if(numberSize < NumberSize.MIN_NUMBER_SIZE || numberSize > NumberSize.MAX_NUMBER_SIZE){
+		if(numberSize < NumberSize.MIN_NUMBER_SIZE.getSize() || numberSize > NumberSize.MAX_NUMBER_SIZE.getSize()){
 			System.out.print("다시 ");
 			setNumber();
 		}

@@ -1,4 +1,4 @@
-package org.gradle.domain;
+package org.gradle.common;
 
 public enum VerdictEnum {
 	STRIKE("S"),

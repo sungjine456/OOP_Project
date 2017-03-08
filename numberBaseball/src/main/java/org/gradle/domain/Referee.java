@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
 
+import org.gradle.common.VerdictEnum;
+
 public class Referee implements Player {
 	private List<Integer> numberList = new LinkedList<>();
 	

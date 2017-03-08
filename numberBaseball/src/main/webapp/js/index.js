@@ -1,16 +1,24 @@
 var index = {
-	form : $("#form"),
+	chooseNumberForm : $("#chooseNumberForm"),
+	choosePlayerSizeForm : $("#choosePlayerSizeForm"),
 	nextUrl : $("#nextUrl"),
-	btn : $(".indexBtn"),
-	btnClickEvent : function(event){
+	oneStartBtn : $("#oneStart"),
+	twoStartBtn : $("#twoStart"),
+	manyStartBtn : $("#manyStart"),
+	chooseNumberEvent : function(event){
 		var target = $(event.target);
 		this.nextUrl.val(target.val());
-		this.form.submit();
-		return false;
+		this.chooseNumberForm.submit();
+	},
+	choosePlayerSizeEvent : function(){
+		this.nextUrl.val(this.manyStartBtn.val());
+		this.choosePlayerSizeForm.submit();
 	},
 	init : function(){
 		var self = this;
-		self.btn.click(function(){self.btnClickEvent(event);});
+		self.oneStartBtn.click(function(){self.chooseNumberEvent(event);});
+		self.twoStartBtn.click(function(){self.chooseNumberEvent(event);});
+		self.manyStartBtn.click(function(){self.choosePlayerSizeEvent();});
 		self.finishBtn.click(function(){self.finishBtnEvent();});
 	}
 }

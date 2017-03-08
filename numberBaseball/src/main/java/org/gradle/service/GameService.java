@@ -2,9 +2,9 @@ package org.gradle.service;
 
 import java.util.stream.IntStream;
 
+import org.gradle.common.VerdictEnum;
 import org.gradle.domain.Player;
 import org.gradle.domain.Referee;
-import org.gradle.domain.VerdictEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

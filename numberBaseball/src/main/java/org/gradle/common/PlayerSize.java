@@ -1,12 +1,12 @@
 package org.gradle.common;
 
-public enum NumberSize {
-	MAX_NUMBER_SIZE(6),
-	MIN_NUMBER_SIZE(3);
+public enum PlayerSize {
+	MIN_PLAYER_SIZE(2),
+	MAX_PLAYER_SIZE(4);
 	
 	private int size;
 	
-	NumberSize(int size){
+	PlayerSize(int size){
 		this.size = size;
 	}
 	
