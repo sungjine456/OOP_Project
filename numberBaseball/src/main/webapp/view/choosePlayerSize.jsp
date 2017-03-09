@@ -9,7 +9,6 @@
 	<body>
 		<form id="form" action="chooseNumber.do" method="post">
 			<input type="hidden" id="playerSize" name="playerSize"/>
-			<input type="hidden" name="nextUrl" value="<%=request.getAttribute("nextUrl")%>"/>
 			<div style="width: 1250; height: 30; margin: auto; text-align: center">
 				<h1>플레이어 수의 크기를 정해주세요</h1>
 				<c:forEach var="i" begin="<%=PlayerSize.MIN_PLAYER_SIZE.getSize()%>" end="<%=PlayerSize.MAX_PLAYER_SIZE.getSize()%>" step="1">

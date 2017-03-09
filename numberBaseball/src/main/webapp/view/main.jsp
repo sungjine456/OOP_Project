@@ -59,7 +59,6 @@
 			</div>
 		</div>
 		<form action="/finish.do" method="post" id="finishForm">
-			<input type="hidden" name="nextUrl" value="<%=(String)request.getAttribute("nextUrl")%>"/>
 			<input type="hidden" name="num" value="<%=num%>"/>
 		</form>
 	</body>

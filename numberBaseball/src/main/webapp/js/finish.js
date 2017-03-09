@@ -2,16 +2,17 @@ var finish = {
 	firstPage : $("#firstPage"),
 	changeNumber : $("#changeNumber"),
 	reStart : $("#reStart"),
-	nextUrl : $("#nextUrl"),
-	form : $("#form"),
+	chooseNumberForm : $("#chooseNumberForm"),
+	startForm : $("#startForm"),
+	num : $("input[name=num]"),
 	firstPageEvent : function(){
 		$(location).attr("href", "index.jsp");
 	},
 	changeNumberEvent : function(){
-		$(location).attr("href", "/chooseNumber.do?nextUrl="+this.nextUrl.val());
+		this.chooseNumberForm.submit();
 	},
 	reStartEvent : function(){
-		this.form.submit();
+		this.startForm.submit();
 	},
 	init : function(){
 		var self = this;

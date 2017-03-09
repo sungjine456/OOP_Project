@@ -1,17 +1,16 @@
 var index = {
 	chooseNumberForm : $("#chooseNumberForm"),
 	choosePlayerSizeForm : $("#choosePlayerSizeForm"),
-	nextUrl : $("#nextUrl"),
+	playerSize : $("#playerSize"),
 	oneStartBtn : $("#oneStart"),
 	twoStartBtn : $("#twoStart"),
 	manyStartBtn : $("#manyStart"),
 	chooseNumberEvent : function(event){
 		var target = $(event.target);
-		this.nextUrl.val(target.val());
+		this.playerSize.val(target.val());
 		this.chooseNumberForm.submit();
 	},
 	choosePlayerSizeEvent : function(){
-		this.nextUrl.val(this.manyStartBtn.val());
 		this.choosePlayerSizeForm.submit();
 	},
 	init : function(){

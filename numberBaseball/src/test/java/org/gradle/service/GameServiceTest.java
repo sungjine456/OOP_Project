@@ -21,7 +21,7 @@ public class GameServiceTest {
 		
 		assertNull(field.get(service));
 		
-		service.makePersonGame(3);
+		service.makeGame(3);
 		Player[] players = (Player[])field.get(service);
 		
 		assertEquals(1, players.length);
@@ -37,7 +37,7 @@ public class GameServiceTest {
 		
 		assertNull(field.get(service));
 		
-		service.makePeopleGame(3, 2);
+		service.makeGame(3, 2);
 		Player[] players = (Player[])field.get(service);
 		
 		assertEquals(2, players.length);

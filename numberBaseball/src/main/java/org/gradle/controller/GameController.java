@@ -18,75 +18,43 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class GameController {
 	private static final Logger log = LoggerFactory.getLogger(GameController.class);
 	
-	private final int PLAYER_SIZE_IS_TWO = 2;
-	
 	@Autowired
 	private GameService gameService;
 	
-	@RequestMapping("/oneStart.do")
-	public String oneStart(int num, String nextUrl, HttpServletRequest req){
-		log.debug("oneStart.do");
-		log.debug("nextUrl" + nextUrl);
-		log.debug("num : " + num);
-		
-		gameService.makePersonGame(num);
-		
-		req.setAttribute("nextUrl", nextUrl);
-		req.setAttribute("num", num);
-		return "view/main";
-	}
-	@RequestMapping("/twoStart.do")
-	public String twoStart(int num, String nextUrl, HttpServletRequest req){
-		log.debug("twoStart.do");
-		log.debug("nextUrl" + nextUrl);
-		log.debug("num : " + num);
-		
-		gameService.makePeopleGame(num, PLAYER_SIZE_IS_TWO);
-		
-		req.setAttribute("playerSize", PLAYER_SIZE_IS_TWO);
-		req.setAttribute("nextUrl", nextUrl);
-		req.setAttribute("num", num);
-		return "view/main";
-	}
-	@RequestMapping("/manyStart.do")
-	public String manyStart(int num, int playerSize, String nextUrl, HttpServletRequest req){
-		log.debug("manyStart.do");
-		log.debug("nextUrl" + nextUrl);
+	@RequestMapping("/start.do")
+	public String start(int num, int playerSize, HttpServletRequest req){
+		log.debug("start.do");
 		log.debug("num : " + num);
 		log.debug("playerSize : " + playerSize);
 		
-		gameService.makePeopleGame(num, playerSize);
+		gameService.makeGame(num, playerSize);
 		
 		req.setAttribute("playerSize", playerSize);
-		req.setAttribute("nextUrl", nextUrl);
 		req.setAttribute("num", num);
 		return "view/main";
 	}
 	@RequestMapping("/finish.do")
-	public String finish(String nextUrl, Integer num, HttpServletRequest req){
+	public String finish(Integer num, @RequestParam(defaultValue="1")int playerSize, 
+			HttpServletRequest req){
 		log.debug("finish.do");
-		log.debug("nextUrl" + nextUrl);
 		log.debug("num : " + num);
+		log.debug("playerSize : " + playerSize);
 		
-		req.setAttribute("nextUrl", nextUrl);
 		req.setAttribute("num", num);
+		req.setAttribute("playerSize", playerSize);
 		return "view/finish";
 	}
 	@RequestMapping("/chooseNumber.do")
-	public String chooseNumber(String nextUrl, @RequestParam(defaultValue="1") int playerSize, 
+	public String chooseNumber(@RequestParam(defaultValue="1")int playerSize, 
 			HttpServletRequest req){
 		log.debug("chooseNumber.do");
-		log.debug("nextUrl : " + nextUrl);
 		log.debug("playerSize : " + playerSize);
-		req.setAttribute("nextUrl", nextUrl);
 		req.setAttribute("playerSize", playerSize);
 		return "view/chooseNumber";
 	}
 	@RequestMapping("choosePlayerSize.do")
-	public String choosePlayerSize(String nextUrl, HttpServletRequest req){
+	public String choosePlayerSize(HttpServletRequest req){
 		log.debug("choosePlayerSize.do");
-		log.debug("nextUrl : " + nextUrl);
-		req.setAttribute("nextUrl", nextUrl);
 		return "view/choosePlayerSize";
 	}
 	@RequestMapping(value="/inputNum.do", produces="application/json;charset=UTF-8")

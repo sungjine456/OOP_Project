@@ -6,15 +6,14 @@
 	</head>
 	<body>
 		<form action="chooseNumber.do" method="post" id="chooseNumberForm">
-			<input type="hidden" id="nextUrl" name="nextUrl"/>
+			<input type="hidden" id="playerSize" name="playerSize"/>
 		</form>
 		<form action="choosePlayerSize.do" method="post" id="choosePlayerSizeForm">
-			<input type="hidden" id="nextUrl" name="nextUrl" value="manyStart"/>
 		</form>
 		<div style="width: 125; height: 30; margin: auto;">
 			<label> 숫자 야구 게임!! </label><br/><br/>
-			<button type="button" id="oneStart" class="btn" value="oneStart">1. 1인 용</button><br/><br/>
-			<button type="button" id="twoStart" class="btn" value="twoStart">2. 2인 용</button><br/><br/>
+			<button type="button" id="oneStart" class="btn" value="1">1. 1인 용</button><br/><br/>
+			<button type="button" id="twoStart" class="btn" value="2">2. 2인 용</button><br/><br/>
 			<button type="button" id="manyStart" class="btn">3. 다인 용</button><br/><br/>
 		</div>
 	</body>

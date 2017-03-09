@@ -16,12 +16,24 @@ public class GameService {
 	private Player[] players;
 	private int numberSize;
 	
-	public void makePersonGame(int numberSize){
+	/**
+	 * 혼자 게임할 때 만든다.
+	 * 
+	 * @param numberSize 게임에 사용될 숫자의 수
+	 */
+	public void makeGame(int numberSize){
 		players = new Player[1];
 		players[0] = new Referee(numberSize);
 		this.numberSize = numberSize;
 	}
-	public void makePeopleGame(int numberSize, int peopleSize){
+	
+	/**
+	 * 한명 이상이 게임할 때 만든다.
+	 * 
+	 * @param numberSize 게임에 사용될 숫자의 수
+	 * @param peopleSize 게임에 참여할 사람의 수
+	 */
+	public void makeGame(int numberSize, int peopleSize){
 		players = new Player[peopleSize];
 		IntStream.range(0, peopleSize).forEach(i->players[i] = new Referee(numberSize));
 		this.numberSize = numberSize;
