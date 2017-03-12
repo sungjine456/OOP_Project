@@ -35,23 +35,23 @@
 		</div>
 		<div>
 			<div>
-				<button type="button" class="numberBtn" value="1">1</button>
-				<button type="button" class="numberBtn" value="2">2</button>
-				<button type="button" class="numberBtn" value="3">3</button>
+				<button type="button" id="numberBtn1" class="numberBtn" value="1">1</button>
+				<button type="button" id="numberBtn2" class="numberBtn" value="2">2</button>
+				<button type="button" id="numberBtn3" class="numberBtn" value="3">3</button>
 			</div>
 			<div>
-				<button type="button" class="numberBtn" value="4">4</button>
-				<button type="button" class="numberBtn" value="5">5</button>
-				<button type="button" class="numberBtn" value="6">6</button>
+				<button type="button" id="numberBtn4" class="numberBtn" value="4">4</button>
+				<button type="button" id="numberBtn5" class="numberBtn" value="5">5</button>
+				<button type="button" id="numberBtn6" class="numberBtn" value="6">6</button>
 			</div>
 			<div>
-				<button type="button" class="numberBtn" value="7">7</button>
-				<button type="button" class="numberBtn" value="8">8</button>
-				<button type="button" class="numberBtn" value="9">9</button>
+				<button type="button" id="numberBtn7" class="numberBtn" value="7">7</button>
+				<button type="button" id="numberBtn8" class="numberBtn" value="8">8</button>
+				<button type="button" id="numberBtn9" class="numberBtn" value="9">9</button>
 			</div>
 			<div>
 				<button type="button" id="cancelBtn" value="cancel">취소</button>
-				<button type="button" class="numberBtn" value="0">0</button>
+				<button type="button" id="numberBtn0" class="numberBtn" value="0">0</button>
 				<button type="button" id="inputBtn" value="input">입력</button>
 			</div>
 			<div>

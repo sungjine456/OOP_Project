@@ -1,4 +1,5 @@
 var main = {
+	body : $("body"),
 	labelCurrentPlayer : $("#labelCurrentPlayer"),
 	numberBtn : $(".numberBtn"),
 	inputBtn : $("#inputBtn"),
@@ -15,6 +16,14 @@ var main = {
 	numberBtnClickEvent : function(event){
 		var target = $(event.target);
 		var value = parseInt(target.val());
+		
+		this.numberClickEvent(value);
+	},
+	numberClickEvent : function(value){
+		var numberButton = $("#numberBtn"+value);
+		if(numberButton.attr("disabled")){
+			return;
+		}
 		var num = parseInt(this.numCheck(this.countNum.val()));
 		var answer = $("#answer"+num);
 		
@@ -25,8 +34,8 @@ var main = {
 		if(num === parseInt(this.maxNum.val()) && answer.val() !== ""){
 			this.enabledFunction(answer.val());
 		}
-		target.attr("class", "numberBtn checkBtn");
-		target.attr("disabled", true);
+		numberButton.attr("class", "numberBtn checkBtn");
+		numberButton.attr("disabled", true);
 		answer.val(value);
 		this.countNum.val(parseInt(num)+1);
 	},
@@ -84,7 +93,7 @@ var main = {
 					area.val(area.val() + "\n" + countValue + "번 : " + arr + " -> " + data.confirm);
 					self.clearEvent();
 					self.nextTurn(myTurn);
-					if(parseInt(playerSize.val()) !== 1){
+					if(parseInt(self.playerSize.val()) !== 1){
 						self.labelCurrentPlayerEvent();
 					}
 				}
@@ -137,12 +146,30 @@ var main = {
 		}
 		return num;
 	},
+	keyupEvent : function(event){
+		event.preventDefault();
+		var keyCode = event.keyCode;
+		if((keyCode > 47 && keyCode < 58) || (keyCode > 95 && keyCode < 106)){
+			var num;
+			if(keyCode > 47 && keyCode < 58){
+				num = keyCode-48;
+			} else if(keyCode > 95 && keyCode < 106){
+				num = keyCode-96;
+			}
+			this.numberClickEvent(num);
+		} else if(keyCode == 8){
+			this.cancelBtnClickEvent();
+		} else if(keyCode == 13){
+			this.inputEvent();
+		}
+	},
 	init : function(){
 		var self = this;
 		self.numberBtn.click(function(){self.numberBtnClickEvent(event);});
 		self.cancelBtn.click(function(){self.cancelBtnClickEvent();});
 		self.inputBtn.click(function(){self.inputEvent();});
 		self.giveUpBtn.click(function(){self.giveUpEvent();});
+		self.body.keyup(function(){self.keyupEvent(event);});
 	}
 }
 
