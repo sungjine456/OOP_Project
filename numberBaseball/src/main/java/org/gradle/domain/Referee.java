@@ -17,6 +17,7 @@ public class Referee implements Player {
 	public Referee(int numberSize){
 		setNumberList(numberSize);
 	}
+	public Referee(){}
 	
 	@Override
 	public String confirmAnswer(String[] numbersStr){
@@ -45,12 +46,9 @@ public class Referee implements Player {
 	}
 	
 	private void shuffle(int numberSize){
-		int i = NUMBERS_BEFORE_SELECTION;
 		Random random = new Random();
-		while(numberList.size() > numberSize){
-			int index = (int)(random.nextInt(i--));
-			numberList.remove(index);
-		}
+		IntStream.range(0, NUMBERS_BEFORE_SELECTION - numberSize)
+				.forEach(n -> numberList.remove(random.nextInt(numberList.size())));
 		do{
 			Collections.shuffle(numberList);
 		} while(numberList.get(0) == 0);
