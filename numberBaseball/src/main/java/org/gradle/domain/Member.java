@@ -1,6 +1,5 @@
 package org.gradle.domain;
 
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -8,10 +7,13 @@ import java.util.stream.IntStream;
 import org.gradle.common.VerdictEnum;
 
 public class Member implements Player {
+	private final int NUMBERS_BEFORE_SELECTION = 10;
+	
 	private List<Integer> numberList = new LinkedList<Integer>();
+	private int numberSize;
 	
 	public Member(int numberSize){
-		makeNumberList(numberSize);
+		this.numberSize = numberSize;
 	}
 	
 	@Override
@@ -40,16 +42,36 @@ public class Member implements Player {
 		return sb.toString();
 	}
 	
-	private void makeNumberList(int numberSize){
-		IntStream.range(0, 10).forEach(i->numberList.add(i));
-		int i = 10;
-		while(numberList.size() > numberSize){
-			int index = (int)(Math.random() * i);
-			numberList.remove(index);
-			i--;
+	public boolean setNumber(String number){
+		String[] str = number.split("");
+		if(str.length != numberSize){
+			return false;
 		}
-		do{
-			Collections.shuffle(numberList);
-		} while(numberList.get(0) == 0);
+		if(parseNumbers(str)){
+			return false;
+		}
+		return notSameNumber();
+	}
+	
+	private boolean notSameNumber(){
+		boolean[] sameCheckArr = new boolean[NUMBERS_BEFORE_SELECTION];
+		for(int number : numberList){
+			if(sameCheckArr[number]){
+				return false;
+			}
+			sameCheckArr[number] = true;
+		}
+		return true;
+	}
+	
+	private boolean parseNumbers(String[] numbers){
+		try {
+			for(String number : numbers){
+				numberList.add(Integer.parseInt(number));
+			}
+		}catch(NumberFormatException e){
+			return false;
+		}
+		return true;
 	}
 }

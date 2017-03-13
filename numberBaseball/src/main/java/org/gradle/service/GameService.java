@@ -3,6 +3,7 @@ package org.gradle.service;
 import java.util.stream.IntStream;
 
 import org.gradle.common.VerdictEnum;
+import org.gradle.domain.Member;
 import org.gradle.domain.Player;
 import org.gradle.domain.Referee;
 import org.slf4j.Logger;
@@ -37,6 +38,24 @@ public class GameService {
 		players = new Player[peopleSize];
 		IntStream.range(0, peopleSize).forEach(i->players[i] = new Referee(numberSize));
 		this.numberSize = numberSize;
+	}
+	
+	/**
+	 * 한명 이상이 게임할 때 만든다.
+	 * 숫자를 유저가 직접 정한다.
+	 * 
+	 * @param numberSize 게임에 사용될 숫자의 수
+	 * @param peopleSize 게임에 참여할 사람의 수
+	 */
+	public void makeGameAndMakeNumber(int numberSize, int peopleSize){
+		players = new Player[peopleSize];
+		IntStream.range(0, peopleSize).forEach(i->players[i] = new Member(numberSize));
+		this.numberSize = numberSize;
+	}
+	
+	public void setMakeNumber(int playerNum, String number){
+		Member member = (Member) players[playerNum - 1];
+		member.setNumber(number);
 	}
 	
 	public String inputNum(int playerNumber, String num){
