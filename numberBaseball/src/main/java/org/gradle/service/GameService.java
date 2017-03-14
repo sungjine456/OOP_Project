@@ -53,9 +53,9 @@ public class GameService {
 		this.numberSize = numberSize;
 	}
 	
-	public void setMakeNumber(int playerNum, String number){
+	public boolean setMakeNumber(int playerNum, String number){
 		Member member = (Member) players[playerNum - 1];
-		member.setNumber(number);
+		return member.setNumber(number);
 	}
 	
 	public String inputNum(int playerNumber, String num){

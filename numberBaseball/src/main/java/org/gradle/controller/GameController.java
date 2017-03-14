@@ -73,4 +73,41 @@ public class GameController {
 		map.put("answer", gameService.getAnswer(playerNumber));
 		return map;
 	}
+	@RequestMapping("/makeNumber.do")
+	public String makeNumber(int num, int playerSize, int playerNumber, 
+			String makeNumber, HttpServletRequest req){
+		log.debug("makeNumberPage.do");
+		log.debug("num : " + num);
+		log.debug("playerSize : " + playerSize);
+		log.debug("playerNumber : " + playerNumber);
+		log.debug("makeNumber : " + makeNumber);
+
+		boolean isReSet = false;
+		
+		req.setAttribute("num", num);
+		req.setAttribute("playerSize", playerSize);
+		if(playerSize > playerNumber){
+			if(playerNumber == 0){
+				gameService.makeGameAndMakeNumber(num, playerSize);
+			} else {
+				isReSet = !gameService.setMakeNumber(playerNumber, makeNumber);
+			}
+			if(playerNumber != 0 && isReSet){
+				req.setAttribute("message", "다시 입력해주세요.");
+				req.setAttribute("playerNumber", playerNumber-1);
+			} else {
+				req.setAttribute("playerNumber", playerNumber);
+			}
+			return "view/makeNumber";
+		} else {
+			isReSet = !gameService.setMakeNumber(playerNumber, makeNumber);
+			if(playerNumber != 0 && isReSet){
+				req.setAttribute("message", "다시 입력해주세요.");
+				req.setAttribute("playerNumber", playerNumber-1);
+				
+				return "view/makeNumber";
+			}
+			return "view/main";
+		}
+	}
 }

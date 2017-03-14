@@ -1,5 +1,6 @@
 package org.gradle.domain;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -19,19 +20,11 @@ public class Member implements Player {
 	@Override
 	public String confirmAnswer(String[] numbersStr){
 		int len = numbersStr.length;
-		int s = 0;
-		int f = 0;
-		for(int i = 0; i < len; i++){
-			if(Integer.parseInt(numbersStr[i]) == numberList.get(i)){
-				s += 1;
-			}
-			for(int j = 0; j < len; j++){
-				if(Integer.parseInt(numbersStr[i]) == numberList.get(j)){
-					f += 1;
-				}
-			}
-		}
-		return s + VerdictEnum.STRIKE.getValue() + " " + (f - s) + VerdictEnum.BALL.getValue();
+		byte strike = (byte) IntStream.range(0, len).filter(i -> Integer.parseInt(numbersStr[i])==numberList.get(i)).count();
+		byte ball = (byte) Arrays.stream(numbersStr).mapToLong(i->
+							numberList.stream().filter(j-> Integer.parseInt(i) == j).count()
+						).sum();
+		return strike + VerdictEnum.STRIKE.getValue() + " " + (ball - strike) + VerdictEnum.BALL.getValue();
 	}
 	
 	@Override
@@ -47,7 +40,7 @@ public class Member implements Player {
 		if(str.length != numberSize){
 			return false;
 		}
-		if(parseNumbers(str)){
+		if(!parseNumbers(str)){
 			return false;
 		}
 		return notSameNumber();

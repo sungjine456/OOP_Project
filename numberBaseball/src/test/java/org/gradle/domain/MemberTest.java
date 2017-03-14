@@ -52,7 +52,7 @@ public class MemberTest {
 	public void setNumber() throws Exception {
 		Field field = clazz.getDeclaredField("numberList");
 		field.setAccessible(true);
-		member.setNumber("125");
+		assertTrue(member.setNumber("125"));
 		
 		List<Integer> list = (LinkedList<Integer>)field.get(member);
 		assertEquals(3, list.size());
