@@ -6,7 +6,7 @@
 	if(message != null){
 %>
 		<script>
-			alert(<%=message%>);
+			alert("<%=message%>");
 		</script>
 <%
 	}

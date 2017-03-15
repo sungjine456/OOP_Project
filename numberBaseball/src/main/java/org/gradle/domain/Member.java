@@ -10,10 +10,11 @@ import org.gradle.common.VerdictEnum;
 public class Member implements Player {
 	private final int NUMBERS_BEFORE_SELECTION = 10;
 	
-	private List<Integer> numberList = new LinkedList<Integer>();
+	private List<Integer> numberList;
 	private int numberSize;
 	
 	public Member(int numberSize){
+		numberList = new LinkedList<Integer>();
 		this.numberSize = numberSize;
 	}
 	
@@ -31,7 +32,7 @@ public class Member implements Player {
 	public String showAnswer(){
 		StringBuilder sb = new StringBuilder();
 		int size = numberList.size();
-		IntStream.range(0, size).forEach(i->sb.append(numberList.get(i)));
+		IntStream.range(0, size).forEach(i->sb.append(numberList.get(i) + " "));
 		return sb.toString();
 	}
 	
