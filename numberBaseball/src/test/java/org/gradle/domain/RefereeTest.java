@@ -53,14 +53,17 @@ public class RefereeTest {
 		List<Integer> numberList = new ArrayList<>();
 		IntStream.range(0, 10).forEach(i->numberList.add(i));
 		
-		Field field = clazz.getDeclaredField("numberList");
-		field.setAccessible(true);
-		Method method = clazz.getDeclaredMethod("shuffle", new Class[]{Integer.TYPE});
+		Field numberListField = clazz.getDeclaredField("numberList");
+		numberListField.setAccessible(true);
+		Field numberSizeField = clazz.getDeclaredField("numberSize");
+		numberSizeField.setAccessible(true);
+		Method method = clazz.getDeclaredMethod("shuffle", new Class[]{});
 		method.setAccessible(true);
-		field.set(referee, numberList);
+		numberListField.set(referee, numberList);
+		numberSizeField.set(referee, 3);
 		
 		assertEquals("0 1 2 3 4 5 6 7 8 9 ", referee.showAnswer());
-		method.invoke(referee, new Object[]{3});
+		method.invoke(referee, new Object[]{});
 		
 		String[] result = referee.showAnswer().split(" ");
 		assertEquals(3, result.length);
@@ -69,19 +72,21 @@ public class RefereeTest {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void setNumberListTest() throws Exception {
-		Field field = clazz.getDeclaredField("numberList");
-		field.setAccessible(true);
-		Method shuffleMethod = clazz.getDeclaredMethod("shuffle", new Class[]{Integer.TYPE});
+		Field numberListField = clazz.getDeclaredField("numberList");
+		numberListField.setAccessible(true);
+		Field numberSizeField = clazz.getDeclaredField("numberSize");
+		numberSizeField.setAccessible(true);
+		Method shuffleMethod = clazz.getDeclaredMethod("shuffle", new Class[]{});
 		shuffleMethod.setAccessible(true);
-		Method setNumberListMethod = clazz.getDeclaredMethod("setNumberList", new Class[]{Integer.TYPE});
+		Method setNumberListMethod = clazz.getDeclaredMethod("setNumberList", new Class[]{});
 		setNumberListMethod.setAccessible(true);
-		Referee referee = (Referee)cons[1].newInstance();
-		
-		List<Integer> list = (List<Integer>) field.get(referee);
+		numberSizeField.set(referee, 3);
+		numberListField.set(referee, new ArrayList<>());
+		List<Integer> list = (List<Integer>) numberListField.get(referee);
 		assertEquals(0, list.size());
-		setNumberListMethod.invoke(referee, new Object[]{3});
+		setNumberListMethod.invoke(referee, new Object[]{});
 		
-		list = (List<Integer>) field.get(referee);
+		list = (List<Integer>) numberListField.get(referee);
 		assertEquals(3, list.size());
 	}
 }

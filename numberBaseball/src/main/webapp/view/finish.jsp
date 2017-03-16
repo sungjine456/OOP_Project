@@ -16,7 +16,13 @@
 			<label> 숫자 야구 게임!! </label><br/><br/>
 			<button type="button" class="btn" id="firstPage">처음으로</button><br/><br/>
 			<button type="button" class="btn" id="changeNumber">숫자 크기 바꿔서 해보기</button><br/><br/>
+<%
+	if((boolean)request.getAttribute("isNotMadeNum")){
+%>
 			<button type="button" class="btn" id="reStart">다시하기</button><br/><br/>
+<%
+	}
+%>
 		</div>
 	</body>
 	<script type="text/javascript" src="/js/common/jquery-1.12.3.min.js"></script>

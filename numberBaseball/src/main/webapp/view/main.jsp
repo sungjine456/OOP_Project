@@ -17,7 +17,6 @@
 		<input type="hidden" id="maxNum" value="<%=num%>"/>
 		<input type="hidden" id="count" value="1"/>
 		<input type="hidden" id="playerNumber" value="0"/>
-		<input type="hidden" id="playerSize" value=<%=playerSize%>/>
 		<input type="hidden" id="turn" value="1"/>
 		<div style="margin-right:10px; float:left">
 			<div>
@@ -60,6 +59,8 @@
 		</div>
 		<form action="/finish.do" method="post" id="finishForm">
 			<input type="hidden" name="num" value="<%=num%>"/>
+			<input type="hidden" id="playerSize" name="playerSize" value="<%=playerSize%>"/>
+			<input type="hidden" name="isNotMadeNum" value="<%=request.getAttribute("isNotMadeNum")%>"/>
 		</form>
 	</body>
 	<script type="text/javascript" src="/js/common/jquery-1.12.3.min.js"></script>

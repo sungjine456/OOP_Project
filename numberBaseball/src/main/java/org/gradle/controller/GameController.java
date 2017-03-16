@@ -29,17 +29,19 @@ public class GameController {
 		
 		gameService.makeGame(num, playerSize);
 		
+		req.setAttribute("isNotMadeNum", true);
 		req.setAttribute("playerSize", playerSize);
 		req.setAttribute("num", num);
 		return "view/main";
 	}
 	@RequestMapping("/finish.do")
-	public String finish(Integer num, @RequestParam(defaultValue="1")int playerSize, 
-			HttpServletRequest req){
+	public String finish(int num, int playerSize, boolean isNotMadeNum, HttpServletRequest req){
 		log.debug("finish.do");
 		log.debug("num : " + num);
 		log.debug("playerSize : " + playerSize);
+		log.debug("isNotMadeNum : " + isNotMadeNum);
 		
+		req.setAttribute("isNotMadeNum", isNotMadeNum);
 		req.setAttribute("num", num);
 		req.setAttribute("playerSize", playerSize);
 		return "view/finish";
@@ -53,7 +55,7 @@ public class GameController {
 		return "view/chooseNumber";
 	}
 	@RequestMapping("choosePlayerSize.do")
-	public String choosePlayerSize(HttpServletRequest req){
+	public String choosePlayerSize(){
 		log.debug("choosePlayerSize.do");
 		return "view/choosePlayerSize";
 	}
@@ -69,6 +71,8 @@ public class GameController {
 	@RequestMapping("/giveUp.do")
 	public @ResponseBody Map<String, String> giveUp(int playerNumber){
 		log.debug("giveUp.do");
+		log.debug("playerNumber : " + playerNumber);
+		
 		Map<String, String> map = new HashMap<>();
 		map.put("answer", gameService.getAnswer(playerNumber));
 		return map;
@@ -107,6 +111,7 @@ public class GameController {
 				
 				return "view/makeNumber";
 			}
+			req.setAttribute("isNotMadeNum", false);
 			return "view/main";
 		}
 	}

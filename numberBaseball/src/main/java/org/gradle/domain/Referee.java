@@ -12,12 +12,13 @@ import org.gradle.common.VerdictEnum;
 public class Referee implements Player {
 	private final int NUMBERS_BEFORE_SELECTION = 10;
 	
-	private List<Integer> numberList = new LinkedList<>();
+	private List<Integer> numberList = new LinkedList<Integer>();
+	private int numberSize;
 	
 	public Referee(int numberSize){
-		setNumberList(numberSize);
+		this.numberSize = numberSize;
+		setNumberList();
 	}
-	public Referee(){}
 	
 	@Override
 	public String confirmAnswer(String[] numbersStr){
@@ -37,13 +38,12 @@ public class Referee implements Player {
 		return sb.toString();
 	}
 	
-	private void setNumberList(int numberSize){
+	private void setNumberList(){
 		IntStream.range(0, NUMBERS_BEFORE_SELECTION).forEach(i->numberList.add(i));
-		
-		shuffle(numberSize);
+		shuffle();
 	}
 	
-	private void shuffle(int numberSize){
+	private void shuffle(){
 		Random random = new Random();
 		IntStream.range(0, NUMBERS_BEFORE_SELECTION - numberSize)
 				.forEach(n -> numberList.remove(random.nextInt(numberList.size())));
