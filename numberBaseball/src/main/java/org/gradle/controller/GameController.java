@@ -47,7 +47,7 @@ public class GameController {
 		return "view/finish";
 	}
 	@RequestMapping("/chooseNumber.do")
-	public String chooseNumber(@RequestParam(defaultValue="1")int playerSize, 
+	public String chooseNumber(int playerSize, 
 			HttpServletRequest req){
 		log.debug("chooseNumber.do");
 		log.debug("playerSize : " + playerSize);
