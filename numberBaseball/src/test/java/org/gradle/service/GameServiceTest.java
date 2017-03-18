@@ -8,18 +8,31 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 
 import org.gradle.domain.Player;
-import org.gradle.domain.Referee;
+import org.junit.Before;
 import org.junit.Test;
 
 public class GameServiceTest {
+	private Class<GameService> serviceClazz;
+	private Constructor<?> serviceCon;
+	private GameService service;
+	private Class<Player> playerClazz;
+	private Constructor<?> playerCon;
+	private Player player;
+	
+	@Before
+	public void setup() throws Exception {
+		serviceClazz = GameService.class;
+		serviceCon = serviceClazz.getConstructor(new Class[]{});
+		service = (GameService) serviceCon.newInstance();
+		playerClazz = Player.class;
+		playerCon = playerClazz.getConstructor();
+		player = (Player)playerCon.newInstance();
+	}
 	
 	@Test
 	public void makeGameTestPramOneInt() throws Exception {
-		Class<GameService> clazz = GameService.class;
-		Constructor<?> con = clazz.getConstructor(new Class[]{});
-		Field field = clazz.getDeclaredField("players");
+		Field field = serviceClazz.getDeclaredField("players");
 		field.setAccessible(true);
-		GameService service = (GameService) con.newInstance();
 		
 		assertNull(field.get(service));
 		
@@ -31,11 +44,8 @@ public class GameServiceTest {
 
 	@Test
 	public void makeGameTestPramsTwoInt() throws Exception {
-		Class<GameService> clazz = GameService.class;
-		Constructor<?> con = clazz.getConstructor(new Class[]{});
-		Field field = clazz.getDeclaredField("players");
+		Field field = serviceClazz.getDeclaredField("players");
 		field.setAccessible(true);
-		GameService service = (GameService) con.newInstance();
 		
 		assertNull(field.get(service));
 		
@@ -47,20 +57,13 @@ public class GameServiceTest {
 	
 	@Test
 	public void getAnswerTest() throws Exception {
-		Class<Referee> refClazz = Referee.class;
-		Constructor<?>[] cons = refClazz.getConstructors();
-		Constructor<?> reCon = cons[0];
-		Field numberListField = refClazz.getDeclaredField("numberList");
+		Field numberListField = playerClazz.getDeclaredField("numberList");
 		numberListField.setAccessible(true);
-		Referee referee = (Referee)reCon.newInstance(10);
-		numberListField.set(referee, Arrays.asList(1,2,3));
-		Player[] players = {referee};
+		numberListField.set(player, Arrays.asList(1,2,3));
+		Player[] players = {player};
 		
-		Class<GameService> gameClazz = GameService.class;
-		Constructor<?> con = gameClazz.getConstructor(new Class[]{});
-		Field playersField = gameClazz.getDeclaredField("players");
+		Field playersField = serviceClazz.getDeclaredField("players");
 		playersField.setAccessible(true);
-		GameService service = (GameService) con.newInstance();
 		playersField.set(service, players);
 		
 		assertEquals("1 2 3 ", service.getAnswer(0));
@@ -68,22 +71,15 @@ public class GameServiceTest {
 	
 	@Test
 	public void inputNumTest() throws Exception {
-		Class<Referee> refClazz = Referee.class;
-		Constructor<?>[] cons = refClazz.getConstructors();
-		Constructor<?> reCon = cons[0];
-		Field numberListField = refClazz.getDeclaredField("numberList");
+		Field numberListField = playerClazz.getDeclaredField("numberList");
 		numberListField.setAccessible(true);
-		Referee referee = (Referee)reCon.newInstance(10);
-		numberListField.set(referee, Arrays.asList(1,2,3));
-		Player[] players = {referee};
+		numberListField.set(player, Arrays.asList(1,2,3));
+		Player[] players = {player};
 		
-		Class<GameService> gameClazz = GameService.class;
-		Constructor<?> con = gameClazz.getConstructor(new Class[]{});
-		Field playersField = gameClazz.getDeclaredField("players");
-		Field numberSizeField = gameClazz.getDeclaredField("numberSize");
+		Field playersField = serviceClazz.getDeclaredField("players");
+		Field numberSizeField = serviceClazz.getDeclaredField("numberSize");
 		playersField.setAccessible(true);
 		numberSizeField.setAccessible(true);
-		GameService service = (GameService) con.newInstance();
 		playersField.set(service, players);
 		numberSizeField.set(service, 3);
 		
