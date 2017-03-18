@@ -8,6 +8,7 @@
 		<form id="form" method="post">
 			<input type="hidden" name="num" value="<%=request.getAttribute("num")%>">
 			<input type="hidden" name="playerSize" value="<%=request.getAttribute("playerSize")%>">
+			<input type="hidden" name="playerNumber" value="0">
 		</form>
 		<div style="width: 125; height: 30; margin: auto;">
 			<label> 숫자 야구 게임!! </label><br/><br/>
@@ -17,6 +18,10 @@
 	if((boolean)request.getAttribute("isNotMadeNum")){
 %>
 			<button type="button" class="btn" id="reStart" value="start.do">다시하기</button><br/><br/>
+<%
+	} else {
+%>
+			<button type="button" class="btn" id="reStartAndMakeNumber" value="makeNumber.do">숫자 다시정하기</button><br/><br/>
 <%
 	}
 %>

@@ -2,24 +2,22 @@ var finish = {
 	firstPage : $("#firstPage"),
 	changeNumber : $("#changeNumber"),
 	reStart : $("#reStart"),
+	reStartAndMakeNumber : $("#reStartAndMakeNumber"),
 	form : $("#form"),
 	num : $("input[name=num]"),
 	firstPageEvent : function(){
 		$(location).attr("href", "index.jsp");
 	},
-	changeNumberEvent : function(){
-		this.form.attr("action", this.changeNumber.val());
-		this.form.submit();
-	},
-	reStartEvent : function(){
-		this.form.attr("action", this.reStart.val());
+	formEvent : function(event){
+		this.form.attr("action", $(event.target).val());
 		this.form.submit();
 	},
 	init : function(){
 		var self = this;
 		self.firstPage.click(function(){self.firstPageEvent();});
-		self.changeNumber.click(function(){self.changeNumberEvent();});
-		self.reStart.click(function(){self.reStartEvent();});
+		self.changeNumber.click(function(){self.formEvent(event);});
+		self.reStart.click(function(){self.formEvent(event);});
+		self.reStartAndMakeNumber.click(function(){self.formEvent(event);});
 	}
 }
 

@@ -18,7 +18,7 @@
 	</head>
 	<body>
 		<div>
-			Player <%=playerNumber%> (예 -> 123)
+			Player <%=playerNumber%> 님이 맞출 숫자를 정해주세요. (예 -> 123)
 		</div>
 		<div>
 			<form id="form" action="makeNumber.do" method="post" onsubmit="return false;" style="float:left">
