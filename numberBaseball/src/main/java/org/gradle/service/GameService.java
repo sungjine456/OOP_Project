@@ -74,6 +74,48 @@ public class GameService {
 		return players[playerNumber].showAnswer();
 	}
 	
+	public boolean IsGiveUpPlayer(int playerNumber){
+		return players[playerNumber].isGiveUp();
+	}
+	
+	public void setGiveUp(int playerNumber){
+		players[playerNumber].setGiveUp(true);
+	}
+	
+	public int nextPlayer(int playerNumber){
+		int next = playerNumber;
+		int count = 0;
+		int playerSize = players.length;
+		while(count<=playerSize){
+			next++;
+			if(next >= playerSize){
+				next = 0;
+			}
+			if(!players[next].isGiveUp()){
+				break;
+			}
+			count++;
+		}
+		return next + 1;
+	}
+	
+	/**
+	 * 두명 미만이면 게임이 끝난다.
+	 * @return 게임이 끝나면 true 아니면 false
+	 */
+	public boolean gameOver(){
+		int count = 0;
+		for(Player player : players){
+			if(!player.isGiveUp()){
+				count++;
+				if(count >= 2){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
 	private boolean inputNumberConfirm(Player player, String[] numbersStr){
 		if(confirmInputIsNotNumber(numbersStr)){
 			log.debug(" 정확한 숫자를 입력해 주세요. ");

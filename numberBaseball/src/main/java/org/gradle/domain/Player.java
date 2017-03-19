@@ -11,6 +11,7 @@ public class Player {
 	protected final int NUMBERS_BEFORE_SELECTION = 10;
 	
 	protected List<Integer> numberList = new LinkedList<Integer>();
+	private boolean giveUp = false;
 	
 	public String confirmAnswer(String[] numbersStr){
 		int len = numbersStr.length;
@@ -25,5 +26,11 @@ public class Player {
 		int size = numberList.size();
 		IntStream.range(0, size).forEach(i->sb.append(numberList.get(i) + " "));
 		return sb.toString();
+	}
+	public boolean isGiveUp() {
+		return giveUp;
+	}
+	public void setGiveUp(boolean giveUp) {
+		this.giveUp = giveUp;
 	}
 }

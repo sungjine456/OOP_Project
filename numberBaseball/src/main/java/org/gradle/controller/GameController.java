@@ -63,8 +63,14 @@ public class GameController {
 		log.debug("inputNum.do");
 		log.debug("input : " + input);
 		log.debug("playerNumber : " + playerNumber);
+		
 		Map<String, String> map = new HashMap<>();
-		map.put("confirm", gameService.inputNum(playerNumber, input));
+		System.out.println(gameService.nextPlayer(playerNumber));
+		if(!gameService.IsGiveUpPlayer(playerNumber)){
+			map.put("confirm", gameService.inputNum(playerNumber, input));
+		} 
+		map.put("nextPlayer", String.valueOf(gameService.nextPlayer(playerNumber)));
+		map.put("isGiveUpPlayer", String.valueOf(gameService.IsGiveUpPlayer(playerNumber)));
 		return map;
 	}
 	@RequestMapping("/giveUp.do")
@@ -72,8 +78,11 @@ public class GameController {
 		log.debug("giveUp.do");
 		log.debug("playerNumber : " + playerNumber);
 		
+		gameService.setGiveUp(playerNumber);
+		
 		Map<String, String> map = new HashMap<>();
 		map.put("answer", gameService.getAnswer(playerNumber));
+		map.put("gameOver", String.valueOf(gameService.gameOver()));
 		return map;
 	}
 	@RequestMapping("/makeNumber.do")

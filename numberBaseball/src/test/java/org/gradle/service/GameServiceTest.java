@@ -1,7 +1,6 @@
 package org.gradle.service;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
@@ -92,5 +91,91 @@ public class GameServiceTest {
 		assertEquals("0S 2B", service.inputNum(0, "5 1 2"));
 		assertEquals("0S 3B", service.inputNum(0, "2 3 1"));
 		assertEquals("성공!!!", service.inputNum(0, "1 2 3"));
+	}
+	
+	@Test
+	public void nextPlayerTest() throws Exception {
+		Field numberSizeField = serviceClazz.getDeclaredField("numberSize");
+		numberSizeField.setAccessible(true);
+		numberSizeField.set(service, 2);
+		
+		Class<Player> playerClazz1 = Player.class;
+		Constructor<?> playerCon1 = playerClazz1.getConstructor();
+		Player player1 = (Player)playerCon1.newInstance();
+		
+		Field giveUpField = playerClazz.getDeclaredField("giveUp");
+		giveUpField.setAccessible(true);
+		Field giveUpField1 = playerClazz.getDeclaredField("giveUp");
+		giveUpField1.setAccessible(true);
+		
+		giveUpField.set(player, false);
+		giveUpField1.set(player1, false);
+		Player[] players = {player, player1};
+		
+		Field playersField = serviceClazz.getDeclaredField("players");
+		playersField.setAccessible(true);
+		playersField.set(service, players);
+		
+		assertEquals(1, service.nextPlayer(2));
+		
+		numberSizeField.set(service, 4);
+		
+		Class<Player> playerClazz2 = Player.class;
+		Constructor<?> playerCon2 = playerClazz2.getConstructor();
+		Player player2 = (Player)playerCon2.newInstance();
+		Class<Player> playerClazz3 = Player.class;
+		Constructor<?> playerCon3 = playerClazz3.getConstructor();
+		Player player3 = (Player)playerCon3.newInstance();
+		
+		Field giveUpField2 = playerClazz.getDeclaredField("giveUp");
+		giveUpField2.setAccessible(true);
+		Field giveUpField3 = playerClazz.getDeclaredField("giveUp");
+		giveUpField3.setAccessible(true);
+		
+		giveUpField.set(player, true);
+		giveUpField1.set(player1, false);
+		giveUpField2.set(player2, true);
+		giveUpField3.set(player3, false);
+		
+		Player[] players2 = {player, player1, player2, player3};
+		
+		playersField = serviceClazz.getDeclaredField("players");
+		playersField.setAccessible(true);
+		playersField.set(service, players2);
+		
+		assertEquals(4, service.nextPlayer(2));
+	}
+	
+	@Test
+	public void gameOverTest() throws Exception {
+		Class<Player> playerClazz1 = Player.class;
+		Constructor<?> playerCon1 = playerClazz1.getConstructor();
+		Player player1 = (Player)playerCon1.newInstance();
+		
+		Field giveUpField = playerClazz.getDeclaredField("giveUp");
+		giveUpField.setAccessible(true);
+		
+		Field giveUpField1 = playerClazz.getDeclaredField("giveUp");
+		giveUpField1.setAccessible(true);
+		
+		giveUpField.set(player, false);
+		giveUpField1.set(player1, false);
+		Player[] players = {player, player1};
+		
+		Field playersField = serviceClazz.getDeclaredField("players");
+		playersField.setAccessible(true);
+		playersField.set(service, players);
+		
+		assertFalse(service.gameOver());
+		
+		giveUpField.set(player, true);
+		giveUpField1.set(player1, false);
+		Player[] players1 = {player, player1};
+		
+		playersField = serviceClazz.getDeclaredField("players");
+		playersField.setAccessible(true);
+		playersField.set(service, players1);
+		
+		assertTrue(service.gameOver());
 	}
 }

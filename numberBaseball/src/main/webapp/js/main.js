@@ -82,17 +82,29 @@ var main = {
 			type : "post",
 			data : {"input" : arr, "playerNumber" : playerNumberVal},
 			success : function(data){
-				if(data.confirm == "성공!!!"){
-					if(parseInt(self.playerSize.val()) === 1){
-						alert("정답입니다 !!");
+				if(data.isGiveUpPlayer!=="true"){
+					if(data.confirm == "성공!!!"){
+						if(parseInt(self.playerSize.val()) === 1){
+							alert("정답입니다 !!");
+						} else {
+							alert("Player " + myTurn + "님이 맞추셨습니다!!");
+						}
+						finishForm.submit();
 					} else {
-						alert("Player " + myTurn + "님이 맞추셨습니다!!");
+						area.val(area.val() + "\n" + countValue + "번 : " + arr + " -> " + data.confirm);
+						alert(data.nextPlayer);
+						self.clearEvent();
+						self.turn.val(data.nextPlayer);
+						self.playerNumber.val(parseInt(data.nextPlayer)-1);
+						if(parseInt(self.playerSize.val()) !== 1){
+							self.labelCurrentPlayerEvent();
+						}
 					}
-					finishForm.submit();
 				} else {
-					area.val(area.val() + "\n" + countValue + "번 : " + arr + " -> " + data.confirm);
+					alert("항복한 Player 입니다. 다시입력해주세요.");
 					self.clearEvent();
-					self.nextTurn(myTurn);
+					self.turn.val(data.nextPlayer);
+					self.playerNumber.val(parseInt(data.nextPlayer)-1);
 					if(parseInt(self.playerSize.val()) !== 1){
 						self.labelCurrentPlayerEvent();
 					}
@@ -123,6 +135,8 @@ var main = {
 	giveUpEvent : function(){
 		var self = this;
 		var playerNumberVal = this.playerNumber.val();
+		var myTurn = this.turn.val();
+		var area = $("#area"+myTurn);
 		var result = confirm("Player " + this.turn.val()  + " 님 항복하시겠습니까?");
 		if(result){
 			$.ajax({
@@ -131,7 +145,15 @@ var main = {
 				type : "post",
 				success : function(data){
 					alert("Player " + self.turn.val()  + "님이 맞췄어야 했던 정답은 "+data.answer+" 이었습니다.");
-					finishForm.submit();
+					if(data.gameOver==="true"){
+						finishForm.submit();
+					}
+					area.val(area.val() + "\n항복");
+					self.clearEvent();
+					self.nextTurn(myTurn);
+					if(parseInt(self.playerSize.val()) !== 1){
+						self.labelCurrentPlayerEvent();
+					}
 				}
 			});
 		}
