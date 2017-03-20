@@ -92,7 +92,6 @@ var main = {
 						finishForm.submit();
 					} else {
 						area.val(area.val() + "\n" + countValue + "번 : " + arr + " -> " + data.confirm);
-						alert(data.nextPlayer);
 						self.clearEvent();
 						self.turn.val(data.nextPlayer);
 						self.playerNumber.val(parseInt(data.nextPlayer)-1);

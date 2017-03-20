@@ -1,11 +1,15 @@
 package org.gradle.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
+import org.gradle.domain.Member;
 import org.gradle.domain.Player;
 import org.junit.Before;
 import org.junit.Test;
@@ -26,19 +30,6 @@ public class GameServiceTest {
 		playerClazz = Player.class;
 		playerCon = playerClazz.getConstructor();
 		player = (Player)playerCon.newInstance();
-	}
-	
-	@Test
-	public void makeGameTestPramOneInt() throws Exception {
-		Field field = serviceClazz.getDeclaredField("players");
-		field.setAccessible(true);
-		
-		assertNull(field.get(service));
-		
-		service.makeGame(3);
-		Player[] players = (Player[])field.get(service);
-		
-		assertEquals(1, players.length);
 	}
 
 	@Test
@@ -177,5 +168,20 @@ public class GameServiceTest {
 		playersField.set(service, players1);
 		
 		assertTrue(service.gameOver());
+	}
+	
+	@Test
+	public void setNumber() throws Exception {
+		Class<Member> memberClazz = Member.class;
+		Constructor<?> memberCon = memberClazz.getConstructor(new Class[]{Integer.TYPE});
+		
+		Field field = serviceClazz.getDeclaredField("players");
+		field.setAccessible(true);
+		Member[] members = {(Member) memberCon.newInstance(3)};
+		field.set(service, members);
+		
+		assertFalse(service.setMakeNumber(0, "125"));
+		assertTrue(service.setMakeNumber(1, "125"));
+		assertFalse(service.setMakeNumber(2, "125"));
 	}
 }

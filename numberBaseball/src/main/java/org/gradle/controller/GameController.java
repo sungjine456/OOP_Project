@@ -50,12 +50,14 @@ public class GameController {
 			HttpServletRequest req){
 		log.debug("chooseNumber.do");
 		log.debug("playerSize : " + playerSize);
+		
 		req.setAttribute("playerSize", playerSize);
 		return "view/chooseNumber";
 	}
 	@RequestMapping("choosePlayerSize.do")
 	public String choosePlayerSize(){
 		log.debug("choosePlayerSize.do");
+		
 		return "view/choosePlayerSize";
 	}
 	@RequestMapping(value="/inputNum.do", produces="application/json;charset=UTF-8")
@@ -65,10 +67,9 @@ public class GameController {
 		log.debug("playerNumber : " + playerNumber);
 		
 		Map<String, String> map = new HashMap<>();
-		System.out.println(gameService.nextPlayer(playerNumber));
 		if(!gameService.IsGiveUpPlayer(playerNumber)){
 			map.put("confirm", gameService.inputNum(playerNumber, input));
-		} 
+		}
 		map.put("nextPlayer", String.valueOf(gameService.nextPlayer(playerNumber)));
 		map.put("isGiveUpPlayer", String.valueOf(gameService.IsGiveUpPlayer(playerNumber)));
 		return map;

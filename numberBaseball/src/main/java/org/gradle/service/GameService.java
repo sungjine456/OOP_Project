@@ -18,17 +18,6 @@ public class GameService {
 	private int numberSize;
 	
 	/**
-	 * 혼자 게임할 때 만든다.
-	 * 
-	 * @param numberSize 게임에 사용될 숫자의 수
-	 */
-	public void makeGame(int numberSize){
-		players = new Player[1];
-		players[0] = new Referee(numberSize);
-		this.numberSize = numberSize;
-	}
-	
-	/**
 	 * 한명 이상이 게임할 때 만든다.
 	 * 
 	 * @param numberSize 게임에 사용될 숫자의 수
@@ -54,7 +43,12 @@ public class GameService {
 	}
 	
 	public boolean setMakeNumber(int playerNum, String number){
-		Member member = (Member) players[playerNum - 1];
+		Member member;
+		try {
+			member = (Member) players[playerNum - 1];
+		} catch(ArrayIndexOutOfBoundsException e){
+			return false;
+		}
 		return member.setNumber(number);
 	}
 	
