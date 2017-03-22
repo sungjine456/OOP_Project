@@ -4,7 +4,6 @@ var finish = {
 	reStart : $("#reStart"),
 	reStartAndMakeNumber : $("#reStartAndMakeNumber"),
 	form : $("#form"),
-	num : $("input[name=num]"),
 	firstPageEvent : function(){
 		$(location).attr("href", "index.jsp");
 	},

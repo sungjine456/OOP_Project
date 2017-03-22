@@ -27,7 +27,7 @@ var main = {
 		var num = parseInt(this.numCheck(this.countNum.val()));
 		var answer = $("#answer"+num);
 		
-		if(num == 1 && value == 0){
+		if(num === 1 && value === 0){
 			alert("첫 숫자는 0이 될 수 없습니다.");
 			return;
 		}
@@ -83,7 +83,7 @@ var main = {
 			data : {"input" : arr, "playerNumber" : playerNumberVal},
 			success : function(data){
 				if(data.isGiveUpPlayer!=="true"){
-					if(data.confirm == "성공!!!"){
+					if(data.confirm === "성공!!!"){
 						if(parseInt(self.playerSize.val()) === 1){
 							alert("정답입니다 !!");
 						} else {
@@ -178,9 +178,9 @@ var main = {
 				num = keyCode-96;
 			}
 			this.numberClickEvent(num);
-		} else if(keyCode == 8){
+		} else if(keyCode === 8){
 			this.cancelBtnClickEvent();
-		} else if(keyCode == 13){
+		} else if(keyCode === 13){
 			this.inputEvent();
 		}
 	},
