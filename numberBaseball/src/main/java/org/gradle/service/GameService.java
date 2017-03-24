@@ -58,10 +58,11 @@ public class GameService {
 		if(inputNumberConfirm(player, numbersStr)){
 			return "";
 		}
-		if(player.confirmAnswer(numbersStr).equals(numberSize + VerdictEnum.STRIKE.getValue() + " 0" + VerdictEnum.BALL.getValue())){
-			return "성공!!!";
+		String confirm = player.confirmAnswer(numbersStr);
+		if(confirm.startsWith(numberSize + VerdictEnum.STRIKE.getValue())){
+			return VerdictEnum.SUCCESS.getValue();
 		}
-		return player.confirmAnswer(numbersStr);
+		return confirm;
 	}
 	
 	public String getAnswer(int playerNumber){

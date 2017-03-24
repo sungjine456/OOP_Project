@@ -2,7 +2,8 @@ package org.gradle.common;
 
 public enum VerdictEnum {
 	STRIKE("S"),
-	BALL("B");
+	BALL("B"),
+	SUCCESS("성공!!!");
 	
 	private String value;
 	

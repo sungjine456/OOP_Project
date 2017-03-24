@@ -65,7 +65,7 @@ public class Game {
 					break;
 				}
 				if(players[i - 1].confirmAnswer(numbersStr).equals(numberSize + VerdictEnum.STRIKE.getValue() + " 0" + VerdictEnum.BALL.getValue())){
-					System.out.println(i + "인 성공 !!");
+					System.out.println(i + "인 " + VerdictEnum.SUCCESS.getValue());
 					count += 1;
 					win[i - 1] = true;
 				}
@@ -86,7 +86,7 @@ public class Game {
 				continue;
 			}
 			if(player.confirmAnswer(numbersStr).equals(numberSize + VerdictEnum.STRIKE.getValue() + " 0" + VerdictEnum.BALL.getValue())){
-				System.out.println("성공 !!");
+				System.out.println(VerdictEnum.SUCCESS.getValue());
 				break;
 			}
 		}

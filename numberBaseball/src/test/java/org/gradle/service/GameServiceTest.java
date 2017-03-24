@@ -9,6 +9,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
+import org.gradle.common.VerdictEnum;
 import org.gradle.domain.Member;
 import org.gradle.domain.Player;
 import org.junit.Before;
@@ -81,7 +82,7 @@ public class GameServiceTest {
 		assertEquals("0S 3B", service.inputNum(0, "3 1 2"));
 		assertEquals("0S 2B", service.inputNum(0, "5 1 2"));
 		assertEquals("0S 3B", service.inputNum(0, "2 3 1"));
-		assertEquals("성공!!!", service.inputNum(0, "1 2 3"));
+		assertEquals(VerdictEnum.SUCCESS.getValue(), service.inputNum(0, "1 2 3"));
 	}
 	
 	@Test

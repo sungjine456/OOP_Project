@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 	<head>
-		<title>성공!!!</title>
+		<title>게임 끝</title>
 		<link rel="stylesheet" href="/css/common.css">
 	</head>
 	<body>

@@ -1,5 +1,6 @@
 var main = {
 	body : $("body"),
+	success : $("#success"),
 	labelCurrentPlayer : $("#labelCurrentPlayer"),
 	numberBtn : $(".numberBtn"),
 	inputBtn : $("#inputBtn"),
@@ -83,7 +84,7 @@ var main = {
 			data : {"input" : arr, "playerNumber" : playerNumberVal},
 			success : function(data){
 				if(data.isGiveUpPlayer!=="true"){
-					if(data.confirm === "성공!!!"){
+					if(data.confirm === self.success.val()){
 						if(parseInt(self.playerSize.val()) === 1){
 							alert("정답입니다 !!");
 						} else {

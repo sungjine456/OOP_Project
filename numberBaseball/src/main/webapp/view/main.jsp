@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="org.gradle.common.VerdictEnum" %>
 <%
 	int num = (Integer)request.getAttribute("num");
 	int playerSize = 1;
@@ -18,6 +19,7 @@
 		<input type="hidden" id="count" value="1"/>
 		<input type="hidden" id="playerNumber" value="0"/>
 		<input type="hidden" id="turn" value="1"/>
+		<input type="hidden" id="success" value="<%=VerdictEnum.SUCCESS.getValue()%>"/>
 		<div style="margin-right:10px; float:left">
 			<div>
 				<c:set var="playerSize" value="<%=playerSize%>"/>
