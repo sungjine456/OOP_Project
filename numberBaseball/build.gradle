@@ -22,6 +22,8 @@ repositories {
 }
 
 dependencies {
+	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.27'
+	compile group: 'org.mybatis', name: 'mybatis', version: '3.2.2'
 	compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
 	compile 'javax.servlet:jstl:1.2'
 	compile 'org.slf4j:slf4j-api:1.7.7'

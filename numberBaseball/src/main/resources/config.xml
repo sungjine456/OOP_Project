@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+    PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ 
+<configuration>
+    <typeAliases>
+        <typeAlias alias="player" type="org.gradle.vo.PlayerVo"/>        
+    </typeAliases>
+ 
+    <environments default="development">
+        <environment id="development">
+          <transactionManager type="JDBC"/>
+            <!--  connecting to Local MySql -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/numberBaseball"/>
+                <property name="username" value="numberBaseball"/>
+                <property name="password" value="numberBaseball"/>
+            </dataSource>
+       </environment>
+    </environments>
+    <mappers>
+       <mapper resource="sql/player.xml"/>
+    </mappers>
+</configuration>
