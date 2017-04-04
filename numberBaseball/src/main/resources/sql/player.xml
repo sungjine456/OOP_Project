@@ -5,11 +5,20 @@
  
 <mapper namespace="Player">
     <resultMap id="result" type="Player">
+        <result property="no" column="no"/>
         <result property="id" column="id"/>
         <result property="point" column="point"/>   
     </resultMap>
  
     <select id="selectAll" resultMap="result">
         SELECT * FROM player;
+    </select>
+    
+    <select id="loginCheck" parameterType="org.gradle.dto.PlayerDto" resultMap="result">
+    	SELECT * FROM player where id=#{id} and password=#{password};
+    </select>
+    
+    <select id="findPlayer" parameterType="String" resultMap="result">
+    	SELECT * FROM player where id=#{id};
     </select>
 </mapper>

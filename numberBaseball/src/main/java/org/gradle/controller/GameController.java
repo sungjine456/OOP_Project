@@ -4,8 +4,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
+import org.gradle.dao.PlayerDao;
+import org.gradle.dto.PlayerDto;
+import org.gradle.mybatis.MyBatisConnectionFactory;
 import org.gradle.service.GameService;
+import org.gradle.vo.PlayerVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +24,7 @@ public class GameController {
 	
 	@Autowired
 	private GameService gameService;
+	private PlayerDao playerDao = new PlayerDao(MyBatisConnectionFactory.getSqlSessionFactory());
 	
 	@RequestMapping("/start.do")
 	public String start(int num, int playerSize, HttpServletRequest req){
@@ -123,5 +129,24 @@ public class GameController {
 			req.setAttribute("isNotMadeNum", false);
 			return "view/main";
 		}
+	}
+	@RequestMapping("/login.do")
+	public String login(PlayerDto dto, HttpSession session){
+		log.debug("login.do");
+		log.debug(dto.getId());
+		log.debug(dto.getPassword());
+		if(playerDao.loginCheck(dto)){
+			PlayerVo player = playerDao.findPlayer(dto.getId());
+			System.out.println(player);
+			session.setAttribute("player", player);
+			return "index";
+		} else {
+			return "view/login";
+		}
+	}
+	@RequestMapping("/loginPage.do")
+	public String loginPage(){
+		log.debug("loginPage.do");
+		return "view/login";
 	}
 }
