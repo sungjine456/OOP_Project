@@ -3,12 +3,12 @@ package org.gradle.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.gradle.dao.PlayerDao;
 import org.gradle.dto.PlayerDto;
-import org.gradle.mybatis.MyBatisConnectionFactory;
 import org.gradle.service.GameService;
 import org.gradle.vo.PlayerVo;
 import org.slf4j.Logger;
@@ -24,7 +24,8 @@ public class GameController {
 	
 	@Autowired
 	private GameService gameService;
-	private PlayerDao playerDao = new PlayerDao(MyBatisConnectionFactory.getSqlSessionFactory());
+	@Resource(name="playerDao")
+	private PlayerDao playerDao;
 	
 	@RequestMapping("/start.do")
 	public String start(int num, int playerSize, HttpServletRequest req){
@@ -52,8 +53,7 @@ public class GameController {
 		return "view/finish";
 	}
 	@RequestMapping("/chooseNumber.do")
-	public String chooseNumber(int playerSize, 
-			HttpServletRequest req){
+	public String chooseNumber(int playerSize, HttpServletRequest req){
 		log.debug("chooseNumber.do");
 		log.debug("playerSize : " + playerSize);
 		
@@ -137,7 +137,6 @@ public class GameController {
 		log.debug(dto.getPassword());
 		if(playerDao.loginCheck(dto)){
 			PlayerVo player = playerDao.findPlayer(dto.getId());
-			System.out.println(player);
 			session.setAttribute("player", player);
 			return "index";
 		} else {

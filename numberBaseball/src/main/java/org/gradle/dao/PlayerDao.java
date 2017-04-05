@@ -3,21 +3,25 @@ package org.gradle.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.gradle.domain.Player;
 import org.gradle.dto.PlayerDto;
 import org.gradle.vo.PlayerVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
+@Repository("playerDao")
 public class PlayerDao {
 	private static final Logger log = LoggerFactory.getLogger(PlayerDao.class);
-	private SqlSession session = null;
 	
-	public PlayerDao(SqlSessionFactory sqlSessionFactory){
-		session = sqlSessionFactory.openSession();
+	@Autowired
+	private SqlSession session;
+	
+	public void setSession(SqlSession session) {
+		this.session = session;
 	}
-	
+
 	public List<Player> selectAll(){
         List<Player> list = null;
  

@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="Player">
-    <resultMap id="result" type="Player">
+    <resultMap id="result" type="player">
         <result property="no" column="no"/>
         <result property="id" column="id"/>
         <result property="point" column="point"/>   

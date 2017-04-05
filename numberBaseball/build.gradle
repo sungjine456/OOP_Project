@@ -22,6 +22,8 @@ repositories {
 }
 
 dependencies {
+	compile group: 'org.springframework', name: 'spring-jdbc', version: '3.2.5.RELEASE'
+	compile group: 'org.mybatis', name: 'mybatis-spring', version: '1.2.0'
 	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.27'
 	compile group: 'org.mybatis', name: 'mybatis', version: '3.2.2'
 	compile 'org.codehaus.jackson:jackson-mapper-asl:1.9.13'
@@ -31,5 +33,6 @@ dependencies {
 	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.0.1'
     compile 'org.springframework:spring-webmvc:4.0.0.RELEASE'
     compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+    testCompile group: 'org.springframework', name: 'spring-test', version: '4.0.0.RELEASE'
     testCompile group: 'junit', name: 'junit', version: '4.+'
 }
