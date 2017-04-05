@@ -7,6 +7,7 @@ var index = {
 		var target = $(event.target);
 		if(target.val()===""){
 			this.choosePlayerSizeForm.submit();
+			return;
 		}
 		this.playerSize.val(target.val());
 		this.chooseNumberForm.submit();
