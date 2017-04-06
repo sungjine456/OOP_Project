@@ -18,11 +18,15 @@
 
 	<context:component-scan base-package="org.gradle" />
 	<mvc:annotation-driven/>
-	    
+	
     <import resource="classpath:jdbc-config.xml"/>
-	         
+
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 <!-- 	<property name="prefix" value="/view/"></property> -->
 		<property name="suffix" value=".jsp"></property>
+	</bean>
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages"/>
 	</bean>
 </beans>

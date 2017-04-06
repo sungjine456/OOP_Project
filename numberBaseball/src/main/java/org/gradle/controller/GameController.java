@@ -1,11 +1,13 @@
 package org.gradle.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 
 import org.gradle.dao.PlayerDao;
 import org.gradle.dto.PlayerDto;
@@ -15,6 +17,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -131,12 +137,20 @@ public class GameController {
 		}
 	}
 	@RequestMapping("/login.do")
-	public String login(PlayerDto dto, HttpSession session){
+	public String login(@ModelAttribute @Valid PlayerDto playerDto, BindingResult result, Model model, HttpSession session){
 		log.debug("login.do");
-		log.debug(dto.getId());
-		log.debug(dto.getPassword());
-		if(playerDao.loginCheck(dto)){
-			PlayerVo player = playerDao.findPlayer(dto.getId());
+		log.debug(playerDto.getId());
+		log.debug(playerDto.getPassword());
+		if(result.hasErrors()){
+			log.debug("bindingResult has error");
+			List<ObjectError> errors = result.getAllErrors();
+			for(ObjectError error : errors){
+				log.debug("error : {}", error.getDefaultMessage());
+			}
+			return "view/login";
+		}
+		if(playerDao.loginCheck(playerDto)){
+			PlayerVo player = playerDao.findPlayer(playerDto.getId());
 			session.setAttribute("player", player);
 			return "index";
 		} else {

@@ -4,11 +4,13 @@ var login = {
 	password : $("#password"),
 	btn : $("#btn"),
 	formEvent : function(){
-		if(!this.password.val()){
-			alert("비밀번호를 입력해주세요.");
-		}
 		if(!this.id.val()){
 			alert("아이디를 입력해주세요");
+			return;
+		}
+		if(!this.password.val()){
+			alert("비밀번호를 입력해주세요.");
+			return;
 		}
 		form.submit();
 	},
