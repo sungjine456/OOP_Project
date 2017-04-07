@@ -1,11 +1,11 @@
 package org.gradle.dto;
 
-import org.hibernate.validator.constraints.NotEmpty;
+import org.hibernate.validator.constraints.Length;
 
 public class PlayerDto {
-	@NotEmpty
+	@Length(min=4, max=10, message="아이디를 다시 입력해주세요.")
 	private String id;
-	@NotEmpty
+	@Length(min=4, max=10, message="비밀번호를 다시 입력해주세요.")
 	private String password;
 	
 	public PlayerDto(){

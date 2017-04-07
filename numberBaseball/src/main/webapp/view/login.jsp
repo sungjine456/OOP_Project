@@ -6,10 +6,10 @@
 	</head>
 	<body>
 		<form:form id="form" name="playerDto" action="login.do" modelAttribute="playerDto" method="post">
-			아이디 : <input type="text" name="id"/>
+			아이디 : <input type="text" id="id" name="id"/>
 			<form:errors path="id" />
 			<br>
-			비밀번호 : <input type="password" name="password"/>
+			비밀번호 : <input type="password" id="password" name="password"/>
 			<form:errors path="password" />
 			<br>
 			<input type="button" id="btn" value="로그인">

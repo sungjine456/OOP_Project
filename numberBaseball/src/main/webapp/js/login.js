@@ -4,11 +4,13 @@ var login = {
 	password : $("#password"),
 	btn : $("#btn"),
 	formEvent : function(){
-		if(!this.id.val()){
+		var idVal = this.id.val();
+		var passwordVal = this.password.val();
+		if(!idVal || idVal.length < 4 || idVal.length > 10){
 			alert("아이디를 입력해주세요");
 			return;
 		}
-		if(!this.password.val()){
+		if(!passwordVal || passwordVal.length < 4 || passwordVal.length > 10){
 			alert("비밀번호를 입력해주세요.");
 			return;
 		}
