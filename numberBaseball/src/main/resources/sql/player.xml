@@ -4,21 +4,19 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
 <mapper namespace="Player">
-    <resultMap id="result" type="player">
-        <result property="no" column="no"/>
-        <result property="id" column="id"/>
-        <result property="point" column="point"/>   
-    </resultMap>
- 
-    <select id="selectAll" resultMap="result">
+	<insert id="insert" parameterType="playerDto">
+		INSERT INTO player(id, password) VALUES(#{id}, #{password});
+	</insert>
+
+    <select id="selectAll" resultType="playerVo">
         SELECT * FROM player;
     </select>
     
-    <select id="loginCheck" parameterType="org.gradle.dto.PlayerDto" resultMap="result">
+    <select id="loginCheck" parameterType="playerDto" resultType="playerVo">
     	SELECT * FROM player where id=#{id} and password=#{password};
     </select>
     
-    <select id="findPlayer" parameterType="String" resultMap="result">
+    <select id="findPlayer" parameterType="String" resultType="playerVo">
     	SELECT * FROM player where id=#{id};
     </select>
 </mapper>

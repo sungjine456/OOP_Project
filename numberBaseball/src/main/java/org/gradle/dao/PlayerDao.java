@@ -3,7 +3,6 @@ package org.gradle.dao;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
-import org.gradle.domain.Player;
 import org.gradle.dto.PlayerDto;
 import org.gradle.vo.PlayerVo;
 import org.slf4j.Logger;
@@ -22,8 +21,8 @@ public class PlayerDao {
 		this.session = session;
 	}
 
-	public List<Player> selectAll(){
-        List<Player> list = null;
+	public List<PlayerVo> selectAll(){
+        List<PlayerVo> list = null;
  
         try {
             list = session.selectList("Player.selectAll");
@@ -54,5 +53,9 @@ public class PlayerDao {
         	log.debug(e.getMessage());
 		}
 		return player;
+	}
+	
+	public void insertPlayer(PlayerDto playerDto){
+		session.selectOne("Player.insert", playerDto);
 	}
 }

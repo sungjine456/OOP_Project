@@ -21,6 +21,10 @@
         <constructor-arg  ref="sqlSessionFactory"/>
     </bean>
     
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+
     <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
 			<value>classpath:/jdbc.properties</value>
@@ -33,5 +37,4 @@
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
-     
 </beans>
