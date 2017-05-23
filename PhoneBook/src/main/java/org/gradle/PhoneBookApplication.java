@@ -2,6 +2,7 @@ package org.gradle;
 
 import java.util.Scanner;
 
+import org.gradle.common.StringUtils;
 import org.gradle.common.Utils;
 import org.gradle.domain.User;
 import org.gradle.repository.UserRepository;
@@ -16,8 +17,8 @@ public class PhoneBookApplication {
 	
 	public static void main(String[] args){
 		log.info("Application Start");
-		boolean playGame = true;
-		while(playGame){
+		boolean startApp = true;
+		while(startApp){
 			System.out.println("1. 로그인 \n2. 회원가입\n3. 종료");
 			int n = Utils.changeStringIsNumber(sc.next());
 			switch (n) {
@@ -29,7 +30,7 @@ public class PhoneBookApplication {
 					}
 					break;
 				case 3:
-					playGame = false;
+					startApp = false;
 					break;
 				default:
 					System.out.println("다시 입력해 주세요.");
@@ -52,5 +53,14 @@ public class PhoneBookApplication {
 		}
 		userRepository.save(new User(id, password, name, number));
 		return true;
+	}
+	
+	private static boolean idAndPasswordCheck(String id, String password){
+		User user = userRepository.find(id);
+		
+		if(user != null && StringUtils.equals(user.getPassword(), password)){
+			return true;
+		}
+		return false;
 	}
 }
