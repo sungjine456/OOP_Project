@@ -23,11 +23,31 @@ public class PhoneBookApplication {
 			int n = Utils.changeStringIsNumber(sc.next());
 			switch (n) {
 				case 1:
+					System.out.print("아이디를 입력해주세요.");
+					String id = sc.next();
+					System.out.print("비밀번호를 입력해주세요.");
+					String password = sc.next();
+					if(idAndPasswordCheck(id, password)){
+						// TODO: 로그인
+					}
+					System.out.println("잘못된 아이디와 비밀번호 입니다.");
 					break;
 				case 2:
-					if(joinUser()){
-						// TODO : 로그인
+					System.out.print("아이디를 입력해주세요 : ");
+					String joinId = sc.next();
+					System.out.print("비밀번호를 입력해주세요 : ");
+					String joinPassword = sc.next();
+					System.out.print("이름을 입력해주세요 : ");
+					String name = sc.next();
+					System.out.print("전화번호를 입력해주세요(ex:000-0000-0000) : ");
+					String number = sc.next();
+					System.out.println(number);
+					if(!Utils.numberCheck(number)){
+						System.out.println("잘못된 형식의 번호입니다.");
+						break;
 					}
+					userRepository.save(new User(joinId, joinPassword, name, number));
+					// TODO: 로그인
 					break;
 				case 3:
 					startApp = false;
@@ -37,22 +57,6 @@ public class PhoneBookApplication {
 					break;
 			}
 		}
-	}
-	
-	private static boolean joinUser(){
-		System.out.print("아이디를 입력해주세요 : ");
-		String id = sc.next();
-		System.out.print("비밀번호를 입력해주세요 : ");
-		String password = sc.next();
-		System.out.print("이름을 입력해주세요 : ");
-		String name = sc.next();
-		System.out.print("전화번호를 입력해주세요(ex:000-0000-0000) : ");
-		String number = sc.next();
-		if(Utils.numberCheck(number)){
-			return false;
-		}
-		userRepository.save(new User(id, password, name, number));
-		return true;
 	}
 	
 	private static boolean idAndPasswordCheck(String id, String password){
