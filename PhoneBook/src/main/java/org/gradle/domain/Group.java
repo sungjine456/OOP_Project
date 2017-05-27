@@ -13,4 +13,7 @@ public class Group {
 	public List<Contcat> getContcats() {
 		return contcats;
 	}
+	public void addContcat(String name, String number){
+		contcats.add(new Contcat(name, number));
+	}
 }
