@@ -16,6 +16,7 @@ public class UtilsTest {
 	
 	@Test
 	public void numberCheckTest(){
+		assertFalse(Utils.numberCheck(null));
 		assertFalse(Utils.numberCheck("1"));
 		assertFalse(Utils.numberCheck("3=3=3"));
 		assertFalse(Utils.numberCheck("3-3-3"));

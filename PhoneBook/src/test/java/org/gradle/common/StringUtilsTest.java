@@ -10,6 +10,7 @@ public class StringUtilsTest {
 	public void isEmptyTest(){
 		assertTrue(StringUtils.isEmpty(null));
 		assertTrue(StringUtils.isEmpty(""));
+		assertTrue(StringUtils.isEmpty(" "));
 		assertFalse(StringUtils.isEmpty("123"));
 		assertFalse(StringUtils.isEmpty("asd"));
 	}
@@ -18,6 +19,7 @@ public class StringUtilsTest {
 	public void isNotEmptyTest(){
 		assertFalse(StringUtils.isNotEmpty(null));
 		assertFalse(StringUtils.isNotEmpty(""));
+		assertFalse(StringUtils.isNotEmpty(" "));
 		assertTrue(StringUtils.isNotEmpty("123"));
 		assertTrue(StringUtils.isNotEmpty("asd"));
 	}
@@ -43,6 +45,7 @@ public class StringUtilsTest {
 		assertFalse(StringUtils.equalsIgnore(null, "abc"));
 		assertFalse(StringUtils.equalsIgnore("abc", null));
 		assertFalse(StringUtils.equalsIgnore("abc", "123"));
+		assertTrue(StringUtils.equalsIgnore(" ", "   "));
 		assertTrue(StringUtils.equalsIgnore("abc", "ABC"));
 		assertTrue(StringUtils.equalsIgnore("abc", "aBc"));
 		assertTrue(StringUtils.equalsIgnore("abc", "abC"));

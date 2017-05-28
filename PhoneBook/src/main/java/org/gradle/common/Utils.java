@@ -12,6 +12,8 @@ public class Utils {
 	}
 	
 	public static boolean numberCheck(String number){
+		if(number == null) return false;
+		
 		return Pattern.matches("01(0|1|[6-9])-(\\d{3}|\\d{4})-\\d{4}", number);
 	}
 }
