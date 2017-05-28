@@ -28,4 +28,18 @@ public class PhoneBookTest {
 		assertNull(phoneBook.getGroup("친구"));
 		assertNotNull(phoneBook.getGroup("친구들"));
 	}
+	
+	@Test(expected=NullPointerException.class)
+	public void groupKeyChangeNullKeyTest(){
+		assertNotNull(phoneBook.getGroup("친구"));
+		
+		phoneBook.groupKeyChange(null, "친구들");
+	}
+	
+	@Test(expected=NullPointerException.class)
+	public void groupKeyChangeNullChangeKeyTest(){
+		assertNotNull(phoneBook.getGroup("친구"));
+		
+		phoneBook.groupKeyChange("친구", null);
+	}
 }
