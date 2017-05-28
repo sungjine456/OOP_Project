@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import org.gradle.common.StringUtils;
+
 public class PhoneBook {
 	private Map<String, Group> groups;
 
@@ -21,6 +23,9 @@ public class PhoneBook {
 		groups.put(key, new Group());
 	}
 	public void groupKeyChange(String key, String changeKey){
+		if(StringUtils.isEmpty(key) || StringUtils.isEmpty(changeKey)){
+			throw new NullPointerException();
+		}
 		Group group = groups.remove(key);
 		groups.put(changeKey, group);
 	}

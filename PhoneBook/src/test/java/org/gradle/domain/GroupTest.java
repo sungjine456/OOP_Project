@@ -13,7 +13,7 @@ public class GroupTest {
 	}
 	
 	@Test
-	public void add_contcat_test() {
-		group.addContcat("name", "number");
+	public void addContcatTest() {
+		group.addContcat("name", "010-1234-1234");
 	}
 }
