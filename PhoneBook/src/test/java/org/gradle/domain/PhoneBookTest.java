@@ -15,8 +15,16 @@ public class PhoneBookTest {
 	}
 
 	@Test
-	public void getGroupTest() {
-		assertNull(phoneBook.getGroup(""));
+	public void getGroupNoParamTest() {
+		assertNotNull(phoneBook.getGroup());
+	}
+
+	@Test
+	public void getGroupParamStringTest() {
+		assertNotNull(phoneBook.getGroup(null));
+		assertNotNull(phoneBook.getGroup(""));
+		assertNotNull(phoneBook.getGroup("spam"));
+		assertNull(phoneBook.getGroup("a"));
 	}
 	
 	@Test
@@ -31,15 +39,11 @@ public class PhoneBookTest {
 	
 	@Test(expected=NullPointerException.class)
 	public void groupKeyChangeNullKeyTest(){
-		assertNotNull(phoneBook.getGroup("친구"));
-		
 		phoneBook.groupKeyChange(null, "친구들");
 	}
 	
 	@Test(expected=NullPointerException.class)
 	public void groupKeyChangeNullChangeKeyTest(){
-		assertNotNull(phoneBook.getGroup("친구"));
-		
 		phoneBook.groupKeyChange("친구", null);
 	}
 }

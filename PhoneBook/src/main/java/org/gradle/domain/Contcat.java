@@ -19,6 +19,9 @@ public class Contcat {
 		this.number = number;
 	}
 	
+	public boolean isExistWord(String word){
+		return name.contains(word)||number.contains(word);
+	}
 	public String getName() {
 		return name;
 	}
