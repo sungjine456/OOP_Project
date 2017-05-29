@@ -7,7 +7,6 @@ import org.gradle.exception.FailNumberException;
 public class Contcat {
 	private String name;
 	private String number;
-	private boolean spam;
 	
 	public Contcat(String name, String number){
 		if(StringUtils.isEmpty(name)||StringUtils.isEmpty(number)){
@@ -18,7 +17,6 @@ public class Contcat {
 		}
 		this.name = name;
 		this.number = number;
-		spam = false;
 	}
 	
 	public String getName() {
@@ -26,8 +24,5 @@ public class Contcat {
 	}
 	public String getNumber() {
 		return number;
-	}
-	public boolean isSpam() {
-		return spam;
 	}
 }
