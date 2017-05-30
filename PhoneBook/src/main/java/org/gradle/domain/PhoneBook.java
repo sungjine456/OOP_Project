@@ -1,6 +1,8 @@
 package org.gradle.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,7 +18,6 @@ public class PhoneBook {
 		groups.put(DEFAULT_GROUP, new Group());
 		groups.put(SPAM_GROUP, new Group());
 	}
-
 	
 	public Group getGroup() {
 		return groups.get(DEFAULT_GROUP);
@@ -27,17 +28,31 @@ public class PhoneBook {
 		}
 		return groups.get(key);
 	}
+	
 	public Set<String> getGroupKeys(){
 		return groups.keySet();
 	}
+	
 	public void addGroup(String key){
 		groups.put(key, new Group());
 	}
+	
 	public void groupKeyChange(String key, String changeKey){
 		if(StringUtils.isEmpty(key) || StringUtils.isEmpty(changeKey)){
 			throw new NullPointerException();
 		}
 		Group group = groups.remove(key);
 		groups.put(changeKey, group);
+	}
+	
+	public List<Group> searchGroup(String word){
+		List<Group> groupList = new ArrayList<>();
+		Set<String> keys = groups.keySet();
+		for(String key : keys){
+			if(key.contains(word)){
+				groupList.add(groups.get(key));
+			}
+		}
+		return groupList;
 	}
 }

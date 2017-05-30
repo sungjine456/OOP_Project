@@ -1,5 +1,6 @@
 package org.gradle.domain;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 import org.junit.Before;
@@ -45,5 +46,21 @@ public class PhoneBookTest {
 	@Test(expected=NullPointerException.class)
 	public void groupKeyChangeNullChangeKeyTest(){
 		phoneBook.groupKeyChange("친구", null);
+	}
+	
+	@Test
+	public void searchGroupTest(){
+		phoneBook.addGroup("친구들");
+		phoneBook.addGroup("family");
+		phoneBook.addGroup("freinds");
+		phoneBook.addGroup("customer");
+		phoneBook.addGroup("office");
+		
+		assertThat(phoneBook.searchGroup(" ").size(), is(0));
+		assertThat(phoneBook.searchGroup("b").size(), is(0));
+		assertThat(phoneBook.searchGroup("d").size(), is(2));
+		assertThat(phoneBook.searchGroup("친").size(), is(2));
+		assertThat(phoneBook.searchGroup("f").size(), is(4)); // default 포함
+		assertThat(phoneBook.searchGroup("a").size(), is(3)); // spam 포함
 	}
 }
