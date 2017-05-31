@@ -4,9 +4,9 @@ import org.gradle.common.StringUtils;
 import org.gradle.common.Utils;
 import org.gradle.exception.FailNumberException;
 
-public class Contcat {
-	private String name;
-	private String number;
+public final class Contcat {
+	private final String name;
+	private final String number;
 	
 	public Contcat(String name, String number){
 		if(StringUtils.isEmpty(name)||StringUtils.isEmpty(number)){
@@ -27,5 +27,25 @@ public class Contcat {
 	}
 	public String getNumber() {
 		return number;
+	}
+	
+	@Override
+	public int hashCode(){
+		int prime = 31;
+		int result = 1;
+		result = prime * result + name.hashCode();
+		result = prime * result + number.hashCode();
+		return result;
+	}
+	@Override
+	public boolean equals(Object o){
+		if(o==this) return true;
+		if(!(o instanceof Contcat)) return false;
+		Contcat contcat = (Contcat)o;
+		return contcat.getName().equals(name) && contcat.getNumber().equals(number);
+	}
+	@Override
+	public String toString(){
+		return "name : " + name + ", number : " + number;
 	}
 }
