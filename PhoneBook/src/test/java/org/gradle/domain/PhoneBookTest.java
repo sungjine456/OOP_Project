@@ -63,4 +63,16 @@ public class PhoneBookTest {
 		assertThat(phoneBook.searchGroup("f").size(), is(4)); // default 포함
 		assertThat(phoneBook.searchGroup("a").size(), is(3)); // spam 포함
 	}
+	
+	@Test
+	public void allContcatListTest(){
+		assertThat(phoneBook.allContcatList().size(),is(0));
+		
+		phoneBook.getGroup("default").addContcat("de", "010-1234-1234");
+		phoneBook.getGroup("default").addContcat("fault", "010-1234-1234");
+		phoneBook.getGroup("spam").addContcat("s", "010-1234-1234");
+		phoneBook.getGroup("spam").addContcat("pam", "010-1234-1234");
+		
+		assertThat(phoneBook.allContcatList().size(),is(4));
+	}
 }

@@ -55,4 +55,13 @@ public class PhoneBook {
 		}
 		return groupList;
 	}
+	
+	public List<Contcat> allContcatList(){
+		List<Contcat> contcatList = new ArrayList<>();
+		Set<String> keys = groups.keySet();
+		for(String key : keys){
+			contcatList.addAll(groups.get(key).getContcats());
+		}
+		return contcatList;
+	}
 }

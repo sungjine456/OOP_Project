@@ -1,9 +1,12 @@
 package org.gradle;
 
+import java.util.List;
 import java.util.Scanner;
 
 import org.gradle.common.StringUtils;
 import org.gradle.common.Utils;
+import org.gradle.domain.Contcat;
+import org.gradle.domain.PhoneBook;
 import org.gradle.domain.User;
 import org.gradle.repository.UserRepository;
 import org.slf4j.Logger;
@@ -63,10 +66,11 @@ public class PhoneBookApplication {
 	private static void login(User user){
 		boolean isLogin = true;
 		while(isLogin){
-			System.out.println("로그인중...\n1. 연락처 \n2. 친구\n3. 로그아웃");
+			System.out.println("로그인중...\n1. 전화번호 부\n2. 친구\n3. 로그아웃");
 			int n = Utils.changeStringIsNumber(sc.next());
 			switch (n) {
 				case 1:
+					phoneBook(user);
 					break;
 				case 2:
 					break;
@@ -80,6 +84,25 @@ public class PhoneBookApplication {
 		}
 	}
 	
+	private static void phoneBook(User user){
+		boolean isPhoneBook = true;
+		while(isPhoneBook){
+			System.out.println(user.getName() + "님의 전화번호 부입니다.\n1. 모든 연락처 보기");
+			int n = Utils.changeStringIsNumber(sc.next());
+			PhoneBook phoneBook = user.getPhoneBook();
+			switch(n){
+				case 1:
+					List<Contcat> contcatList = phoneBook.allContcatList();
+					for(Contcat contcat: contcatList){
+						System.out.println(contcat);
+					}
+					break;
+				default :
+					System.out.println("다시 입력해 주세요.");
+					break;
+			}
+		}
+	}
 	private static boolean idAndPasswordCheck(String id, String password){
 		User user = userRepository.find(id);
 		
