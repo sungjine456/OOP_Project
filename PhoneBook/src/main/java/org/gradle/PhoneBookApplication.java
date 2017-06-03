@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import org.gradle.common.StringUtils;
 import org.gradle.common.Utils;
-import org.gradle.domain.Contcat;
 import org.gradle.domain.Group;
 import org.gradle.domain.PhoneBook;
 import org.gradle.domain.User;
@@ -88,22 +87,30 @@ public class PhoneBookApplication {
 	private static void phoneBook(User user){
 		boolean isPhoneBook = true;
 		while(isPhoneBook){
-			System.out.println(user.getName() + "님의 전화번호 부입니다.\n1. 모든 연락처 보기\n2. 그룹별 연락처 보기\n3. 그룹 검색");
-			int n = Utils.changeStringIsNumber(sc.next());
 			PhoneBook phoneBook = user.getPhoneBook();
+			System.out.println(user.getName() + "님의 전화번호 부입니다.( " + phoneBook.getGroupKeys().size() + " 개의 그룹이 있습니다.)"
+					+ "\n1. 모든 연락처 보기\n2. 그룹별 연락처 보기\n3. 그룹 검색\n4. 그룹 추가\n5. 모든 그룹명 보기\n6. 나가기");
+			int n = Utils.changeStringIsNumber(sc.next());
 			switch(n){
 				case 1:
-					List<Contcat> contcatList = phoneBook.allContcatList();
-					for(Contcat contcat: contcatList){
-						System.out.println(contcat);
-					}
+					printList(phoneBook.allContcatList());
 					break;
 				case 2:
-					System.out.print("그룹 명을 입력해주세요.");
+					System.out.print("그룹 명을 입력해주세요. : ");
 					String groupName = sc.next();
 					group(phoneBook.getGroup(groupName), groupName);
 					break;
 				case 3:
+					break;
+				case 4:
+					System.out.print("추가할 그룹명을 입력해주세요. : ");
+					phoneBook.addGroup(sc.next());
+					break;
+				case 5:
+					printList(phoneBook.getGroupKeys());
+					break;
+				case 6:
+					isPhoneBook = false;
 					break;
 				default :
 					System.out.println("다시 입력해 주세요.");
@@ -115,23 +122,28 @@ public class PhoneBookApplication {
 	private static void group(Group group, String groupName){
 		boolean isGroup = true;
 		while(isGroup){
-			System.out.println(groupName + "그룹 입니다.\n1. 연락처 보기\n2. 연락처 추가\n3. 연락처 검색\n4. 나가기");
+			System.out.println(groupName + "그룹 입니다.( " + group.contcatSize() + " 개의 연락처가 있습니다.)"
+					+ "\n1. 연락처 보기\n2. 연락처 추가\n3. 연락처 검색\n4. 나가기");
 			int n = Utils.changeStringIsNumber(sc.next());
 			switch(n){
 				case 1:
-					printContcat(group.getContcats());
+					printList(group.getContcats());
 					break;
 				case 2:
 					System.out.print("추가할 연락처를 입력해주세요.\n이름 : ");
 					String name = sc.next();
 					System.out.print("전화번호 : ");
 					String number = sc.next();
+					if(!Utils.numberCheck(number)){
+						System.out.println("잘못된 형식의 번호입니다.");
+						break;
+					}
 					group.addContcat(name, number);
 					break;
 				case 3:
 					System.out.print("검색할 내용을 입력해주세요 : ");
 					String word = sc.next();
-					printContcat(group.searchContcat(word));
+					printList(group.searchContcat(word));
 					break;
 				case 4:
 					isGroup = false;
@@ -143,34 +155,12 @@ public class PhoneBookApplication {
 		}
 	}
 	
-	private static void printContcat(List<Contcat> contcatList){
-		if(contcatList.size() == 0){
-			System.out.println("등록된 연락처가 없습니다.");
+	private static <T> void printList(List<T> list){
+		if(list.size() == 0){
+			System.out.println("등록된 내용이 없습니다.");
 		}
-		for(Contcat contcat : contcatList){
-			System.out.println(contcat);
-		}
-	}
-	
-	private static void contcat(User user){
-		boolean isContcat = true;
-		while(isContcat){
-			System.out.println(user.getName() + "님의 연락처입니다.\n1. 연락처 보기\n2. 연락처 추가\n3. 연락처 삭제\n4. 나가기");
-			int n = Utils.changeStringIsNumber(sc.next());
-			switch(n){
-				case 1:
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				case 4:
-					isContcat = false;
-					break;
-				default :
-					System.out.println("다시 입력해 주세요.");
-					break;
-			}
+		for(T t : list){
+			System.out.println(t);
 		}
 	}
 	
