@@ -25,4 +25,7 @@ public class Group {
 		}
 		return searchContcats;
 	}
+	public int contcatSize(){
+		return contcats.size();
+	}
 }

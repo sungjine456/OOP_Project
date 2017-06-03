@@ -29,8 +29,12 @@ public class PhoneBook {
 		return groups.get(key);
 	}
 	
-	public Set<String> getGroupKeys(){
-		return groups.keySet();
+	public List<String> getGroupKeys(){
+		List<String> list = new ArrayList<>();
+		for(String str : groups.keySet()){
+			list.add(str);
+		}
+		return list;
 	}
 	
 	public void addGroup(String key){

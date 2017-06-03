@@ -1,7 +1,11 @@
 package org.gradle.domain;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -74,5 +78,16 @@ public class PhoneBookTest {
 		phoneBook.getGroup("spam").addContcat("pam", "010-1234-1234");
 		
 		assertThat(phoneBook.allContcatList().size(),is(4));
+	}
+	
+	@Test
+	public void getGroupKeysTest(){
+		List<String> list = phoneBook.getGroupKeys();
+		assertNotNull(list);
+		assertThat(list.size(), is(3));
+		
+		phoneBook.addGroup("friends");
+		list = phoneBook.getGroupKeys();
+		assertThat(list.size(), is(4));
 	}
 }

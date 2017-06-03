@@ -72,4 +72,11 @@ public class GroupTest {
 		assertThat(contcats.size(), is(1));
 		assertThat(contcats.get(0).getName(), is("name2"));
 	}
+	
+	@Test
+	public void contcatSizeTest(){
+		assertThat(group.contcatSize(), is(0));
+		group.addContcat("name", "010-0000-4444");
+		assertThat(group.contcatSize(), is(1));
+	}
 }
