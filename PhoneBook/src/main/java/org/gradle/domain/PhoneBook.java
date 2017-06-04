@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.gradle.common.StringUtils;
+import org.gradle.exception.AlreadyGroupNameException;
 
 public class PhoneBook {
 	private Map<String, Group> groups;
@@ -15,8 +16,8 @@ public class PhoneBook {
 
 	public PhoneBook() {
 		groups = new HashMap<>();
-		groups.put(DEFAULT_GROUP, new Group());
-		groups.put(SPAM_GROUP, new Group());
+		addGroup(DEFAULT_GROUP);
+		addGroup(SPAM_GROUP);
 	}
 	
 	public Group getGroup() {
@@ -38,14 +39,18 @@ public class PhoneBook {
 	}
 	
 	public void addGroup(String key){
-		groups.put(key, new Group());
+		groups.put(key, new Group(key));
 	}
 	
 	public void groupKeyChange(String key, String changeKey){
 		if(StringUtils.isEmpty(key) || StringUtils.isEmpty(changeKey)){
 			throw new NullPointerException();
 		}
+		if(hasGroupName(changeKey)){
+			throw new AlreadyGroupNameException();
+		}
 		Group group = groups.remove(key);
+		group.setGroupName(changeKey);
 		groups.put(changeKey, group);
 	}
 	
@@ -67,5 +72,9 @@ public class PhoneBook {
 			contcatList.addAll(groups.get(key).getContcats());
 		}
 		return contcatList;
+	}
+	
+	private boolean hasGroupName(String groupName){
+		return groups.containsKey(groupName);
 	}
 }

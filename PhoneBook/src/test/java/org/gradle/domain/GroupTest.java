@@ -14,7 +14,7 @@ public class GroupTest {
 	
 	@Before
 	public void setUp(){
-		group = new Group();
+		group = new Group("default");
 	}
 	
 	@Test

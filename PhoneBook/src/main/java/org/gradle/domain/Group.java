@@ -4,12 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Group {
+	private String groupName;
 	private List<Contcat> contcats;
 	
-	public Group(){
+	public Group(String groupName){
+		this.groupName = groupName;
 		contcats = new ArrayList<>();
 	}
 
+	public String getGroupName(){
+		return groupName;
+	}
+	public void setGroupName(String changeKey) {
+		groupName = changeKey;
+	}
 	public List<Contcat> getContcats() {
 		return contcats;
 	}

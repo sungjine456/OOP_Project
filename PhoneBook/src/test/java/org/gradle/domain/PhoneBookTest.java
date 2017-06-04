@@ -7,6 +7,7 @@ import static org.junit.Assert.assertThat;
 
 import java.util.List;
 
+import org.gradle.exception.AlreadyGroupNameException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -50,6 +51,11 @@ public class PhoneBookTest {
 	@Test(expected=NullPointerException.class)
 	public void groupKeyChangeNullChangeKeyTest(){
 		phoneBook.groupKeyChange("친구", null);
+	}
+	
+	@Test(expected=AlreadyGroupNameException.class)
+	public void groupKeyChangeAlreadyGroupNameTest(){
+		phoneBook.groupKeyChange("친구", "default");
 	}
 	
 	@Test

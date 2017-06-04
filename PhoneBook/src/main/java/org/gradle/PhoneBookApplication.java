@@ -98,7 +98,7 @@ public class PhoneBookApplication {
 				case 2:
 					System.out.print("그룹 명을 입력해주세요. : ");
 					String groupName = sc.next();
-					group(phoneBook.getGroup(groupName), groupName);
+					group(phoneBook.getGroup(groupName));
 					break;
 				case 3:
 					break;
@@ -119,10 +119,10 @@ public class PhoneBookApplication {
 		}
 	}
 	
-	private static void group(Group group, String groupName){
+	private static void group(Group group){
 		boolean isGroup = true;
 		while(isGroup){
-			System.out.println(groupName + "그룹 입니다.( " + group.contcatSize() + " 개의 연락처가 있습니다.)"
+			System.out.println(group.getGroupName() + "그룹 입니다.( " + group.contcatSize() + " 개의 연락처가 있습니다.)"
 					+ "\n1. 연락처 보기\n2. 연락처 추가\n3. 연락처 검색\n4. 나가기");
 			int n = Utils.changeStringIsNumber(sc.next());
 			switch(n){
