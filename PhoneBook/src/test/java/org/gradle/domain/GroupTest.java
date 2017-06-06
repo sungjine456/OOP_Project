@@ -79,4 +79,15 @@ public class GroupTest {
 		group.addContcat("name", "010-0000-4444");
 		assertThat(group.contcatSize(), is(1));
 	}
+	
+	@Test
+	public void deleteContcatTest(){
+		assertThat(group.contcatSize(), is(0));
+		group.addContcat("name", "010-0000-0000");
+		group.addContcat("name", "010-0000-0001");
+		group.addContcat("name", "010-0000-0002");
+		assertThat(group.contcatSize(), is(3));
+		group.deleteContcat("name", "010-0000-0000");
+		assertThat(group.contcatSize(), is(2));
+	}
 }

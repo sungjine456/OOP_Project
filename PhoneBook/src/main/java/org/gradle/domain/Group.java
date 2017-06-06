@@ -24,6 +24,9 @@ public class Group {
 	public void addContcat(String name, String number){
 		contcats.add(new Contcat(name, number));
 	}
+	public void deleteContcat(String name, String number){
+		contcats.remove(new Contcat(name, number));
+	}
 	public List<Contcat> searchContcat(String word){
 		List<Contcat> searchContcats = new ArrayList<>();
 		for(Contcat contcat : contcats){
