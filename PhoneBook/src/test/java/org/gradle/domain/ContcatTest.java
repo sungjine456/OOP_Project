@@ -1,6 +1,13 @@
 package org.gradle.domain;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import org.gradle.exception.FailNumberException;
 import org.junit.Before;
@@ -40,5 +47,33 @@ public class ContcatTest {
 		assertTrue(contcat.isExistWord("jin"));
 		assertTrue(contcat.isExistWord("010-"));
 		assertTrue(contcat.isExistWord("1234"));
+	}
+	
+	@Test
+	public void soltTest(){
+		List<Contcat> list = new ArrayList<>();
+		list.add(new Contcat("가", "010-0000-0000"));
+		list.add(new Contcat("김", "010-0000-0000"));
+		list.add(new Contcat("a", "010-0000-0000"));
+		list.add(new Contcat("A", "010-0000-0000"));
+		list.add(new Contcat("z", "010-0000-0000"));
+		list.add(new Contcat("한", "010-0000-0000"));
+		list.add(new Contcat("하", "010-0000-0000"));
+		list.add(new Contcat("Z", "010-0000-0000"));
+		list.add(new Contcat("가a", "010-0000-0000"));
+		list.add(new Contcat("가김", "010-0000-0000"));
+		list.add(new Contcat("&", "010-0000-0000"));
+		Collections.sort(list);
+		assertThat(list.get(0).getName(), is("가"));
+		assertThat(list.get(1).getName(), is("가김"));
+		assertThat(list.get(2).getName(), is("가a"));
+		assertThat(list.get(3).getName(), is("김"));
+		assertThat(list.get(4).getName(), is("하"));
+		assertThat(list.get(5).getName(), is("한"));
+		assertThat(list.get(6).getName(), is("A"));
+		assertThat(list.get(7).getName(), is("Z"));
+		assertThat(list.get(8).getName(), is("a"));
+		assertThat(list.get(9).getName(), is("z"));
+		assertThat(list.get(10).getName(), is("&"));
 	}
 }
