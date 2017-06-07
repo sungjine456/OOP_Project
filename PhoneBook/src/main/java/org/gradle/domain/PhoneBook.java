@@ -1,15 +1,16 @@
 package org.gradle.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.gradle.common.StringUtils;
 import org.gradle.common.Utils;
 import org.gradle.exception.AlreadyGroupNameException;
 import org.gradle.exception.FailNumberException;
+import org.gradle.sort.GroupNameComparator;
 
 public class PhoneBook {
 	private Map<String, Group> groups;
@@ -37,6 +38,7 @@ public class PhoneBook {
 		for(String str : groups.keySet()){
 			list.add(str);
 		}
+		Collections.sort(list, new GroupNameComparator());
 		return list;
 	}
 	
@@ -64,8 +66,7 @@ public class PhoneBook {
 			return new ArrayList<>();
 		}
 		List<Group> groupList = new ArrayList<>();
-		Set<String> keys = groups.keySet();
-		for(String key : keys){
+		for(String key : getGroupKeys()){
 			if(key.contains(word)){
 				groupList.add(groups.get(key));
 			}
@@ -75,8 +76,7 @@ public class PhoneBook {
 	
 	public List<Contcat> allContcatList(){
 		List<Contcat> contcatList = new ArrayList<>();
-		Set<String> keys = groups.keySet();
-		for(String key : keys){
+		for(String key : getGroupKeys()){
 			contcatList.addAll(groups.get(key).getContcats());
 		}
 		return contcatList;
@@ -99,7 +99,7 @@ public class PhoneBook {
 			return new ArrayList<>();
 		}
 		List<Contcat> contcatList = new ArrayList<>();
-		for(String key : groups.keySet()){
+		for(String key : getGroupKeys()){
 			contcatList.addAll(groups.get(key).searchContcat(word));
 		}
 		return contcatList;

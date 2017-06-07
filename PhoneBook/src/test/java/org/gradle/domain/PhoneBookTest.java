@@ -109,6 +109,10 @@ public class PhoneBookTest {
 		phoneBook.addGroup("friends");
 		list = phoneBook.getGroupKeys();
 		assertThat(list.size(), is(4));
+		assertThat(list.get(0), is("친구"));
+		assertThat(list.get(1), is("default"));
+		assertThat(list.get(2), is("friends"));
+		assertThat(list.get(3), is("spam"));
 	}
 	
 	@Test
