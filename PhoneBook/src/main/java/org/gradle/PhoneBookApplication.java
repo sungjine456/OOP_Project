@@ -162,9 +162,7 @@ public class PhoneBookApplication {
 		if(list.size() == 0){
 			System.out.println("등록된 내용이 없습니다.");
 		}
-		for(T t : list){
-			System.out.println(t);
-		}
+		list.stream().forEach(System.out::println);
 	}
 	
 	private static boolean idAndPasswordCheck(String id, String password){

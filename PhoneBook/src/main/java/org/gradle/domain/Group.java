@@ -3,6 +3,7 @@ package org.gradle.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import org.gradle.sort.ContcatComparator;
 
@@ -33,11 +34,9 @@ public class Group {
 	}
 	public List<Contcat> searchContcat(String word){
 		List<Contcat> searchContcats = new ArrayList<>();
-		for(Contcat contcat : getContcats()){
-			if(contcat.isExistWord(word)){
-				searchContcats.add(contcat);
-			}
-		}
+		getContcats().stream()
+				.filter(contcat -> contcat.isExistWord(word))
+				.forEach(contcat -> searchContcats.add(contcat));
 		return searchContcats;
 	}
 	public int contcatSize(){
@@ -58,14 +57,12 @@ public class Group {
 		Group group = (Group)o;
 		List<Contcat> contcatList = getContcats();
 		List<Contcat> otherContcatList = group.getContcats();
-		if(otherContcatList.size()!=contcats.size()) return false;
 		int len = contcats.size();
-		for(int i = 0; i < len; i++){
-			if(!otherContcatList.get(i).equals(contcatList.get(i))){
-				return false;
-			}
-		}
-		return group.getGroupName().equals(groupName);
+		if(otherContcatList.size() != len) return false;
+		long count = IntStream.range(0, len)
+							.filter(i -> otherContcatList.get(i).equals(contcatList.get(i)))
+							.count();
+		return count==len && group.getGroupName().equals(groupName);
 	}
 	@Override
 	public String toString(){

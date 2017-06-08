@@ -35,9 +35,7 @@ public class PhoneBook {
 	
 	public List<String> getGroupKeys(){
 		List<String> list = new ArrayList<>();
-		for(String str : groups.keySet()){
-			list.add(str);
-		}
+		groups.keySet().stream().forEach(s -> list.add(s));
 		Collections.sort(list, new GroupNameComparator());
 		return list;
 	}
@@ -66,19 +64,16 @@ public class PhoneBook {
 			return new ArrayList<>();
 		}
 		List<Group> groupList = new ArrayList<>();
-		for(String key : getGroupKeys()){
-			if(key.contains(word)){
-				groupList.add(groups.get(key));
-			}
-		}
+		getGroupKeys().stream()
+					.filter(key -> key.contains(word))
+					.forEach(key -> groupList.add(groups.get(key)));
 		return groupList;
 	}
 	
 	public List<Contcat> allContcatList(){
 		List<Contcat> contcatList = new ArrayList<>();
-		for(String key : getGroupKeys()){
-			contcatList.addAll(groups.get(key).getContcats());
-		}
+		getGroupKeys().stream()
+					.forEach(key -> contcatList.addAll(groups.get(key).getContcats()));
 		return contcatList;
 	}
 	
@@ -99,9 +94,8 @@ public class PhoneBook {
 			return new ArrayList<>();
 		}
 		List<Contcat> contcatList = new ArrayList<>();
-		for(String key : getGroupKeys()){
-			contcatList.addAll(groups.get(key).searchContcat(word));
-		}
+		getGroupKeys().stream()
+				.forEach(key -> contcatList.addAll(groups.get(key).searchContcat(word)));
 		return contcatList;
 	}
 
