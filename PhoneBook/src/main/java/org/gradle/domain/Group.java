@@ -1,7 +1,10 @@
 package org.gradle.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+
+import org.gradle.sort.ContcatComparator;
 
 public class Group {
 	private String groupName;
@@ -19,6 +22,7 @@ public class Group {
 		groupName = changeKey;
 	}
 	public List<Contcat> getContcats() {
+		Collections.sort(contcats, new ContcatComparator());
 		return contcats;
 	}
 	public void addContcat(String name, String number){
@@ -29,7 +33,7 @@ public class Group {
 	}
 	public List<Contcat> searchContcat(String word){
 		List<Contcat> searchContcats = new ArrayList<>();
-		for(Contcat contcat : contcats){
+		for(Contcat contcat : getContcats()){
 			if(contcat.isExistWord(word)){
 				searchContcats.add(contcat);
 			}
@@ -52,11 +56,12 @@ public class Group {
 		if(o==this) return true;
 		if(!(o instanceof Group)) return false;
 		Group group = (Group)o;
-		List<Contcat> contcatList = group.getContcats();
-		if(contcatList.size()!=contcats.size()) return false;
+		List<Contcat> contcatList = getContcats();
+		List<Contcat> otherContcatList = group.getContcats();
+		if(otherContcatList.size()!=contcats.size()) return false;
 		int len = contcats.size();
 		for(int i = 0; i < len; i++){
-			if(!contcatList.get(i).equals(contcats.get(i))){
+			if(!otherContcatList.get(i).equals(contcatList.get(i))){
 				return false;
 			}
 		}

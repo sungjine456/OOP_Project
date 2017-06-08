@@ -90,4 +90,31 @@ public class GroupTest {
 		group.deleteContcat("name", "010-0000-0000");
 		assertThat(group.contcatSize(), is(2));
 	}
+	
+	@Test
+	public void getContcatsSortTest(){
+		group.addContcat("A", "010-0000-0000");
+		group.addContcat("김", "010-0000-0000");
+		group.addContcat("a", "010-0000-0000");
+		group.addContcat("가", "010-0000-0000");
+		group.addContcat("z", "010-0000-0000");
+		group.addContcat("한", "010-0000-0000");
+		group.addContcat("하", "010-0000-0000");
+		group.addContcat("가a", "010-0000-0000");
+		group.addContcat("Z", "010-0000-0000");
+		group.addContcat("가김", "010-0000-0000");
+		group.addContcat("&", "010-0000-0000");
+		List<Contcat> list = group.getContcats();
+		assertThat(list.get(0).getName(), is("가"));
+		assertThat(list.get(1).getName(), is("가김"));
+		assertThat(list.get(2).getName(), is("가a"));
+		assertThat(list.get(3).getName(), is("김"));
+		assertThat(list.get(4).getName(), is("하"));
+		assertThat(list.get(5).getName(), is("한"));
+		assertThat(list.get(6).getName(), is("A"));
+		assertThat(list.get(7).getName(), is("Z"));
+		assertThat(list.get(8).getName(), is("a"));
+		assertThat(list.get(9).getName(), is("z"));
+		assertThat(list.get(10).getName(), is("&"));
+	}
 }
