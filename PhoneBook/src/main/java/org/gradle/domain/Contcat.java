@@ -3,13 +3,18 @@ package org.gradle.domain;
 import org.gradle.common.StringUtils;
 import org.gradle.common.Utils;
 import org.gradle.exception.FailNumberException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class Contcat {
+	private static final Logger log = LoggerFactory.getLogger(Contcat.class);
+	
 	private final String name;
 	private final String number;
 	
-	public Contcat(String name, String number){
+	public Contcat(String name, String number) throws FailNumberException {
 		if(StringUtils.isEmpty(name)||StringUtils.isEmpty(number)){
+			log.debug("이름과 전화번호 모두 작성되어야 합니다. 이름 : " + name + ", 전화번호 : " + number);
 			throw new NullPointerException();
 		}
 		if(!Utils.numberCheck(number)){

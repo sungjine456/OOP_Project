@@ -40,7 +40,7 @@ public class PhoneBook {
 		return list;
 	}
 	
-	public void addGroup(String key){
+	public void addGroup(String key) throws AlreadyGroupNameException {
 		if(StringUtils.isEmpty(key)){
 			throw new NullPointerException();
 		}
@@ -50,7 +50,7 @@ public class PhoneBook {
 		groups.put(key, new Group(key));
 	}
 	
-	public void groupKeyChange(String key, String changeKey){
+	public void groupKeyChange(String key, String changeKey) throws AlreadyGroupNameException {
 		if(StringUtils.isEmpty(key) || StringUtils.isEmpty(changeKey)){
 			throw new NullPointerException();
 		}
@@ -84,11 +84,8 @@ public class PhoneBook {
 		return groups.containsKey(groupName);
 	}
 	
-	public void addContcat(String groupName, String name, String number){
+	public void addContcat(String groupName, String name, String number) throws FailNumberException {
 		Group group = getGroup(groupName);
-		if(!Utils.numberCheck(number)){
-			throw new FailNumberException(number);
-		}
 		group.addContcat(name, number);
 	}
 

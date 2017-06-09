@@ -3,6 +3,8 @@ package org.gradle.domain;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gradle.exception.FailNumberException;
+
 public final class User {
 	private final String id;
 	private final String password;
@@ -10,7 +12,7 @@ public final class User {
 	private final PhoneBook phoneBook;
 	private final Contcat contcat;
 	
-	public User(String id, String password, String name, String number){
+	public User(String id, String password, String name, String number) throws FailNumberException {
 		contcat = new Contcat(name, number);
 		this.id = id;
 		this.password = password;

@@ -8,6 +8,7 @@ import org.gradle.common.Utils;
 import org.gradle.domain.Group;
 import org.gradle.domain.PhoneBook;
 import org.gradle.domain.User;
+import org.gradle.exception.AlreadyGroupNameException;
 import org.gradle.exception.FailNumberException;
 import org.gradle.repository.UserRepository;
 import org.slf4j.Logger;
@@ -82,7 +83,7 @@ public class PhoneBookApplication {
 		while(isPhoneBook){
 			PhoneBook phoneBook = user.getPhoneBook();
 			System.out.println(user.getName() + "님의 전화번호 부입니다.( " + phoneBook.getGroupKeys().size() + " 개의 그룹이 있습니다.)"
-					+ "\n1. 모든 연락처 보기\n2. 그룹별 연락처 보기\n3. 그룹 검색\n4. 그룹 추가\n5. 연락처 검색\n6. 연락처 추가\n7. 연락처 삭제\n8. 모든 그룹명 보기\n9. 나가기");
+					+ "\n1. 모든 연락처 보기\n2. 그룹별 연락처 보기\n3. 그룹 검색\n4. 그룹 추가\n5. 그룹명 수정\n6. 연락처 검색\n7. 모든 그룹명 보기\n8. 나가기");
 			int n = Utils.changeStringIsNumber(sc.next());
 			switch(n){
 				case 1:
@@ -96,28 +97,36 @@ public class PhoneBookApplication {
 					break;
 				case 4:
 					System.out.print("추가할 그룹명을 입력해주세요. : ");
-					phoneBook.addGroup(sc.next());
+					try{
+						phoneBook.addGroup(sc.next());
+					} catch(AlreadyGroupNameException agne){
+						log.debug(agne.getMessage());
+					}
+					phoneBook.addGroup(reInputGroupName(phoneBook));
 					break;
 				case 5:
+					System.out.print("수정할 대상의 그룹명을 입력해주세요. : ");
+					String groupName = sc.next();
+					if(phoneBook.getGroup(groupName)==null){
+						System.out.println("없는 그룹입니다.");
+					} else {
+						System.out.println("수정할 그룹명을 입력해주세요. : ");
+						try{
+							phoneBook.groupKeyChange(groupName, sc.next());
+						} catch(AlreadyGroupNameException agne){
+							log.debug(agne.getMessage());
+						}
+						phoneBook.groupKeyChange(groupName, reInputGroupName(phoneBook));
+					}
+					break;
+				case 6:
 					System.out.print("검색할 연락처를 입력해주세요. : ");
 					printList(phoneBook.searchContCat(sc.next()));
 					break;
-				case 6:
-					System.out.print("추가할 연락처의 그룹을 입력해주세요.(없으면 Enter를 치세요.) : ");
-					String groupName = sc.next();
-					String[] strArr = inputNameAndNumber();
-					phoneBook.addContcat(groupName, strArr[0], strArr[1]);
-					break;
 				case 7:
-					System.out.print("삭제할 연락처의 그룹을 입력해주세요.(없으면 Enter를 치세요.) : ");
-					groupName = sc.next();
-					strArr = inputNameAndNumber();
-					phoneBook.deleteContcat(groupName, strArr[0], strArr[1]);
-					break;
-				case 8:
 					printList(phoneBook.getGroupKeys());
 					break;
-				case 9:
+				case 8:
 					isPhoneBook = false;
 					break;
 				default :
@@ -177,24 +186,48 @@ public class PhoneBookApplication {
 	private static void addContcat(Group group){
 		System.out.print("추가할 연락처를 입력해주세요.\n이름 : ");
 		String[] strArr = inputNameAndNumber();
-		group.addContcat(strArr[0], strArr[1]);
+		try{
+			group.addContcat(strArr[0], strArr[1]);
+		} catch(FailNumberException fne){
+			log.debug(fne.getMessage());
+		}
+		group.addContcat(strArr[0], reInputNumber());
 	}
 
 	private static void deleteContcat(Group group){
 		System.out.print("삭제할 연락처를 입력해주세요.\n이름 : ");
 		String[] strArr = inputNameAndNumber();
-		group.deleteContcat(strArr[0], strArr[1]);
+		try{
+			group.deleteContcat(strArr[0], strArr[1]);
+		} catch(FailNumberException fne){
+			log.debug(fne.getMessage());
+		}
+		group.deleteContcat(strArr[0], reInputNumber());
 	}
 	
 	private static String[] inputNameAndNumber(){
 		String name = sc.next();
 		System.out.print("전화번호 : ");
 		String number = sc.next();
-		if(!Utils.numberCheck(number)){
-			System.out.println("잘못된 형식의 번호입니다.");
-			throw new FailNumberException(number);
-		}
 		String[] strArr = {name, number};
 		return strArr;
+	}
+	
+	private static String reInputNumber(){
+		System.out.println("잘못된 전화번호입니다. 다시 입력해주세요.");
+		String number = sc.next();
+		if(!Utils.numberCheck(number)){
+			number = reInputNumber();
+		}
+		return number;
+	}
+	
+	private static String reInputGroupName(PhoneBook phoneBook){
+		System.out.println("다시 입력해주세요.");
+		String groupName = sc.next();
+		if(phoneBook.getGroup(groupName)!=null){
+			groupName = reInputGroupName(phoneBook);
+		}
+		return groupName;
 	}
 }
