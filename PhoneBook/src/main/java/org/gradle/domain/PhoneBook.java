@@ -44,6 +44,9 @@ public class PhoneBook {
 		if(StringUtils.isEmpty(key)){
 			throw new NullPointerException();
 		}
+		if(hasGroupName(key)){
+			throw new AlreadyGroupNameException(key);
+		}
 		groups.put(key, new Group(key));
 	}
 	
@@ -52,7 +55,7 @@ public class PhoneBook {
 			throw new NullPointerException();
 		}
 		if(hasGroupName(changeKey)){
-			throw new AlreadyGroupNameException();
+			throw new AlreadyGroupNameException(changeKey);
 		}
 		Group group = groups.remove(key);
 		group.setGroupName(changeKey);
@@ -84,7 +87,7 @@ public class PhoneBook {
 	public void addContcat(String groupName, String name, String number){
 		Group group = getGroup(groupName);
 		if(!Utils.numberCheck(number)){
-			throw new FailNumberException();
+			throw new FailNumberException(number);
 		}
 		group.addContcat(name, number);
 	}
@@ -102,7 +105,7 @@ public class PhoneBook {
 	public void deleteContcat(String groupName, String name, String number) {
 		Group group = getGroup(groupName);
 		if(!Utils.numberCheck(number)){
-			throw new FailNumberException();
+			throw new FailNumberException(number);
 		}
 		group.deleteContcat(name, number);
 	}

@@ -192,7 +192,7 @@ public class PhoneBookApplication {
 		String number = sc.next();
 		if(!Utils.numberCheck(number)){
 			System.out.println("잘못된 형식의 번호입니다.");
-			throw new FailNumberException();
+			throw new FailNumberException(number);
 		}
 		String[] strArr = {name, number};
 		return strArr;

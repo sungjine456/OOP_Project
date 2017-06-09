@@ -13,7 +13,7 @@ public final class Contcat {
 			throw new NullPointerException();
 		}
 		if(!Utils.numberCheck(number)){
-			throw new FailNumberException();
+			throw new FailNumberException(number);
 		}
 		this.name = name;
 		this.number = number;
