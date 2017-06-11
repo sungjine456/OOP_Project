@@ -1,10 +1,10 @@
 package org.gradle.domain;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.gradle.common.StringUtils;
 import org.gradle.common.Utils;
@@ -34,10 +34,9 @@ public class PhoneBook {
 	}
 	
 	public List<String> getGroupKeys(){
-		List<String> list = new ArrayList<>();
-		groups.keySet().stream().forEach(s -> list.add(s));
-		Collections.sort(list, new GroupNameComparator());
-		return list;
+		return groups.keySet().stream()
+							.sorted(new GroupNameComparator())
+							.collect(Collectors.toList());
 	}
 	
 	public void addGroup(String key) throws AlreadyGroupNameException {
@@ -66,18 +65,16 @@ public class PhoneBook {
 		if(StringUtils.isEmpty(word)){
 			return new ArrayList<>();
 		}
-		List<Group> groupList = new ArrayList<>();
-		getGroupKeys().stream()
+		return getGroupKeys().stream()
 					.filter(key -> key.contains(word))
-					.forEach(key -> groupList.add(groups.get(key)));
-		return groupList;
+					.map(key -> groups.get(key))
+					.collect(Collectors.toList());
 	}
 	
 	public List<Contcat> allContcatList(){
-		List<Contcat> contcatList = new ArrayList<>();
-		getGroupKeys().stream()
-					.forEach(key -> contcatList.addAll(groups.get(key).getContcats()));
-		return contcatList;
+		return getGroupKeys().stream()
+							.flatMap(key -> groups.get(key).getContcats().stream())
+							.collect(Collectors.toList());
 	}
 	
 	private boolean hasGroupName(String groupName){
@@ -93,10 +90,9 @@ public class PhoneBook {
 		if(StringUtils.isEmpty(word)){
 			return new ArrayList<>();
 		}
-		List<Contcat> contcatList = new ArrayList<>();
-		getGroupKeys().stream()
-				.forEach(key -> contcatList.addAll(groups.get(key).searchContcat(word)));
-		return contcatList;
+		return getGroupKeys().stream()
+							.flatMap(key -> groups.get(key).searchContcat(word).stream())
+							.collect(Collectors.toList());
 	}
 
 	public void deleteContcat(String groupName, String name, String number) {

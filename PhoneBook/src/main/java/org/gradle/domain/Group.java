@@ -3,6 +3,7 @@ package org.gradle.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import org.gradle.exception.FailNumberException;
@@ -34,11 +35,9 @@ public class Group {
 		contcats.remove(new Contcat(name, number));
 	}
 	public List<Contcat> searchContcat(String word){
-		List<Contcat> searchContcats = new ArrayList<>();
-		getContcats().stream()
-				.filter(contcat -> contcat.isExistWord(word))
-				.forEach(contcat -> searchContcats.add(contcat));
-		return searchContcats;
+		return getContcats().stream()
+						.filter(contcat -> contcat.isExistWord(word))
+						.collect(Collectors.toList());
 	}
 	public int contcatSize(){
 		return contcats.size();

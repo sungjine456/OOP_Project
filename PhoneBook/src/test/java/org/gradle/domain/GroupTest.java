@@ -23,7 +23,7 @@ public class GroupTest {
 	}
 	
 	@Test
-	public void searchNameTest(){
+	public void searchContcatNameTest(){
 		group.addContcat("name", "010-1234-1234");
 		group.addContcat("names", "010-1234-1234");
 		group.addContcat("name1", "010-1234-1234");
@@ -48,7 +48,7 @@ public class GroupTest {
 	}
 	
 	@Test
-	public void searchNumberTest(){
+	public void searchContcatNumberTest(){
 		group.addContcat("name1", "010-1234-1234");
 		group.addContcat("name2", "010-1234-1231");
 		group.addContcat("name3", "010-1234-2275");
