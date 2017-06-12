@@ -4,6 +4,7 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
@@ -22,9 +23,17 @@ public class PhoneBookTest {
 	
 	@Test
 	public void addGroupTest(){
-		assertThat(phoneBook.getGroupKeys().size(), is(3));
+		assertThat(phoneBook.getGroupKeys())
+			.asList()
+			.hasSize(3)
+			.doesNotContain("addGroup");
+		
 		phoneBook.addGroup("addGroup");
-		assertThat(phoneBook.getGroupKeys().size(), is(4));
+		
+		assertThat(phoneBook.getGroupKeys())
+			.asList()
+			.hasSize(4)
+			.contains("addGroup");
 	}
 
 	@Test(expected = NullPointerException.class)
@@ -34,15 +43,22 @@ public class PhoneBookTest {
 
 	@Test
 	public void getGroupNoParamTest() {
-		assertNotNull(phoneBook.getGroup());
+		assertThat(phoneBook.getGroup())
+			.hasSameClassAs(phoneBook.getGroup("default"));
 	}
 
 	@Test
 	public void getGroupParamStringTest() {
-		assertNotNull(phoneBook.getGroup(null));
-		assertNotNull(phoneBook.getGroup(""));
-		assertNotNull(phoneBook.getGroup("spam"));
-		assertNull(phoneBook.getGroup("a"));
+		assertThat(phoneBook.getGroup(null))
+			.isNotNull()
+			.hasSameClassAs(phoneBook.getGroup("default"));
+		assertThat(phoneBook.getGroup(""))
+			.isNotNull()
+			.hasSameClassAs(phoneBook.getGroup("default"));
+		assertThat(phoneBook.getGroup("spam"))
+			.isNotNull();
+		assertThat(phoneBook.getGroup("a"))
+			.isNull();
 	}
 	
 	@Test
