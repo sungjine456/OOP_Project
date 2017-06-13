@@ -1,14 +1,14 @@
 package org.gradle.domain;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 import static org.junit.Assert.assertThat;
 import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
 import org.gradle.exception.AlreadyGroupNameException;
+import org.gradle.exception.CanNotBeChangedException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -84,6 +84,11 @@ public class PhoneBookTest {
 	@Test(expected=AlreadyGroupNameException.class)
 	public void groupKeyChangeAlreadyGroupNameTest(){
 		phoneBook.groupKeyChange("친구", "default");
+	}
+
+	@Test(expected=CanNotBeChangedException.class)
+	public void defaultGroupNameChangedExceptionTest(){
+		phoneBook.groupKeyChange("default", "defaaaault");
 	}
 	
 	@Test
@@ -169,5 +174,13 @@ public class PhoneBookTest {
 		assertThat(defaultGroup.contcatSize(), is(1));
 		phoneBook.deleteContcat("", "name", "010-0000-0000");
 		assertThat(defaultGroup.contcatSize(), is(0));
+	}
+	
+	@Test
+	public void isCangedGroupNameTest(){
+		assertFalse(phoneBook.isCangedGroupName(null));
+		assertFalse(phoneBook.isCangedGroupName(""));
+		assertFalse(phoneBook.isCangedGroupName("default"));
+		assertTrue(phoneBook.isCangedGroupName("spam"));
 	}
 }

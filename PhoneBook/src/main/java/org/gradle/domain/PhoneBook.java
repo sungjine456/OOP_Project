@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import org.gradle.common.StringUtils;
 import org.gradle.common.Utils;
 import org.gradle.exception.AlreadyGroupNameException;
+import org.gradle.exception.CanNotBeChangedException;
 import org.gradle.exception.FailNumberException;
 import org.gradle.sort.GroupNameComparator;
 
@@ -49,9 +50,12 @@ public class PhoneBook {
 		groups.put(key, new Group(key));
 	}
 	
-	public void groupKeyChange(String key, String changeKey) throws AlreadyGroupNameException {
+	public void groupKeyChange(String key, String changeKey) throws AlreadyGroupNameException, CanNotBeChangedException {
 		if(StringUtils.isEmpty(key) || StringUtils.isEmpty(changeKey)){
 			throw new NullPointerException();
+		}
+		if(DEFAULT_GROUP.equals(key)){
+			throw new CanNotBeChangedException(DEFAULT_GROUP);
 		}
 		if(hasGroupName(changeKey)){
 			throw new AlreadyGroupNameException(changeKey);
@@ -101,5 +105,12 @@ public class PhoneBook {
 			throw new FailNumberException(number);
 		}
 		group.deleteContcat(name, number);
+	}
+	
+	public boolean isCangedGroupName(String groupName){
+		if(DEFAULT_GROUP.equals(groupName)){
+			return false;
+		}
+		return hasGroupName(groupName);
 	}
 }
