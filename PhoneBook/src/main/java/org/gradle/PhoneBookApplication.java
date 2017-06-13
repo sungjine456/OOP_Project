@@ -101,22 +101,22 @@ public class PhoneBookApplication {
 						phoneBook.addGroup(sc.next());
 					} catch(AlreadyGroupNameException agne){
 						log.debug(agne.getMessage());
+						phoneBook.addGroup(reInputGroupName(phoneBook));
 					}
-					phoneBook.addGroup(reInputGroupName(phoneBook));
 					break;
 				case 5:
 					System.out.print("수정할 대상의 그룹명을 입력해주세요. : ");
 					String groupName = sc.next();
-					if(phoneBook.getGroup(groupName)==null){
-						System.out.println("없는 그룹입니다.");
+					if(!phoneBook.isCangedGroupName(groupName)){
+						System.out.println("존재하지 않거나 수정할 수 없는 그룹입니다.");
 					} else {
 						System.out.println("수정할 그룹명을 입력해주세요. : ");
 						try{
 							phoneBook.groupKeyChange(groupName, sc.next());
 						} catch(AlreadyGroupNameException agne){
 							log.debug(agne.getMessage());
+							phoneBook.groupKeyChange(groupName, reInputGroupName(phoneBook));
 						}
-						phoneBook.groupKeyChange(groupName, reInputGroupName(phoneBook));
 					}
 					break;
 				case 6:
