@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import org.gradle.exception.FailNumberException;
 import org.gradle.sort.ContcatComparator;
 
 public class Group {
@@ -28,16 +27,27 @@ public class Group {
 		Collections.sort(contcats, new ContcatComparator());
 		return contcats;
 	}
-	public void addContcat(String name, String number) throws FailNumberException {
-		contcats.add(new Contcat(name, number));
+	public void addContcat(Contcat contcat) {
+		contcats.add(contcat);
 	}
-	public void deleteContcat(String name, String number) throws FailNumberException {
-		contcats.remove(new Contcat(name, number));
+	public void deleteContcat(Contcat contcat) {
+		contcats.remove(contcat);
 	}
 	public List<Contcat> searchContcat(String word){
 		return getContcats().stream()
 						.filter(contcat -> contcat.isExistWord(word))
 						.collect(Collectors.toList());
+	}
+	public boolean hasContcat(Contcat contcat){
+		if(contcat == null){
+			return false;
+		}
+		for(Contcat cont : contcats){
+			if(contcat.equals(cont.getName())){
+				return true;
+			}
+		}
+		return false;
 	}
 	public int contcatSize(){
 		return contcats.size();

@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.gradle.common.StringUtils;
-import org.gradle.common.Utils;
 import org.gradle.exception.AlreadyGroupNameException;
 import org.gradle.exception.CanNotBeChangedException;
 import org.gradle.exception.FailNumberException;
@@ -85,9 +84,9 @@ public class PhoneBook {
 		return groups.containsKey(groupName);
 	}
 	
-	public void addContcat(String groupName, String name, String number) throws FailNumberException {
+	public void addContcat(String groupName, Contcat contcat) throws FailNumberException {
 		Group group = getGroup(groupName);
-		group.addContcat(name, number);
+		group.addContcat(contcat);
 	}
 
 	public List<Contcat> searchContCat(String word) {
@@ -99,12 +98,9 @@ public class PhoneBook {
 							.collect(Collectors.toList());
 	}
 
-	public void deleteContcat(String groupName, String name, String number) {
+	public void deleteContcat(String groupName, Contcat contcat) {
 		Group group = getGroup(groupName);
-		if(!Utils.numberCheck(number)){
-			throw new FailNumberException(number);
-		}
-		group.deleteContcat(name, number);
+		group.deleteContcat(contcat);
 	}
 	
 	public boolean isCangedGroupName(String groupName){

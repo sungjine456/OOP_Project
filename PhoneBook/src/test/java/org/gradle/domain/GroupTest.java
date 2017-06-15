@@ -19,21 +19,21 @@ public class GroupTest {
 	
 	@Test
 	public void addContcatTest() {
-		group.addContcat("name", "010-1234-1234");
+		group.addContcat(new Contcat("name", "010-1234-1234"));
 	}
 	
 	@Test
 	public void searchContcatNameTest(){
-		group.addContcat("name", "010-1234-1234");
-		group.addContcat("names", "010-1234-1234");
-		group.addContcat("name1", "010-1234-1234");
-		group.addContcat("na", "010-1234-1234");
-		group.addContcat("nami", "010-1234-1234");
-		group.addContcat("sungjin", "010-1234-1234");
-		group.addContcat("hong", "010-1234-1234");
-		group.addContcat("kim", "010-1234-1234");
-		group.addContcat("kim dong 동", "010-9999-9999");
-		group.addContcat("kim me!", "010-1234-1234");
+		group.addContcat(new Contcat("name", "010-1234-1234"));
+		group.addContcat(new Contcat("names", "010-1234-1234"));
+		group.addContcat(new Contcat("name1", "010-1234-1234"));
+		group.addContcat(new Contcat("na", "010-1234-1234"));
+		group.addContcat(new Contcat("nami", "010-1234-1234"));
+		group.addContcat(new Contcat("sungjin", "010-1234-1234"));
+		group.addContcat(new Contcat("hong", "010-1234-1234"));
+		group.addContcat(new Contcat("kim", "010-1234-1234"));
+		group.addContcat(new Contcat("kim dong 동", "010-9999-9999"));
+		group.addContcat(new Contcat("kim me!", "010-1234-1234"));
 		
 		assertThat(group.searchContcat("na").size(), is(5));
 		assertThat(group.searchContcat("m").size(), is(7));
@@ -49,16 +49,16 @@ public class GroupTest {
 	
 	@Test
 	public void searchContcatNumberTest(){
-		group.addContcat("name1", "010-1234-1234");
-		group.addContcat("name2", "010-1234-1231");
-		group.addContcat("name3", "010-1234-2275");
-		group.addContcat("name4", "010-1344-1554");
-		group.addContcat("name5", "010-1112-9595");
-		group.addContcat("name6", "010-1453-8935");
-		group.addContcat("name7", "010-6673-7345");
-		group.addContcat("name8", "010-2367-4674");
-		group.addContcat("name9", "010-3456-2345");
-		group.addContcat("name10", "010-4460-7667");
+		group.addContcat(new Contcat("name1", "010-1234-1234"));
+		group.addContcat(new Contcat("name2", "010-1234-1231"));
+		group.addContcat(new Contcat("name3", "010-1234-2275"));
+		group.addContcat(new Contcat("name4", "010-1344-1554"));
+		group.addContcat(new Contcat("name5", "010-1112-9595"));
+		group.addContcat(new Contcat("name6", "010-1453-8935"));
+		group.addContcat(new Contcat("name7", "010-6673-7345"));
+		group.addContcat(new Contcat("name8", "010-2367-4674"));
+		group.addContcat(new Contcat("name9", "010-3456-2345"));
+		group.addContcat(new Contcat("name10", "010-4460-7667"));
 		
 		assertThat(group.searchContcat("010-").size(), is(10));
 		assertThat(group.searchContcat("010-1").size(), is(6));
@@ -76,34 +76,34 @@ public class GroupTest {
 	@Test
 	public void contcatSizeTest(){
 		assertThat(group.contcatSize(), is(0));
-		group.addContcat("name", "010-0000-4444");
+		group.addContcat(new Contcat("name", "010-0000-4444"));
 		assertThat(group.contcatSize(), is(1));
 	}
 	
 	@Test
 	public void deleteContcatTest(){
 		assertThat(group.contcatSize(), is(0));
-		group.addContcat("name", "010-0000-0000");
-		group.addContcat("name", "010-0000-0001");
-		group.addContcat("name", "010-0000-0002");
+		group.addContcat(new Contcat("name", "010-0000-0000"));
+		group.addContcat(new Contcat("name", "010-0000-0001"));
+		group.addContcat(new Contcat("name", "010-0000-0002"));
 		assertThat(group.contcatSize(), is(3));
-		group.deleteContcat("name", "010-0000-0000");
+		group.deleteContcat(new Contcat("name", "010-0000-0000"));
 		assertThat(group.contcatSize(), is(2));
 	}
 	
 	@Test
 	public void getContcatsSortTest(){
-		group.addContcat("A", "010-0000-0000");
-		group.addContcat("김", "010-0000-0000");
-		group.addContcat("a", "010-0000-0000");
-		group.addContcat("가", "010-0000-0000");
-		group.addContcat("z", "010-0000-0000");
-		group.addContcat("한", "010-0000-0000");
-		group.addContcat("하", "010-0000-0000");
-		group.addContcat("가a", "010-0000-0000");
-		group.addContcat("Z", "010-0000-0000");
-		group.addContcat("가김", "010-0000-0000");
-		group.addContcat("&", "010-0000-0000");
+		group.addContcat(new Contcat("A", "010-0000-0000"));
+		group.addContcat(new Contcat("김", "010-0000-0000"));
+		group.addContcat(new Contcat("a", "010-0000-0000"));
+		group.addContcat(new Contcat("가", "010-0000-0000"));
+		group.addContcat(new Contcat("z", "010-0000-0000"));
+		group.addContcat(new Contcat("한", "010-0000-0000"));
+		group.addContcat(new Contcat("하", "010-0000-0000"));
+		group.addContcat(new Contcat("가a", "010-0000-0000"));
+		group.addContcat(new Contcat("Z", "010-0000-0000"));
+		group.addContcat(new Contcat("가김", "010-0000-0000"));
+		group.addContcat(new Contcat("&", "010-0000-0000"));
 		List<Contcat> list = group.getContcats();
 		assertThat(list.get(0).getName(), is("가"));
 		assertThat(list.get(1).getName(), is("가김"));

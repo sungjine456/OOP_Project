@@ -12,8 +12,8 @@ public final class User {
 	private final PhoneBook phoneBook;
 	private final Contcat contcat;
 	
-	public User(String id, String password, String name, String number) throws FailNumberException {
-		contcat = new Contcat(name, number);
+	public User(String id, String password, Contcat contcat) throws FailNumberException {
+		this.contcat = contcat;
 		this.id = id;
 		this.password = password;
 		friends = new ArrayList<>();

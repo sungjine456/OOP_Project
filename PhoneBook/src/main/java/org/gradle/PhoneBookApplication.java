@@ -5,11 +5,11 @@ import java.util.Scanner;
 
 import org.gradle.common.StringUtils;
 import org.gradle.common.Utils;
+import org.gradle.domain.Contcat;
 import org.gradle.domain.Group;
 import org.gradle.domain.PhoneBook;
 import org.gradle.domain.User;
 import org.gradle.exception.AlreadyGroupNameException;
-import org.gradle.exception.FailNumberException;
 import org.gradle.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,8 +42,7 @@ public class PhoneBookApplication {
 					String joinId = sc.next();
 					System.out.print("비밀번호를 입력해주세요 : ");
 					String joinPassword = sc.next();
-					String[] strArr = inputNameAndNumber();
-					userRepository.save(new User(joinId, joinPassword, strArr[0], strArr[1]));
+					userRepository.save(new User(joinId, joinPassword, inputNameAndNumber()));
 					
 					login(userRepository.find(joinId));
 					break;
@@ -184,33 +183,34 @@ public class PhoneBookApplication {
 	}
 	
 	private static void addContcat(Group group){
-		System.out.print("추가할 연락처를 입력해주세요.\n이름 : ");
-		String[] strArr = inputNameAndNumber();
-		try{
-			group.addContcat(strArr[0], strArr[1]);
-		} catch(FailNumberException fne){
-			log.debug(fne.getMessage());
+		System.out.println("추가할 연락처를 입력해주세요.");
+		Contcat contcat = inputNameAndNumber();
+		if(group.hasContcat(contcat)){
+			System.out.println("이미 등록된 연락처입니다.");
+			return;
 		}
-		group.addContcat(strArr[0], reInputNumber());
+		group.addContcat(contcat);
 	}
 
 	private static void deleteContcat(Group group){
 		System.out.print("삭제할 연락처를 입력해주세요.\n이름 : ");
-		String[] strArr = inputNameAndNumber();
-		try{
-			group.deleteContcat(strArr[0], strArr[1]);
-		} catch(FailNumberException fne){
-			log.debug(fne.getMessage());
+		Contcat contcat = inputNameAndNumber();
+		if(!group.hasContcat(contcat)){
+			System.out.println("없는 연락처입니다.");
+			return;
 		}
-		group.deleteContcat(strArr[0], reInputNumber());
+		group.deleteContcat(contcat);
 	}
 	
-	private static String[] inputNameAndNumber(){
+	private static Contcat inputNameAndNumber(){
+		System.out.println("이름 : ");
 		String name = sc.next();
 		System.out.print("전화번호 : ");
 		String number = sc.next();
-		String[] strArr = {name, number};
-		return strArr;
+		if(!Utils.numberCheck(number)){
+			number = reInputNumber();
+		}
+		return new Contcat(name, number);
 	}
 	
 	private static String reInputNumber(){

@@ -113,10 +113,10 @@ public class PhoneBookTest {
 	public void allContcatListTest(){
 		assertThat(phoneBook.allContcatList().size(),is(0));
 		
-		phoneBook.getGroup("default").addContcat("de", "010-1234-1234");
-		phoneBook.getGroup("default").addContcat("fault", "010-1234-1234");
-		phoneBook.getGroup("spam").addContcat("s", "010-1234-1234");
-		phoneBook.getGroup("spam").addContcat("pam", "010-1234-1234");
+		phoneBook.getGroup("default").addContcat(new Contcat("de", "010-1234-1234"));
+		phoneBook.getGroup("default").addContcat(new Contcat("fault", "010-1234-1234"));
+		phoneBook.getGroup("spam").addContcat(new Contcat("s", "010-1234-1234"));
+		phoneBook.getGroup("spam").addContcat(new Contcat("pam", "010-1234-1234"));
 		
 		assertThat(phoneBook.allContcatList().size(),is(4));
 	}
@@ -139,17 +139,17 @@ public class PhoneBookTest {
 	@Test
 	public void searchContcatTest(){
 		Group defaultGroup = phoneBook.getGroup();
-		defaultGroup.addContcat("name1", "010-0000-0000");
-		defaultGroup.addContcat("name2", "010-0000-0001");
-		defaultGroup.addContcat("name3", "010-0000-0002");
-		defaultGroup.addContcat("name4", "010-0000-0003");
-		defaultGroup.addContcat("name5", "010-0000-0004");
+		defaultGroup.addContcat(new Contcat("name1", "010-0000-0000"));
+		defaultGroup.addContcat(new Contcat("name2", "010-0000-0001"));
+		defaultGroup.addContcat(new Contcat("name3", "010-0000-0002"));
+		defaultGroup.addContcat(new Contcat("name4", "010-0000-0003"));
+		defaultGroup.addContcat(new Contcat("name5", "010-0000-0004"));
 		Group spamGroup = phoneBook.getGroup("spam");
-		spamGroup.addContcat("name6", "010-0000-0000");
-		spamGroup.addContcat("name7", "010-0000-0011");
-		spamGroup.addContcat("name8", "010-0000-0022");
-		spamGroup.addContcat("name9", "010-0000-0033");
-		spamGroup.addContcat("10", "010-0000-0044");
+		spamGroup.addContcat(new Contcat("name6", "010-0000-0000"));
+		spamGroup.addContcat(new Contcat("name7", "010-0000-0011"));
+		spamGroup.addContcat(new Contcat("name8", "010-0000-0022"));
+		spamGroup.addContcat(new Contcat("name9", "010-0000-0033"));
+		spamGroup.addContcat(new Contcat("10", "010-0000-0044"));
 		
 		assertThat(phoneBook.searchContCat(null).size(), is(0));
 		assertThat(phoneBook.searchContCat("").size(), is(0));
@@ -163,16 +163,16 @@ public class PhoneBookTest {
 	@Test
 	public void addContcatTest(){
 		assertThat(phoneBook.getGroup().contcatSize(), is(0));
-		phoneBook.addContcat("", "name1", "010-0000-0000");
+		phoneBook.addContcat("", new Contcat("name1", "010-0000-0000"));
 		assertThat(phoneBook.getGroup().contcatSize(), is(1));
 	}
 	
 	@Test
 	public void deleteContcatTest(){
 		Group defaultGroup = phoneBook.getGroup();
-		defaultGroup.addContcat("name", "010-0000-0000");
+		defaultGroup.addContcat(new Contcat("name", "010-0000-0000"));
 		assertThat(defaultGroup.contcatSize(), is(1));
-		phoneBook.deleteContcat("", "name", "010-0000-0000");
+		phoneBook.deleteContcat("", new Contcat("name", "010-0000-0000"));
 		assertThat(defaultGroup.contcatSize(), is(0));
 	}
 	
