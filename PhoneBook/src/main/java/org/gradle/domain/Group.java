@@ -43,7 +43,7 @@ public class Group {
 			return false;
 		}
 		for(Contcat cont : contcats){
-			if(contcat.equals(cont.getName())){
+			if(contcat.equals(cont)){
 				return true;
 			}
 		}

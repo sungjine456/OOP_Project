@@ -80,7 +80,7 @@ public class PhoneBook {
 							.collect(Collectors.toList());
 	}
 	
-	private boolean hasGroupName(String groupName){
+	public boolean hasGroupName(String groupName){
 		return groups.containsKey(groupName);
 	}
 	

@@ -34,8 +34,9 @@ public class PhoneBookApplication {
 					String password = sc.next();
 					if(idAndPasswordCheck(id, password)){
 						login(userRepository.find(id));
+					} else {
+						System.out.println("잘못된 아이디와 비밀번호 입니다.");
 					}
-					System.out.println("잘못된 아이디와 비밀번호 입니다.");
 					break;
 				case 2:
 					System.out.print("아이디를 입력해주세요 : ");
@@ -90,31 +91,39 @@ public class PhoneBookApplication {
 					break;
 				case 2:
 					System.out.print("그룹 명을 입력해주세요. : ");
-					group(phoneBook.getGroup(sc.next()));
+					String groupName = sc.next();
+					if(!phoneBook.hasGroupName(groupName)){
+						groupName = reInputGroupName(phoneBook, phoneBook.hasGroupName(groupName));
+					}
+					group(phoneBook.getGroup());
 					break;
 				case 3:
+					System.out.print("그룹 명을 입력해주세요. : ");
+					printList(phoneBook.searchGroup(sc.next()));
 					break;
 				case 4:
 					System.out.print("추가할 그룹명을 입력해주세요. : ");
+					groupName = sc.next();
 					try{
-						phoneBook.addGroup(sc.next());
+						phoneBook.addGroup(groupName);
 					} catch(AlreadyGroupNameException agne){
 						log.debug(agne.getMessage());
-						phoneBook.addGroup(reInputGroupName(phoneBook));
+						phoneBook.addGroup(reInputGroupName(phoneBook, phoneBook.hasGroupName(groupName)));
 					}
 					break;
 				case 5:
 					System.out.print("수정할 대상의 그룹명을 입력해주세요. : ");
-					String groupName = sc.next();
+					groupName = sc.next();
 					if(!phoneBook.isCangedGroupName(groupName)){
 						System.out.println("존재하지 않거나 수정할 수 없는 그룹입니다.");
 					} else {
 						System.out.println("수정할 그룹명을 입력해주세요. : ");
+						String changeGroupName = sc.next();
 						try{
-							phoneBook.groupKeyChange(groupName, sc.next());
+							phoneBook.groupKeyChange(groupName, changeGroupName);
 						} catch(AlreadyGroupNameException agne){
 							log.debug(agne.getMessage());
-							phoneBook.groupKeyChange(groupName, reInputGroupName(phoneBook));
+							phoneBook.groupKeyChange(groupName, reInputGroupName(phoneBook, phoneBook.hasGroupName(changeGroupName)));
 						}
 					}
 					break;
@@ -150,8 +159,7 @@ public class PhoneBookApplication {
 					break;
 				case 3:
 					System.out.print("검색할 내용을 입력해주세요 : ");
-					String word = sc.next();
-					printList(group.searchContcat(word));
+					printList(group.searchContcat(sc.next()));
 					break;
 				case 4:
 					deleteContcat(group);
@@ -170,7 +178,9 @@ public class PhoneBookApplication {
 		if(list.size() == 0){
 			System.out.println("등록된 내용이 없습니다.");
 		}
-		list.stream().forEach(System.out::println);
+		for(T t : list){
+			System.out.println(t);
+		}
 	}
 	
 	private static boolean idAndPasswordCheck(String id, String password){
@@ -193,17 +203,18 @@ public class PhoneBookApplication {
 	}
 
 	private static void deleteContcat(Group group){
-		System.out.print("삭제할 연락처를 입력해주세요.\n이름 : ");
+		System.out.println("삭제할 연락처를 입력해주세요. : ");
 		Contcat contcat = inputNameAndNumber();
 		if(!group.hasContcat(contcat)){
 			System.out.println("없는 연락처입니다.");
 			return;
 		}
 		group.deleteContcat(contcat);
+		System.out.println("삭제되었습니다.");
 	}
 	
 	private static Contcat inputNameAndNumber(){
-		System.out.println("이름 : ");
+		System.out.print("이름 : ");
 		String name = sc.next();
 		System.out.print("전화번호 : ");
 		String number = sc.next();
@@ -214,7 +225,7 @@ public class PhoneBookApplication {
 	}
 	
 	private static String reInputNumber(){
-		System.out.println("잘못된 전화번호입니다. 다시 입력해주세요.");
+		System.out.print("잘못된 전화번호입니다. 다시 입력해주세요. : ");
 		String number = sc.next();
 		if(!Utils.numberCheck(number)){
 			number = reInputNumber();
@@ -222,11 +233,11 @@ public class PhoneBookApplication {
 		return number;
 	}
 	
-	private static String reInputGroupName(PhoneBook phoneBook){
-		System.out.println("다시 입력해주세요.");
+	private static String reInputGroupName(PhoneBook phoneBook, boolean bool){
+		System.out.print((bool?"이미 존재하는 그룹명입니다.":"존재하지 않는 그룹명입니다.")+" 다시 입력해주세요. : ");
 		String groupName = sc.next();
-		if(phoneBook.getGroup(groupName)!=null){
-			groupName = reInputGroupName(phoneBook);
+		if(phoneBook.hasGroupName(groupName) == bool){
+			groupName = reInputGroupName(phoneBook, bool);
 		}
 		return groupName;
 	}
