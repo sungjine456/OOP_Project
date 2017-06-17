@@ -2,13 +2,14 @@ package org.gradle.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.gradle.exception.FailNumberException;
 
 public final class User {
 	private final String id;
 	private final String password;
-	private final List<User> friends;
+	private final List<Friend> friends;
 	private final PhoneBook phoneBook;
 	private final Contcat contcat;
 	
@@ -35,11 +36,28 @@ public final class User {
 	public Contcat getContcat(){
 		return contcat;
 	}
-	public List<User> getFriends() {
+	public List<Friend> getFriends() {
 		return friends;
 	}
 	public PhoneBook getPhoneBook() {
 		return phoneBook;
+	}
+	
+	public boolean hasFriend(String id){
+		return findFriend(id)!=null;
+	}
+	public void addFriend(Friend friend){
+		friends.add(friend);
+	}
+	public void removeFriend(Friend friend){
+		friends.remove(friend);
+	}
+	public List<Friend> findFriends(String id){
+		return friends.stream().filter(friend -> friend.getId().contains(id)).collect(Collectors.toList());
+	}
+	public Friend findFriend(String id){
+		List<Friend> list = friends.stream().filter(friend -> friend.getId().equals(id)).collect(Collectors.toList());
+		return list.isEmpty()?null:list.get(0);
 	}
 	
 	@Override
@@ -60,6 +78,6 @@ public final class User {
 	}
 	@Override
 	public String toString(){
-		return "id : " + id + ", contcat : [ " + contcat.toString() + " ]";
+		return "id : " + id + ", " + contcat.toString();
 	}
 }

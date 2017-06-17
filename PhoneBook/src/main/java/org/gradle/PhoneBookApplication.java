@@ -6,6 +6,7 @@ import java.util.Scanner;
 import org.gradle.common.StringUtils;
 import org.gradle.common.Utils;
 import org.gradle.domain.Contcat;
+import org.gradle.domain.Friend;
 import org.gradle.domain.Group;
 import org.gradle.domain.PhoneBook;
 import org.gradle.domain.User;
@@ -67,9 +68,92 @@ public class PhoneBookApplication {
 					phoneBook(user);
 					break;
 				case 2:
+					friend(user);
 					break;
 				case 3:
 					isLogin = false;
+					break;
+				default :
+					System.out.println("다시 입력해 주세요.");
+					break;
+			}
+		}
+	}
+	
+	private static void friend(User user){
+		boolean isFriend = true;
+		while(isFriend){
+			System.out.println("1. 친구목록 보기\n2. 친구 검색\n3. 친구 추가\n4. 친구 삭제\n5. 나가기");
+			int n = Utils.changeStringIsNumber(sc.next());
+			switch(n){
+				case 1:
+					printList(user.getFriends());
+					break;
+				case 2:
+					System.out.print("친구의 아이디를 입력해주세요. : ");
+					List<Friend> friends = user.findFriends(sc.next());
+					if(friends.isEmpty()){
+						System.out.println("등록된 친구가 없습니다.");
+					} else {
+						printList(friends);
+					}
+					break;
+				case 3:
+					System.out.print("친구의 아이디를 입력해주세요. : ");
+					User findUser = userRepository.find(sc.next());
+					if(findUser != null){
+						if(user.hasFriend(findUser.getId())){
+							System.out.println("이미 존재하는 친구입니다.");
+							break;
+						}
+						System.out.println(findUser);
+						System.out.print("추가하시겠습니까?(yes, no) : ");
+						String answer = sc.next().toUpperCase();
+						while(true){
+							if("YES".equals(answer)){
+								user.addFriend(new Friend(findUser.getId(), findUser.getContcat()));
+								System.out.println("추가되었습니다.");
+								break;
+							} else if("NO".equals(answer)){
+								System.out.println("추가가 취소되었습니다.");
+								break;
+							}
+							System.out.println("다시 입력해주세요. : ");
+							answer = sc.next().toUpperCase();
+						}
+					} else {
+						System.out.println("존재하지 않는 아이디입니다.");
+					}
+					break;
+				case 4:
+					System.out.print("친구의 아이디를 입력해주세요. : ");
+					Friend friend = user.findFriend(sc.next());
+					if(friend == null){
+						System.out.println("등록된 친구가 없습니다.");
+					} else {
+						if(!user.hasFriend(friend.getId())){
+							System.out.println("존재하지 않는 친구입니다.");
+							break;
+						}
+						System.out.println(friend);
+						System.out.print("삭제하시겠습니까?(yes, no) : ");
+						String answer = sc.next().toUpperCase();
+						while(true){
+							if("YES".equals(answer)){
+								user.removeFriend(friend);
+								System.out.println("삭제되었습니다.");
+								break;
+							} else if("NO".equals(answer)){
+								System.out.println("삭제가 취소되었습니다.");
+								break;
+							}
+							System.out.println("다시 입력해주세요. : ");
+							answer = sc.next().toUpperCase();
+						}
+					}
+					break;
+				case 5:
+					isFriend = false;
 					break;
 				default :
 					System.out.println("다시 입력해 주세요.");
