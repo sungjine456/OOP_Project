@@ -107,19 +107,8 @@ public class PhoneBookApplication {
 							break;
 						}
 						System.out.println(findUser);
-						System.out.print("추가하시겠습니까?(yes, no) : ");
-						String answer = sc.next().toUpperCase();
-						while(true){
-							if("YES".equals(answer)){
-								user.addFriend(new Friend(findUser.getId(), findUser.getContcat()));
-								System.out.println("추가되었습니다.");
-								break;
-							} else if("NO".equals(answer)){
-								System.out.println("추가가 취소되었습니다.");
-								break;
-							}
-							System.out.println("다시 입력해주세요. : ");
-							answer = sc.next().toUpperCase();
+						if(reYesOrNo("추가하시겠습니까?", sc.next().toUpperCase())){
+							user.addFriend(new Friend(findUser.getId(), findUser.getContcat()));
 						}
 					} else {
 						System.out.println("존재하지 않는 아이디입니다.");
@@ -136,19 +125,8 @@ public class PhoneBookApplication {
 							break;
 						}
 						System.out.println(friend);
-						System.out.print("삭제하시겠습니까?(yes, no) : ");
-						String answer = sc.next().toUpperCase();
-						while(true){
-							if("YES".equals(answer)){
-								user.removeFriend(friend);
-								System.out.println("삭제되었습니다.");
-								break;
-							} else if("NO".equals(answer)){
-								System.out.println("삭제가 취소되었습니다.");
-								break;
-							}
-							System.out.println("다시 입력해주세요. : ");
-							answer = sc.next().toUpperCase();
+						if(reYesOrNo("삭제하시겠습니까?", sc.next().toUpperCase())){
+							user.removeFriend(friend);
 						}
 					}
 					break;
@@ -176,10 +154,11 @@ public class PhoneBookApplication {
 				case 2:
 					System.out.print("그룹 명을 입력해주세요. : ");
 					String groupName = sc.next();
-					if(!phoneBook.hasGroupName(groupName)){
-						groupName = reInputGroupName(phoneBook, phoneBook.hasGroupName(groupName));
+					if(phoneBook.hasGroupName(groupName)){
+						group(phoneBook.getGroup(groupName));
+					} else {
+						System.out.println("없는 그룹입니다.");
 					}
-					group(phoneBook.getGroup());
 					break;
 				case 3:
 					System.out.print("그룹 명을 입력해주세요. : ");
@@ -256,6 +235,22 @@ public class PhoneBookApplication {
 					break;
 			}
 		}
+	}
+	
+	private static boolean reYesOrNo(String message, String word){
+		System.out.print(message + "(yes, no) : ");
+		while(true){
+			if("YES".equals(word)){
+				System.out.println("삭제되었습니다.");
+				break;
+			} else if("NO".equals(word)){
+				System.out.println("삭제가 취소되었습니다.");
+				break;
+			}
+			System.out.println("다시 입력해주세요. : ");
+			word = sc.next().toUpperCase();
+		}
+		return word.equals("YES")?true:false;
 	}
 	
 	private static <T> void printList(List<T> list){

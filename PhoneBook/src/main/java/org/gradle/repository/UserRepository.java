@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.gradle.domain.Contcat;
+import org.gradle.domain.Friend;
 import org.gradle.domain.User;
 
 public class UserRepository {
@@ -11,9 +12,7 @@ public class UserRepository {
 	
 	private static UserRepository thisRepository;
 	
-	private UserRepository(){
-		initData();
-	}
+	private UserRepository(){}
 	
 	public static UserRepository getInstance(){
 		if(thisRepository == null){
@@ -22,10 +21,12 @@ public class UserRepository {
 		return thisRepository;
 	}
 	
-	private void initData(){
+	static {
 		data.put("sungjin", new User("sungjin", "123123", new Contcat("sungjins", "010-0000-1111")));
 		data.put("user", new User("user", "123123", new Contcat("hong", "010-0000-2222")));
-		data.put("admin", new User("admin", "123123", new Contcat("jodan", "010-0000-3333")));
+		User user = new User("admin", "123123", new Contcat("jodan", "010-0000-3333"));
+		user.addFriend(new Friend("sungjin", data.get("sungjin").getContcat()));
+		data.put("admin", user);
 	}
 	
 	public void save(User user){

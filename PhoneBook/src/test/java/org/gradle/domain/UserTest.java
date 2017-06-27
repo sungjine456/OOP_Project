@@ -20,8 +20,6 @@ public class UserTest {
 		assertFalse(user.hasFriend("user"));
 		user.addFriend(new Friend("user", new Contcat("user", "010-1234-1243")));
 		assertTrue(user.hasFriend("user"));
-		user.removeFriend(new Friend("user", new Contcat("user", "010-1234-1243")));
-		assertFalse(user.hasFriend("user"));
 	}
 	
 	@Test
@@ -32,7 +30,6 @@ public class UserTest {
 	}
 	@Test
 	public void removeFriendTest(){
-		assertFalse(user.hasFriend("user"));
 		user.addFriend(new Friend("user", new Contcat("user", "010-1234-1243")));
 		assertTrue(user.hasFriend("user"));
 		user.removeFriend(new Friend("user", new Contcat("user", "010-1234-1243")));
@@ -56,5 +53,6 @@ public class UserTest {
 		user.addFriend(friend);
 		user.addFriend(friend1);
 		assertThat(user.findFriend("user")).isNotNull();
+		assertThat(user.findFriend("use")).isNull();
 	}
 }
