@@ -37,7 +37,9 @@ public final class User {
 		return contcat;
 	}
 	public List<Friend> getFriends() {
-		return friends;
+		List<Friend> copyFriend = new ArrayList<>();
+		copyFriend.addAll(friends);
+		return copyFriend;
 	}
 	public PhoneBook getPhoneBook() {
 		return phoneBook;
@@ -53,11 +55,13 @@ public final class User {
 		friends.remove(friend);
 	}
 	public List<Friend> findFriends(String id){
-		return friends.stream().filter(friend -> friend.getId().contains(id)).collect(Collectors.toList());
+		return friends.stream()
+					.filter(friend -> friend.getId().contains(id))
+					.collect(Collectors.toList());
 	}
 	public Friend findFriend(String id){
-		List<Friend> list = friends.stream().filter(friend -> friend.getId().equals(id)).collect(Collectors.toList());
-		return list.isEmpty()?null:list.get(0);
+		return friends.stream()
+				.filter(friend -> friend.getId().equals(id)).findAny().orElse(null);
 	}
 	
 	@Override

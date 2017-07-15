@@ -24,8 +24,10 @@ public class Group {
 		groupName = changeKey;
 	}
 	public List<Contcat> getContcats() {
-		Collections.sort(contcats, new ContcatComparator());
-		return contcats;
+		List<Contcat> copyContcats = new ArrayList<>();
+		copyContcats.addAll(contcats);
+		Collections.sort(copyContcats, new ContcatComparator());
+		return copyContcats;
 	}
 	public void addContcat(Contcat contcat) {
 		contcats.add(contcat);

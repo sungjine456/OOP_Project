@@ -29,7 +29,9 @@ public class GroupController extends Controller {
 			addContcat(group);
 		} else if(num == 3){
 			System.out.print("검색할 내용을 입력해주세요 : ");
-			printList(group.searchContcat(sc.next()));
+			List<Contcat> list = group.searchContcat(sc.next());
+			list.add(new Contcat("name", "010-1234-1234"));
+			printList(list);
 		} else if(num == 4){
 			deleteContcat(group);
 		}
