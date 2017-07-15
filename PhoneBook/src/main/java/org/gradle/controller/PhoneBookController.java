@@ -12,7 +12,7 @@ public class PhoneBookController extends Controller {
 	
 	private User user;
 	private PhoneBook phoneBook;
-	private final String message = "1. 모든 연락처 보기\n2. 그룹별 연락처 보기\n3. 그룹 검색\n4. 그룹 추가\n5. 그룹명 수정\n6. 연락처 검색\n7. 모든 그룹명 보기\n8. 나가기";
+	private final String[] menus = {"모든 연락처 보기", "그룹별 연락처 보기", "그룹 검색", "그룹 추가", "그룹명 수정", "연락처 검색", "모든 그룹명 보기"};
 	
 	public PhoneBookController(Scanner sc) {
 		super(sc);
@@ -20,7 +20,7 @@ public class PhoneBookController extends Controller {
 	
 	public void play(User user){
 		this.user = user;
-		super.play(message, 8);
+		super.play(menus);
 	}
 
 	@Override

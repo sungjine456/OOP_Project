@@ -10,7 +10,7 @@ import org.gradle.repository.UserRepository;
 public class FriendController extends Controller {
 	private UserRepository userRepository = UserRepository.getInstance();
 	
-	private final String message = "1. 친구목록 보기\n2. 친구 검색\n3. 친구 추가\n4. 친구 삭제\n5. 나가기";
+	private final String[] menus = {"친구목록 보기", "친구 검색", "친구 추가", "친구 삭제"};
 	private User user;
 
 	public FriendController(Scanner sc) {
@@ -19,7 +19,7 @@ public class FriendController extends Controller {
 	
 	public void play(User user){
 		this.user = user;
-		super.play(message, 5);
+		super.play(menus);
 	}
 
 	@Override

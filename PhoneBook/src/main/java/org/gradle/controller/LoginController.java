@@ -9,7 +9,7 @@ public class LoginController extends Controller {
 	private PhoneBookController phoneBookController = new PhoneBookController(sc);
 	private FriendController friendController = new FriendController(sc);
 	
-	private final String message = "로그인중...\n1. 전화번호 부\n2. 친구\n3. 로그아웃";
+	private final String[] menus = {"전화번호 부", "친구"};
 	private User user;
 
 	public LoginController(Scanner sc) {
@@ -17,7 +17,7 @@ public class LoginController extends Controller {
 	}
 	
 	public void play(){
-		super.play(message, 3);
+		super.play(menus, "로그아웃");
 	}
 	
 	@Override

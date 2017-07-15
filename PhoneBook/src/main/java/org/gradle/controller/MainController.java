@@ -12,14 +12,14 @@ public class MainController extends Controller {
 	private UserRepository userRepository = UserRepository.getInstance();
 	private LoginController loginController = new LoginController(sc);
 	
-	private final String message = "1. 로그인 \n2. 회원가입\n3. 종료";
+	private final String[] menus = {"로그인", "회원가입"};
 	
 	public MainController(Scanner sc){
 		super(sc);
 	}
 	
 	public void play(){
-		super.play(message, 3);
+		super.play(menus, "종료");
 	}
 	
 	@Override

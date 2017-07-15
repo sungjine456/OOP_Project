@@ -6,14 +6,23 @@ import org.gradle.common.Utils;
 
 public abstract class Controller {
 	protected Scanner sc;
+	private final String END_MESSAGE = "나가기";
 	
-	public Controller(Scanner sc){
+	protected Controller(Scanner sc){
 		this.sc = sc;
 	}
 	
-	protected void play(String message, int endNum){
+	protected void play(String[] menus){
+		play(menus, END_MESSAGE);
+	}
+
+	protected void play(String[] menus, String endMessage){
+		int endNum = menus.length + 1;
 		while(true){
-			System.out.println(message);
+			for(int i = 0; i < menus.length; i++){
+				System.out.println((i+1)+". " + menus[i]);
+			}
+			System.out.println(endNum + ". " + endMessage);
 			int n = Utils.changeStringIsNumber(sc.next());
 			if(n == endNum){
 				break;
@@ -26,5 +35,5 @@ public abstract class Controller {
 		}
 	}
 	
-	abstract public void searchMenu(int num);
+	abstract protected void searchMenu(int num);
 }

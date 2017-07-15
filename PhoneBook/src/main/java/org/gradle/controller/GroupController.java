@@ -10,7 +10,7 @@ import org.gradle.domain.Group;
 public class GroupController extends Controller {
 	
 	private Group group;
-	private final String message = "\n1. 연락처 보기\n2. 연락처 추가\n3. 연락처 검색\n4. 연락처 삭제\n5. 나가기";
+	private final String[] menus = {"연락처 보기", "연락처 추가", "연락처 검색", "연락처 삭제"};
 
 	public GroupController(Scanner sc) {
 		super(sc);
@@ -18,7 +18,7 @@ public class GroupController extends Controller {
 	
 	public void play(Group group){
 		this.group = group;
-		super.play(message, 5);
+		super.play(menus);
 	}
 
 	@Override
