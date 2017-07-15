@@ -50,15 +50,14 @@ public class PhoneBookController extends Controller {
 	private void updateGroup(){
 		System.out.print("수정할 대상의 그룹명을 입력해주세요. : ");
 		String groupName = sc.next();
-		if(!phoneBook.isCangedGroupName(groupName)){
-			System.out.println("존재하지 않거나 수정할 수 없는 그룹입니다.");
-		} else {
-			System.out.println("수정할 그룹명을 입력해주세요. : ");
-			String changeGroupName = sc.next();
-			try{
-				phoneBook.groupKeyChange(groupName, changeGroupName);
-			} catch(AlreadyGroupNameException agne){
-				phoneBook.groupKeyChange(groupName, reInputGroupName(phoneBook, phoneBook.hasGroupName(changeGroupName)));
+		System.out.println("수정할 그룹명을 입력해주세요. : ");
+		String changeGroupName = sc.next();
+		try{
+			phoneBook.groupNameChange(groupName, changeGroupName);
+		} catch(AlreadyGroupNameException agne){
+			changeGroupName = reInputGroupName(phoneBook, phoneBook.hasGroupName(changeGroupName));
+			if(changeGroupName != null){
+				phoneBook.groupNameChange(groupName, changeGroupName);
 			}
 		}
 	}
@@ -95,8 +94,11 @@ public class PhoneBookController extends Controller {
 		}
 	}
 	private String reInputGroupName(PhoneBook phoneBook, boolean bool){
-		System.out.print((bool?"이미 존재하는 그룹명입니다.":"존재하지 않는 그룹명입니다.")+" 다시 입력해주세요. : ");
+		System.out.print((bool?"이미 존재하는 그룹명입니다.":"존재하지 않는 그룹명입니다.")+" 다시 입력해주세요.(0입력시 취소) : ");
 		String groupName = sc.next();
+		if("0".equals(groupName)){
+			return null;
+		}
 		if(phoneBook.hasGroupName(groupName) == bool){
 			groupName = reInputGroupName(phoneBook, bool);
 		}

@@ -13,7 +13,7 @@ import org.gradle.exception.FailNumberException;
 import org.gradle.sort.GroupNameComparator;
 
 public class PhoneBook {
-	private Map<String, Group> groups;
+	private final Map<String, Group> groups;
 	private final String DEFAULT_GROUP = "default";
 	private final String SPAM_GROUP = "spam";
 
@@ -49,19 +49,13 @@ public class PhoneBook {
 		groups.put(key, new Group(key));
 	}
 	
-	public void groupKeyChange(String key, String changeKey) throws AlreadyGroupNameException, CanNotBeChangedException {
-		if(StringUtils.isEmpty(key) || StringUtils.isEmpty(changeKey)){
-			throw new NullPointerException();
+	public void groupNameChange(String groupName, String changeGroupName) throws AlreadyGroupNameException, CanNotBeChangedException {
+		if(isNotChangeGroupName(changeGroupName)){
+			throw new AlreadyGroupNameException(changeGroupName);
 		}
-		if(DEFAULT_GROUP.equals(key)){
-			throw new CanNotBeChangedException(DEFAULT_GROUP);
-		}
-		if(hasGroupName(changeKey)){
-			throw new AlreadyGroupNameException(changeKey);
-		}
-		Group group = groups.remove(key);
-		group.setGroupName(changeKey);
-		groups.put(changeKey, group);
+		Group group = groups.remove(groupName);
+		group.setGroupName(changeGroupName);
+		groups.put(changeGroupName, group);
 	}
 	
 	public List<Group> searchGroup(String word){
@@ -103,9 +97,9 @@ public class PhoneBook {
 		group.deleteContcat(contcat);
 	}
 	
-	public boolean isCangedGroupName(String groupName){
-		if(DEFAULT_GROUP.equals(groupName)){
-			return false;
+	private boolean isNotChangeGroupName(String groupName){
+		if(StringUtils.isEmpty(groupName)){
+			return true;
 		}
 		return hasGroupName(groupName);
 	}

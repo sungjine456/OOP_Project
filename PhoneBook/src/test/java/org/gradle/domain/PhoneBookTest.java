@@ -65,7 +65,7 @@ public class PhoneBookTest {
 	public void groupKeyChangeSuccessTest(){
 		assertNotNull(phoneBook.getGroup("친구"));
 		
-		phoneBook.groupKeyChange("친구", "친구들");
+		phoneBook.groupNameChange("친구", "친구들");
 		
 		assertNull(phoneBook.getGroup("친구"));
 		assertNotNull(phoneBook.getGroup("친구들"));
@@ -73,22 +73,22 @@ public class PhoneBookTest {
 	
 	@Test(expected=NullPointerException.class)
 	public void groupKeyChangeNullKeyTest(){
-		phoneBook.groupKeyChange(null, "친구들");
+		phoneBook.groupNameChange(null, "친구들");
 	}
 	
 	@Test(expected=NullPointerException.class)
 	public void groupKeyChangeNullChangeKeyTest(){
-		phoneBook.groupKeyChange("친구", null);
+		phoneBook.groupNameChange("친구", null);
 	}
 	
 	@Test(expected=AlreadyGroupNameException.class)
 	public void groupKeyChangeAlreadyGroupNameTest(){
-		phoneBook.groupKeyChange("친구", "default");
+		phoneBook.groupNameChange("친구", "default");
 	}
 
 	@Test(expected=CanNotBeChangedException.class)
 	public void defaultGroupNameChangedExceptionTest(){
-		phoneBook.groupKeyChange("default", "defaaaault");
+		phoneBook.groupNameChange("default", "defaaaault");
 	}
 	
 	@Test
@@ -174,13 +174,5 @@ public class PhoneBookTest {
 		assertThat(defaultGroup.contcatSize(), is(1));
 		phoneBook.deleteContcat("", new Contcat("name", "010-0000-0000"));
 		assertThat(defaultGroup.contcatSize(), is(0));
-	}
-	
-	@Test
-	public void isCangedGroupNameTest(){
-		assertFalse(phoneBook.isCangedGroupName(null));
-		assertFalse(phoneBook.isCangedGroupName(""));
-		assertFalse(phoneBook.isCangedGroupName("default"));
-		assertTrue(phoneBook.isCangedGroupName("spam"));
 	}
 }
