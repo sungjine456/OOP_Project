@@ -19,7 +19,7 @@ public class HeroTest {
 	}
 	
 	@Test
-	public void none_weapon() {
+	public void noneWeapon() {
 		assertThat(hero.getOffensePower(), is(0));
 		assertThat(hero.getDefensePower(), is(0));
 	}
