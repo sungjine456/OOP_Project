@@ -5,12 +5,14 @@ import org.gradle.api.domain.common.HealthImpl;
 public final class ServantCard implements Card {
 	private final int mana;
 	private final int offensePower;
+	private final int defensePower;
 	private final String ability;
 	private HealthImpl health;
 
-	public ServantCard(int mana, int offensePower, String ability, int health) {
+	public ServantCard(int mana, int offensePower, int defensePower, String ability, int health) {
 		this.mana = mana;
 		this.offensePower = offensePower;
+		this.defensePower = defensePower;
 		this.ability = ability;
 		this.health = new HealthImpl(health);
 	}
@@ -27,6 +29,10 @@ public final class ServantCard implements Card {
 	@Override
 	public int getOffensePower() {
 		return offensePower;
+	}
+	@Override
+	public int getDefensePower() {
+		return defensePower;
 	}
 	@Override
 	public String getAbility() {
@@ -47,11 +53,6 @@ public final class ServantCard implements Card {
 	@Override
 	public void beCure(int cure) {
 		health.beCure(cure);
-	}
-
-	@Override
-	public int getDefensePower() {
-		return 0;
 	}
 
 	@Override

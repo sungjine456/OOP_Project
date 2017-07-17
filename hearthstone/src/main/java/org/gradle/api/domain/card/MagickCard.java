@@ -1,5 +1,7 @@
 package org.gradle.api.domain.card;
 
+import org.gradle.api.exception.MethodInvokeException;
+
 public final class MagickCard implements Card {
 	private final int mana;
 	private final String ability;
@@ -47,30 +49,26 @@ public final class MagickCard implements Card {
 
 	@Override
 	public int getOffensePower() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new MethodInvokeException("마법 카드는 공격력이 없습니다.");
 	}
 	@Override
 	public int getDefensePower() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new MethodInvokeException("마법 카드는 방어력이 없습니다.");
 	}
 	@Override
 	public boolean isDead() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new MethodInvokeException("마법 카드는 죽을 수 없습니다.");
 	}
 	@Override
 	public int getHealth() {
-		// TODO Auto-generated method stub
-		return 0;
+		throw new MethodInvokeException("마법 카드는 생명력이 없습니다.");
 	}
 	@Override
 	public void beAttack(int attack) {
-		// TODO Auto-generated method stub
+		throw new MethodInvokeException("마법 카드는 공격받을 수 없습니다.");
 	}
 	@Override
 	public void beCure(int cure) {
-		// TODO Auto-generated method stub
+		throw new MethodInvokeException("마법 카드는 치료받을 수 없습니다.");
 	}
 }
