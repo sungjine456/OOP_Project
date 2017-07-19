@@ -15,8 +15,8 @@ public class HeroTest {
 	
 	@Before
 	public void setUp(){
-		HeroSkill skill = new HeroSkill(2, new CureAbility(2));
-		hero = new Hero(skill, 10);
+		HeroSkill skill = new HeroSkill(new CureAbility(2));
+		hero = new Hero(skill);
 	}
 	
 	@Test

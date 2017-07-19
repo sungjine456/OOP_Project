@@ -6,17 +6,22 @@ import org.gradle.api.domain.common.HealthImpl;
 import org.gradle.api.domain.common.OffensePower;
 
 public final class Hero implements OffensePower, Health {
+	private final int HERO_HEALTH = 30;
+	
 	private final HeroSkill skill;
 	private WeaponCard weapon;
 	
 	private Health health;
 
-	public Hero(HeroSkill skill, int health) {
+	public Hero(HeroSkill skill) {
 		this.skill = skill;
 		weapon = null;
-		this.health = new HealthImpl(health);
+		this.health = new HealthImpl(HERO_HEALTH);
 	}
-
+	
+	public void setWeapon(WeaponCard weapon){
+		this.weapon = weapon;
+	}
 	public HeroSkill getSkill() {
 		return skill;
 	}
