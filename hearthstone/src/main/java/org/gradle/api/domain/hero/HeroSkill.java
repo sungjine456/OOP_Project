@@ -1,13 +1,13 @@
 package org.gradle.api.domain.hero;
 
-import org.gradle.api.domain.common.Ability;
+import org.gradle.api.domain.ability.Ability;
 import org.gradle.api.domain.common.Mana;
 
-public final class HeroSkill implements Mana, Ability {
+public final class HeroSkill implements Mana {
 	private final int mana;
-	private final String ability;
+	private final Ability ability;
 	
-	public HeroSkill(int mana, String ability) {
+	public HeroSkill(int mana, Ability ability) {
 		this.mana = mana;
 		this.ability = ability;
 	}
@@ -15,9 +15,5 @@ public final class HeroSkill implements Mana, Ability {
 	@Override
 	public int getMana() {
 		return mana;
-	}
-	@Override
-	public String getAbility() {
-		return ability;
 	}
 }

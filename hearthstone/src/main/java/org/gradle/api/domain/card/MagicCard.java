@@ -1,12 +1,13 @@
 package org.gradle.api.domain.card;
 
+import org.gradle.api.domain.ability.Ability;
 import org.gradle.api.exception.MethodInvokeException;
 
-public final class MagickCard implements Card {
+public final class MagicCard implements Card {
 	private final int mana;
-	private final String ability;
+	private final Ability ability;
 	
-	public MagickCard(int mana, String ability) {
+	public MagicCard(int mana, Ability ability) {
 		this.mana = mana;
 		this.ability = ability;
 	}
@@ -14,10 +15,6 @@ public final class MagickCard implements Card {
 	@Override
 	public int getMana() {
 		return mana;
-	}
-	@Override
-	public String getAbility() {
-		return ability;
 	}
 	
 	@Override
@@ -36,7 +33,7 @@ public final class MagickCard implements Card {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		MagickCard other = (MagickCard) obj;
+		MagicCard other = (MagicCard) obj;
 		if (ability == null) {
 			if (other.ability != null)
 				return false;
@@ -50,10 +47,6 @@ public final class MagickCard implements Card {
 	@Override
 	public int getOffensePower() {
 		throw new MethodInvokeException("마법 카드는 공격력이 없습니다.");
-	}
-	@Override
-	public int getDefensePower() {
-		throw new MethodInvokeException("마법 카드는 방어력이 없습니다.");
 	}
 	@Override
 	public boolean isDead() {

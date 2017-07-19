@@ -1,24 +1,33 @@
 package org.gradle.api.domain.card;
 
+import org.gradle.api.domain.ability.Ability;
+import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.common.HealthImpl;
 
 public final class ServantCard implements Card {
 	private final int mana;
-	private final int offensePower;
-	private final int defensePower;
-	private final String ability;
-	private HealthImpl health;
+	private int offensePower;
+	private final Ability ability;
+	private Health health;
 
-	public ServantCard(int mana, int offensePower, int defensePower, String ability, int health) {
+	public ServantCard(int mana, int offensePower, int health) {
 		this.mana = mana;
 		this.offensePower = offensePower;
-		this.defensePower = defensePower;
+		ability = null;
+		this.health = new HealthImpl(health);
+	}
+	public ServantCard(int mana, int offensePower, Ability ability, int health) {
+		this.mana = mana;
+		this.offensePower = offensePower;
 		this.ability = ability;
 		this.health = new HealthImpl(health);
 	}
 
 	public boolean hasAbility(){
-		return false;
+		return ability!=null;
+	}
+	public void killSerant(){
+		health = new HealthImpl(0);
 	}
 	
 	// getter
@@ -29,14 +38,6 @@ public final class ServantCard implements Card {
 	@Override
 	public int getOffensePower() {
 		return offensePower;
-	}
-	@Override
-	public int getDefensePower() {
-		return defensePower;
-	}
-	@Override
-	public String getAbility() {
-		return ability;
 	}
 	@Override
 	public int getHealth() {

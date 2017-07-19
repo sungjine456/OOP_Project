@@ -3,9 +3,9 @@ package org.gradle.api.domain.hero;
 import org.gradle.api.domain.card.WeaponCard;
 import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.common.HealthImpl;
-import org.gradle.api.domain.common.OffenseAndDefensePower;
+import org.gradle.api.domain.common.OffensePower;
 
-public final class Hero implements OffenseAndDefensePower, Health {
+public final class Hero implements OffensePower, Health {
 	private final HeroSkill skill;
 	private WeaponCard weapon;
 	
@@ -24,7 +24,6 @@ public final class Hero implements OffenseAndDefensePower, Health {
 	public int getOffensePower() {
 		return weapon==null?0:weapon.getOffensePower();
 	}
-	@Override
 	public int getDefensePower() {
 		return weapon==null?0:weapon.getDefensePower();
 	}

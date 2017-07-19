@@ -3,6 +3,7 @@ package org.gradle.domain.hero;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
+import org.gradle.api.domain.ability.CureAbility;
 import org.gradle.api.domain.hero.Hero;
 import org.gradle.api.domain.hero.HeroSkill;
 import org.junit.Before;
@@ -14,7 +15,7 @@ public class HeroTest {
 	
 	@Before
 	public void setUp(){
-		HeroSkill skill = new HeroSkill(2, "영웅을 공격한다.");
+		HeroSkill skill = new HeroSkill(2, new CureAbility(2));
 		hero = new Hero(skill, 10);
 	}
 	

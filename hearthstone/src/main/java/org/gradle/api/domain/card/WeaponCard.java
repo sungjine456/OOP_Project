@@ -21,7 +21,6 @@ public final class WeaponCard implements Card {
 	public int getOffensePower() {
 		return offensePower;
 	}
-	@Override
 	public int getDefensePower() {
 		return defensePower;
 	}
@@ -53,10 +52,6 @@ public final class WeaponCard implements Card {
 		return true;
 	}
 
-	@Override
-	public String getAbility() {
-		throw new MethodInvokeException("무기카드는 능력을 가질 수 없습니다.");
-	}
 	@Override
 	public boolean isDead() {
 		throw new MethodInvokeException("무기카드는 죽을 수 없습니다.");
