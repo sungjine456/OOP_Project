@@ -51,6 +51,10 @@ public final class WeaponCard implements Card {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "WeaponCard [mana=" + mana + ", offensePower=" + offensePower + ", defensePower=" + defensePower + "]";
+	}
 
 	@Override
 	public boolean isDead() {

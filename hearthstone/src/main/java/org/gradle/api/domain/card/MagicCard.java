@@ -43,6 +43,10 @@ public final class MagicCard implements Card {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "MagicCard [mana=" + mana + ", ability=" + ability + "]";
+	}
 
 	@Override
 	public int getOffensePower() {

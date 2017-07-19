@@ -85,4 +85,9 @@ public final class ServantCard implements Card {
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "ServantCard [mana=" + mana + ", offensePower=" + offensePower + ", ability=" + ability + ", health="
+				+ health + "]";
+	}
 }

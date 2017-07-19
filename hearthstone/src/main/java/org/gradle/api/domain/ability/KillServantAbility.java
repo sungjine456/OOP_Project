@@ -17,4 +17,9 @@ public class KillServantAbility implements Ability {
 	public void useAbility(ServantCard servantCard) {
 		servantCard.beAttack(servantCard.getHealth());
 	}
+
+	@Override
+	public String toString() {
+		return "KillServantAbility []";
+	}
 }
