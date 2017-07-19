@@ -8,20 +8,29 @@ import org.gradle.api.domain.hero.Hero;
 import org.gradle.api.domain.hero.HeroSkill;
 
 public final class Player {
-	private Hero hero;
-	private List<Card> handCardDeck;
-	private List<Card> fieldCardDeck;
+	private final Hero hero;
+	private final List<Card> handCards;
+	private final List<Card> fieldCards;
 	private int mana;
 	
 	public Player(Hero hero){
 		this.hero = hero;
-		handCardDeck = new ArrayList<>();
-		fieldCardDeck = new ArrayList<>();
+		handCards = new ArrayList<>();
+		fieldCards = new ArrayList<>();
 		mana = 1;
 	}
 	
 	public void turnOff(){
-		
+		mana += 1;
+	}
+	public void addCard(Card card){
+		handCards.add(card);
+	}
+	public void putInTheField(Card card){
+		if(handCards.contains(card)){
+			handCards.remove(card);
+			fieldCards.add(card);
+		}
 	}
 	public Card useCard(){
 		return null;
@@ -31,5 +40,18 @@ public final class Player {
 	}
 	public int heroAttack(){
 		return -1;
+	}
+	
+	public List<Card> getHandCards(){
+		return handCards;
+	}
+	public List<Card> getFieldCards(){
+		return fieldCards;
+	}
+	public Hero getHero(){
+		return hero;
+	}
+	public int getMana(){
+		return mana;
 	}
 }

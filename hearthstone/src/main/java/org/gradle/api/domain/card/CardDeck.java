@@ -17,11 +17,11 @@ public final class CardDeck {
 		cardDeck = makeFullCardDeck();
 	}
 	
-	public void remove(Card card){
-		cardDeck.remove(card);
-	}
 	public boolean add(Card card){
 		return cardDeck.add(card);
+	}
+	public Card getCard(){
+		return cardDeck.remove(0);
 	}
 	public List<Card> getCardDeck(){
 		return cardDeck;
