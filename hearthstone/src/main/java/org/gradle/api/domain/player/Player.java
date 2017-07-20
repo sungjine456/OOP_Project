@@ -20,7 +20,8 @@ public final class Player {
 		mana = 1;
 	}
 	
-	public void turnOff(){
+	public void turnOn(Card card){
+		handCards.add(card);
 		mana += 1;
 	}
 	public void addCard(Card card){

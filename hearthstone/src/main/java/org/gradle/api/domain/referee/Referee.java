@@ -29,20 +29,32 @@ public class Referee {
 	}
 
 	public void changeTurn(){
-		Player player = players.get(turn);
-		player.turnOff();
 		turn = turn==0?1:0;
+		
+		Player player = getNowPlayer();
+		player.turnOn(getNowCardDeck().getCard());
 	}
 	public List<Card> showCardsThatPlayerHave() {
-		return players.get(turn).getHandCards();
+		return getNowPlayer().getHandCards();
 	}
 	public List<Card> showCardsInTheField() {
-		return players.get(turn).getFieldCards();
+		return getNowPlayer().getFieldCards();
 	}
 	public Hero showHero() {
-		return players.get(turn).getHero();
+		return getNowPlayer().getHero();
+	}
+	public int attackWithHero(){
+		Hero hero = getNowPlayer().getHero();
+		
+		return hero.useWeapon();
 	}
 	
+	private Player getNowPlayer() {
+		return players.get(turn);
+	}
+	private CardDeck getNowCardDeck() {
+		return cardDecks.get(turn);
+	}
 	private void begingGiveTheCards(int turn, int numberOfCards){
 		Player player = players.get(turn);
 		CardDeck cardDeck = cardDecks.get(turn);

@@ -11,7 +11,7 @@ import org.gradle.api.domain.hero.HeroSkill;
 
 public class HeroRepository {
 	private static final HeroRepository INSTANCE = new HeroRepository();
-	public static List<Hero> heroData = new ArrayList<>();
+	private static List<Hero> heroData = new ArrayList<>();
 	
 	private HeroRepository(){}
 	public static HeroRepository getInstance(){
