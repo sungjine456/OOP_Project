@@ -1,11 +1,9 @@
-package org.gradle.domain.hero;
+package org.gradle.api.domain.hero;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.gradle.api.domain.ability.CureAbility;
-import org.gradle.api.domain.hero.Hero;
-import org.gradle.api.domain.hero.HeroSkill;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,8 +18,7 @@ public class HeroTest {
 	}
 	
 	@Test
-	public void noneWeapon() {
+	public void noneWeaponTest() {
 		assertThat(hero.getOffensePower(), is(0));
-		assertThat(hero.getDefensePower(), is(0));
 	}
 }

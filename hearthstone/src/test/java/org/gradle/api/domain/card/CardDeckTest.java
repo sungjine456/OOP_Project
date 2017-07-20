@@ -1,4 +1,4 @@
-package org.gradle.domain.card;
+package org.gradle.api.domain.card;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;

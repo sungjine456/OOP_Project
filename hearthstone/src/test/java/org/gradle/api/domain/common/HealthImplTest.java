@@ -1,4 +1,4 @@
-package org.gradle.domain.common;
+package org.gradle.api.domain.common;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertFalse;
