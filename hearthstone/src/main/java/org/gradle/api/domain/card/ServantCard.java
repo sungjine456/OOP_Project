@@ -9,18 +9,21 @@ public final class ServantCard implements Card {
 	private int offensePower;
 	private final Ability ability;
 	private Health health;
+	private boolean isAttack;
 
 	public ServantCard(int mana, int offensePower, int health) {
 		this.mana = mana;
 		this.offensePower = offensePower;
 		ability = null;
 		this.health = new HealthImpl(health);
+		isAttack = true;
 	}
 	public ServantCard(int mana, int offensePower, Ability ability, int health) {
 		this.mana = mana;
 		this.offensePower = offensePower;
 		this.ability = ability;
 		this.health = new HealthImpl(health);
+		isAttack = true;
 	}
 
 	public boolean hasAbility(){
@@ -29,15 +32,22 @@ public final class ServantCard implements Card {
 	public void killSerant(){
 		health = new HealthImpl(0);
 	}
+	@Override
+	public int attack(){
+		if(!isAttack){
+			return 0;
+		}
+		isAttack = false;
+		return offensePower;
+	}
 	
 	// getter
+	public boolean getIsAttack(){
+		return isAttack;
+	}
 	@Override
 	public int getMana() {
 		return mana;
-	}
-	@Override
-	public int getOffensePower() {
-		return offensePower;
 	}
 	@Override
 	public int getHealth() {

@@ -5,12 +5,15 @@ import org.gradle.api.exception.MethodInvokeException;
 public final class WeaponCard implements Card {
 	private final int mana;
 	private final int offensePower;
-	private final int defensePower;
 	
-	public WeaponCard(int mana, int offensePower, int defensePower) {
+	private int durability;
+	private boolean isAttack;
+	
+	public WeaponCard(int mana, int offensePower, int durability) {
 		this.mana = mana;
 		this.offensePower = offensePower;
-		this.defensePower = defensePower;
+		this.durability = durability;
+		isAttack = true;
 	}
 	
 	@Override
@@ -18,18 +21,26 @@ public final class WeaponCard implements Card {
 		return mana;
 	}
 	@Override
-	public int getOffensePower() {
+	public int attack(){
+		if(!isAttack){
+			return 0;
+		}
+		isAttack = false;
+		durability -= 1;
 		return offensePower;
 	}
-	public int getDefensePower() {
-		return defensePower;
+	public boolean getIsAttack(){
+		return isAttack;
+	}
+	public int getDurability() {
+		return durability;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + defensePower;
+		result = prime * result + durability;
 		result = prime * result + mana;
 		result = prime * result + offensePower;
 		return result;
@@ -43,7 +54,7 @@ public final class WeaponCard implements Card {
 		if (getClass() != obj.getClass())
 			return false;
 		WeaponCard other = (WeaponCard) obj;
-		if (defensePower != other.defensePower)
+		if (durability != other.durability)
 			return false;
 		if (mana != other.mana)
 			return false;
@@ -53,7 +64,7 @@ public final class WeaponCard implements Card {
 	}
 	@Override
 	public String toString() {
-		return "WeaponCard [mana=" + mana + ", offensePower=" + offensePower + ", defensePower=" + defensePower + "]";
+		return "WeaponCard [mana=" + mana + ", offensePower=" + offensePower + ", durability=" + durability + "]";
 	}
 
 	@Override

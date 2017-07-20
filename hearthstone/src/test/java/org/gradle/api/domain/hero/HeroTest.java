@@ -4,6 +4,9 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 import org.gradle.api.domain.ability.CureAbility;
+import org.gradle.api.domain.card.WeaponCard;
+import org.gradle.api.domain.hero.Hero;
+import org.gradle.api.domain.hero.HeroSkill;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,6 +22,15 @@ public class HeroTest {
 	
 	@Test
 	public void noneWeaponTest() {
-		assertThat(hero.getOffensePower(), is(0));
+		assertThat(hero.attack(), is(0));
+	}
+	
+	@Test
+	public void useWeaponTest(){
+		assertThat(hero.attack(), is(0));
+		hero.setWeapon(new WeaponCard(0, 1, 1));
+		assertThat(hero.attack(), is(1));
+		hero.useWeapon();
+		assertThat(hero.attack(), is(0));
 	}
 }

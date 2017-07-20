@@ -9,7 +9,7 @@ public interface GameService {
 	void turnOff();
 	void putOutTheCard();
 	void useThePowerOfHero();
-	void attackWithHero();
+	int attackWithHero();
 	void attackWithServant();
 	List<Card> showCardsThatPlayerHave();
 	List<Card> showCardsInTheField();

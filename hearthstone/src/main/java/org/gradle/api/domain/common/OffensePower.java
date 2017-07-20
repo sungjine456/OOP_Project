@@ -1,5 +1,5 @@
 package org.gradle.api.domain.common;
 
 public interface OffensePower {
-	int getOffensePower();
+	int attack();
 }

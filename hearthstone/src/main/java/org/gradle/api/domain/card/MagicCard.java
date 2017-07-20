@@ -49,7 +49,7 @@ public final class MagicCard implements Card {
 	}
 
 	@Override
-	public int getOffensePower() {
+	public int attack() {
 		throw new MethodInvokeException("마법 카드는 공격력이 없습니다.");
 	}
 	@Override

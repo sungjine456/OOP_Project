@@ -32,9 +32,8 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public void attackWithHero() {
-		// TODO Auto-generated method stub
-		
+	public int attackWithHero() {
+		return referee.attackWithHero();
 	}
 
 	@Override
