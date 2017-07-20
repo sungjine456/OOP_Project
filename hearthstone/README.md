@@ -16,7 +16,7 @@
 ```
 
 ### 객체 관계도
-![객체 관계도](https://github.com/sungjine456/OOP_Project/tree/master/hearthstone/images/classDiagram.PNG)
+![객체 관계도](./images/classDiagram.PNG)
 
 ### 객체별 필요 요소
 ----
