@@ -13,9 +13,11 @@
 ### 주요 객체
 ```
 카드덱, 카드, 영웅, 심판, 플레이어
-
-![객체 관계도](https://github.com/sungjine456/OOP_Project/tree/master/hearthstone/images/classDiagram.PNG)
 ```
+
+### 객체 관계도
+![객체 관계도](https://github.com/sungjine456/OOP_Project/tree/master/hearthstone/images/classDiagram.PNG)
+
 ### 객체별 필요 요소
 ----
 
