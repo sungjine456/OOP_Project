@@ -1,5 +1,7 @@
 package org.gradle.api.domain.referee;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -10,7 +12,12 @@ import org.gradle.api.domain.player.Player;
 import org.gradle.api.repository.HeroRepository;
 
 public class Referee {
-	private final int PLAYER_NUMBER = 2;
+	private final int PLAYER_MAX_NUMBER = 2;
+	private final int FIRST_PLAYER_CARD_NUMBER = 3;
+	private final int FIRST_AFTER_PLAYER_CARD_NUMBER = 4;
+	private final int FIRST_PLAYER_NUMBER;
+	private final int FIRST_AFTER_PLAYER_NUMBER;
+	
 	private List<Player> players;
 	private List<CardDeck> cardDecks;
 	private int turn;
@@ -18,18 +25,19 @@ public class Referee {
 	private HeroRepository heroRepository = HeroRepository.getInstance();
 	
 	public Referee(){
-		for(int i = 0; i < PLAYER_NUMBER; i++){
+		for(int i = 0; i < PLAYER_MAX_NUMBER; i++){
 			players.add(new Player(randomHero()));
 			cardDecks.add(new CardDeck());
 		}
-		firstAttackerDecide();
-		begingGiveTheCards(turn, 3);
-		int otherPlayer = turn==0?1:0;
-		begingGiveTheCards(otherPlayer, 4);
+		List<Integer> number = randomNumbering();
+		FIRST_PLAYER_NUMBER = number.get(0);
+		FIRST_AFTER_PLAYER_NUMBER = number.get(1);
+		begingGiveTheCards(turn, FIRST_PLAYER_CARD_NUMBER);
+		begingGiveTheCards(nextTurn(), FIRST_AFTER_PLAYER_CARD_NUMBER);
 	}
 
 	public void changeTurn(){
-		turn = turn==0?1:0;
+		turn = nextTurn();
 		
 		Player player = getNowPlayer();
 		player.turnOn(getNowCardDeck().getCard());
@@ -66,8 +74,14 @@ public class Referee {
 		Random random = new Random();
 		return heroRepository.getHero(random.nextInt(heroRepository.size()));
 	}
-	private void firstAttackerDecide(){
-		Random random = new Random();
-		turn = random.nextInt(PLAYER_NUMBER);
+	private List<Integer> randomNumbering(){
+		List<Integer> number = new ArrayList<>();
+		number.add(0);
+		number.add(1);
+		Collections.shuffle(number);
+		return number;
+	}
+	private int nextTurn(){
+		return turn == FIRST_PLAYER_NUMBER ? FIRST_AFTER_PLAYER_NUMBER : FIRST_PLAYER_NUMBER;
 	}
 }

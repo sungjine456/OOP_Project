@@ -12,11 +12,13 @@ import org.junit.Test;
 
 public class HeroTest {
 
+	private final int AMOUNT_MANA = 2;
+	
 	private Hero hero;
 	
 	@Before
 	public void setUp(){
-		HeroSkill skill = new HeroSkill(new CureAbility(2));
+		HeroSkill skill = new HeroSkill(new CureAbility(AMOUNT_MANA));
 		hero = new Hero(skill);
 	}
 	
