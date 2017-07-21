@@ -50,8 +50,8 @@ public final class ServantCard implements Card {
 		return mana;
 	}
 	@Override
-	public int getHealth() {
-		return health.getHealth();
+	public int remainingHealth() {
+		return health.remainingHealth();
 	}
 	@Override
 	public boolean isDead() {

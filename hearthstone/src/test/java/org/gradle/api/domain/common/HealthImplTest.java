@@ -20,27 +20,27 @@ public class HealthImplTest {
 	
 	@Test
 	public void getHealthAndBeAttackTest(){
-		assertThat(health.getHealth(), is(10));
+		assertThat(health.remainingHealth(), is(10));
 		health.beAttack(2);
-		assertThat(health.getHealth(), is(8));
+		assertThat(health.remainingHealth(), is(8));
 		health.beAttack(4);
-		assertThat(health.getHealth(), is(4));
+		assertThat(health.remainingHealth(), is(4));
 		health.beAttack(5);
-		assertThat(health.getHealth(), is(-1));
+		assertThat(health.remainingHealth(), is(-1));
 	}
 	
 	@Test
 	public void beCureTest(){
 		health.beAttack(10);
-		assertThat(health.getHealth(), is(0));
+		assertThat(health.remainingHealth(), is(0));
 		health.beCure(2);
-		assertThat(health.getHealth(), is(2));
+		assertThat(health.remainingHealth(), is(2));
 		health.beCure(4);
-		assertThat(health.getHealth(), is(6));
+		assertThat(health.remainingHealth(), is(6));
 		health.beCure(4);
-		assertThat(health.getHealth(), is(10));
+		assertThat(health.remainingHealth(), is(10));
 		health.beCure(6);
-		assertThat(health.getHealth(), is(10));
+		assertThat(health.remainingHealth(), is(10));
 	}
 	
 	@Test

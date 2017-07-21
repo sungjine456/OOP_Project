@@ -2,7 +2,7 @@ package org.gradle.api.domain.common;
 
 public interface Health {
 	boolean isDead();
-	int getHealth();
+	int remainingHealth();
 	void beAttack(int attack);
 	void beCure(int cure);
 }

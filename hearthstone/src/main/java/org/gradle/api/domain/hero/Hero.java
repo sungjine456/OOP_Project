@@ -44,8 +44,8 @@ public final class Hero implements OffensePower, Health {
 		return weapon==null?0:weapon.attack();
 	}
 	@Override
-	public int getHealth() {
-		return health.getHealth();
+	public int remainingHealth() {
+		return health.remainingHealth();
 	}
 	@Override
 	public boolean isDead() {

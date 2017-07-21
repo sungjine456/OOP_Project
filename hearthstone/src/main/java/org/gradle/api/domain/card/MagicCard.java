@@ -57,7 +57,7 @@ public final class MagicCard implements Card {
 		throw new MethodInvokeException("마법 카드는 죽을 수 없습니다.");
 	}
 	@Override
-	public int getHealth() {
+	public int remainingHealth() {
 		throw new MethodInvokeException("마법 카드는 생명력이 없습니다.");
 	}
 	@Override
