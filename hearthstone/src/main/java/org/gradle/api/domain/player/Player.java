@@ -3,6 +3,7 @@ package org.gradle.api.domain.player;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gradle.api.domain.ability.Ability;
 import org.gradle.api.domain.card.Card;
 import org.gradle.api.domain.hero.Hero;
 import org.gradle.api.domain.hero.HeroSkill;
@@ -27,14 +28,17 @@ public final class Player {
 	public void addCard(Card card){
 		handCards.add(card);
 	}
+	public void removeCardWithHandCards(Card card){
+		handCards.remove(card);
+	}
 	public void putInTheField(Card card){
 		if(handCards.contains(card)){
 			handCards.remove(card);
 			fieldCards.add(card);
 		}
 	}
-	public Card useCard(){
-		return null;
+	public Ability useCard(Card card){
+		return card.useCard(this);
 	}
 	public HeroSkill useHeroSkcill(){
 		return null;

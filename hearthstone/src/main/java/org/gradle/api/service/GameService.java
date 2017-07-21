@@ -3,11 +3,13 @@ package org.gradle.api.service;
 import java.util.List;
 
 import org.gradle.api.domain.card.Card;
+import org.gradle.api.domain.card.ServantCard;
 import org.gradle.api.domain.hero.Hero;
 
 public interface GameService {
 	void turnOff();
-	void putOutTheCard();
+	void putOutTheCard(Card cardToUse, ServantCard targetCard);
+	void putOutTheCard(Card cardToUse, Hero targetHero);
 	void useThePowerOfHero();
 	int attackWithHero();
 	void attackWithServant();

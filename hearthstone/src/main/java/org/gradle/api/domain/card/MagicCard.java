@@ -1,7 +1,7 @@
 package org.gradle.api.domain.card;
 
 import org.gradle.api.domain.ability.Ability;
-import org.gradle.api.exception.MethodInvokeException;
+import org.gradle.api.domain.player.Player;
 
 public final class MagicCard implements Card {
 	private final int mana;
@@ -15,6 +15,11 @@ public final class MagicCard implements Card {
 	@Override
 	public int getMana() {
 		return mana;
+	}
+	@Override
+	public Ability useCard(Player player) {
+		player.removeCardWithHandCards(this);
+		return ability;
 	}
 	
 	@Override
@@ -46,26 +51,5 @@ public final class MagicCard implements Card {
 	@Override
 	public String toString() {
 		return "MagicCard [mana=" + mana + ", ability=" + ability + "]";
-	}
-
-	@Override
-	public int attack() {
-		throw new MethodInvokeException("마법 카드는 공격력이 없습니다.");
-	}
-	@Override
-	public boolean isDead() {
-		throw new MethodInvokeException("마법 카드는 죽을 수 없습니다.");
-	}
-	@Override
-	public int remainingHealth() {
-		throw new MethodInvokeException("마법 카드는 생명력이 없습니다.");
-	}
-	@Override
-	public void beAttack(int attack) {
-		throw new MethodInvokeException("마법 카드는 공격받을 수 없습니다.");
-	}
-	@Override
-	public void beCure(int cure) {
-		throw new MethodInvokeException("마법 카드는 치료받을 수 없습니다.");
 	}
 }

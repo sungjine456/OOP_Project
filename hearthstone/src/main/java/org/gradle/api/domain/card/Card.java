@@ -1,8 +1,9 @@
 package org.gradle.api.domain.card;
 
-import org.gradle.api.domain.common.Health;
+import org.gradle.api.domain.ability.Ability;
 import org.gradle.api.domain.common.Mana;
-import org.gradle.api.domain.common.OffensePower;
+import org.gradle.api.domain.player.Player;
 
-public interface Card extends Mana, OffensePower, Health {
+public interface Card extends Mana {
+	Ability useCard(Player player);
 }

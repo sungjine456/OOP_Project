@@ -3,8 +3,10 @@ package org.gradle.api.domain.card;
 import org.gradle.api.domain.ability.Ability;
 import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.common.HealthImpl;
+import org.gradle.api.domain.common.OffensePower;
+import org.gradle.api.domain.player.Player;
 
-public final class ServantCard implements Card {
+public final class ServantCard implements Card, OffensePower, Health {
 	private final int mana;
 	private int offensePower;
 	private final Ability ability;
@@ -64,6 +66,11 @@ public final class ServantCard implements Card {
 	@Override
 	public void beCure(int cure) {
 		health.beCure(cure);
+	}
+	@Override
+	public Ability useCard(Player player) {
+		player.putInTheField(this);
+		return ability;
 	}
 
 	@Override

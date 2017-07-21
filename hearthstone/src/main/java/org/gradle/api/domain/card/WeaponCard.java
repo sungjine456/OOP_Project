@@ -1,8 +1,11 @@
 package org.gradle.api.domain.card;
 
-import org.gradle.api.exception.MethodInvokeException;
+import org.gradle.api.domain.ability.Ability;
+import org.gradle.api.domain.common.OffensePower;
+import org.gradle.api.domain.hero.Hero;
+import org.gradle.api.domain.player.Player;
 
-public final class WeaponCard implements Card {
+public final class WeaponCard implements Card, OffensePower {
 	private final int mana;
 	private final int offensePower;
 	
@@ -35,6 +38,13 @@ public final class WeaponCard implements Card {
 	public int getDurability() {
 		return durability;
 	}
+	@Override
+	public Ability useCard(Player player) {
+		Hero hero = player.getHero();
+		hero.setWeapon(this);
+		player.removeCardWithHandCards(this);
+		return null;
+	}
 
 	@Override
 	public int hashCode() {
@@ -65,22 +75,5 @@ public final class WeaponCard implements Card {
 	@Override
 	public String toString() {
 		return "WeaponCard [mana=" + mana + ", offensePower=" + offensePower + ", durability=" + durability + "]";
-	}
-
-	@Override
-	public boolean isDead() {
-		throw new MethodInvokeException("무기카드는 죽을 수 없습니다.");
-	}
-	@Override
-	public int remainingHealth() {
-		throw new MethodInvokeException("무기카드는 체력을 가질 수 없습니다.");
-	}
-	@Override
-	public void beAttack(int attack) {
-		throw new MethodInvokeException("무기카드는 공격받을 수 없습니다.");
-	}
-	@Override
-	public void beCure(int cure) {
-		throw new MethodInvokeException("무기카드는 치료받을 수 없습니다.");
 	}
 }
