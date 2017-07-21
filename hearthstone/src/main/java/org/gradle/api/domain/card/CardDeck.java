@@ -8,8 +8,9 @@ import java.util.Random;
 import org.gradle.api.repository.CardRepository;
 
 public final class CardDeck {
-	private List<Card> cardDeck;
 	private final int MAX_CARD_DECK_SIZE = 30;
+	
+	private List<Card> cardDeck;
 	private CardRepository cardRepository;
 	
 	public CardDeck(){
@@ -33,14 +34,16 @@ public final class CardDeck {
 	private List<Card> makeFullCardDeck(){
 		List<Card> cardList = new ArrayList<>();
 		Random random = new Random();
-		int size = cardRepository.size();
-		int[] check = new int[size];
-		while(cardList.size() < MAX_CARD_DECK_SIZE){
-			int randomNum = random.nextInt(size);
+		int numberOfCards = cardRepository.size();
+		int[] check = new int[numberOfCards];
+		int cardListSize = 0;
+		while(cardListSize < MAX_CARD_DECK_SIZE){
+			int randomNum = random.nextInt(numberOfCards);
 			if(check[randomNum] >= 2){
 				continue;
 			}
 			cardList.add(cardRepository.getCard(randomNum));
+			cardListSize += 1;
 			check[randomNum] += 1;
 		}
 		Collections.shuffle(cardList);

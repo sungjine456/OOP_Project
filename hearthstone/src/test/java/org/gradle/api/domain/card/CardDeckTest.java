@@ -32,18 +32,14 @@ public class CardDeckTest {
 		Map<Card, Integer> checkMap = new HashMap<>();
 		for(Card card : cards){
 			if(checkMap.containsKey(card)){
-				checkMap.put(card, checkMap.get(card)+1);
+				int cardCount = checkMap.get(card) + 1;
+				if(cardCount > 2){
+					fail("The number of cards exceeds two.");
+				}
+				checkMap.put(card, cardCount);
 			} else {
 				checkMap.put(card, 1);
 			}
 		}
-		int max = 0;
-		for(Card card : checkMap.keySet()){
-			int num = checkMap.get(card);
-			if(num > max){
-				max = num;
-			}
-		}
-		assertTrue(max < 3);
 	}
 }
