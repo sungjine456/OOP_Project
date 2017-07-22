@@ -4,7 +4,7 @@ import org.gradle.api.domain.card.ServantCard;
 import org.gradle.api.domain.hero.Hero;
 import org.gradle.api.exception.MethodInvokeException;
 
-public class KillServantAbility implements Ability {
+public class KillServantAbility extends AbstractAbility {
 	
 	@Override
 	public void useAbility(Hero hero) {

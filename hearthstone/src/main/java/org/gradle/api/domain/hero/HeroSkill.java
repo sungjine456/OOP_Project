@@ -1,7 +1,7 @@
 package org.gradle.api.domain.hero;
 
 import org.gradle.api.domain.ability.Ability;
-import org.gradle.api.domain.card.ServantCard;
+import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.common.Mana;
 
 public final class HeroSkill implements Mana {
@@ -20,13 +20,9 @@ public final class HeroSkill implements Mana {
 	public int getMana() {
 		return HERO_MANA;
 	}
-	public void useAbility(Hero hero){
-		doNotUse();
-		ability.useAbility(hero);
-	}
-	public void useAbility(ServantCard servantCard){
-		doNotUse();
-		ability.useAbility(servantCard);
+	public void useAbility(Health heroOrServantCard){
+		disableAbility();
+		ability.useAbility(heroOrServantCard);
 	}
 	public boolean getUsedAbility(){
 		return usedAbility;
@@ -35,7 +31,7 @@ public final class HeroSkill implements Mana {
 		usedAbility = false;
 	}
 	
-	private void doNotUse(){
+	private void disableAbility(){
 		usedAbility = true;
 	}
 }

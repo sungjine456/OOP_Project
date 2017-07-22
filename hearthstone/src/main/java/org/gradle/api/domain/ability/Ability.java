@@ -1,9 +1,7 @@
 package org.gradle.api.domain.ability;
 
-import org.gradle.api.domain.card.ServantCard;
-import org.gradle.api.domain.hero.Hero;
+import org.gradle.api.domain.common.Health;
 
 public interface Ability {
-	void useAbility(Hero hero);
-	void useAbility(ServantCard servantCard);
+	void useAbility(Health health);
 }

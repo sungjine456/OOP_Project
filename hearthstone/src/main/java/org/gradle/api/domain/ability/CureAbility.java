@@ -3,7 +3,7 @@ package org.gradle.api.domain.ability;
 import org.gradle.api.domain.card.ServantCard;
 import org.gradle.api.domain.hero.Hero;
 
-public class CureAbility implements Ability {
+public class CureAbility extends AbstractAbility {
 	
 	private final int cure;
 	

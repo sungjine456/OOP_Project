@@ -3,7 +3,7 @@ package org.gradle.api.service;
 import java.util.List;
 
 import org.gradle.api.domain.card.Card;
-import org.gradle.api.domain.card.ServantCard;
+import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.hero.Hero;
 import org.gradle.api.domain.referee.Referee;
 
@@ -21,21 +21,13 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public void putOutTheCard(Card cardToUse, ServantCard targetCard) {
-		referee.putOutTheCard(cardToUse, targetCard);
-	}
-	@Override
-	public void putOutTheCard(Card cardToUse, Hero targetHero) {
-		referee.putOutTheCard(cardToUse, targetHero);
+	public void putOutTheCard(Card cardToUse, Health heroOrServantCard) {
+		referee.putOutTheCard(cardToUse, heroOrServantCard);
 	}
 
 	@Override
-	public void useTheAbilityOfHero(ServantCard targetCard) {
-		referee.useTheAbilityOfHero(targetCard);
-	}
-	@Override
-	public void useTheAbilityOfHero(Hero targetHero) {
-		referee.useTheAbilityOfHero(targetHero);
+	public void useTheAbilityOfHero(Health heroOrServantCard) {
+		referee.useTheAbilityOfHero(heroOrServantCard);
 	}
 
 	@Override
