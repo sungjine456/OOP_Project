@@ -5,11 +5,11 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-import org.gradle.api.domain.ability.Ability;
 import org.gradle.api.domain.card.Card;
 import org.gradle.api.domain.card.CardDeck;
 import org.gradle.api.domain.card.ServantCard;
 import org.gradle.api.domain.hero.Hero;
+import org.gradle.api.domain.hero.HeroSkill;
 import org.gradle.api.domain.player.Player;
 import org.gradle.api.repository.HeroRepository;
 
@@ -59,15 +59,25 @@ public class Referee {
 		return hero.useWeapon();
 	}
 	public void putOutTheCard(Card cardToUse, ServantCard targetCard) {
-		Ability ability = getNowPlayer().useCard(cardToUse);
-		if(ability != null){
-			ability.useAbility(targetCard);
+		if(cardToUse.hasAbility()){
+			getNowPlayer().useCard(cardToUse).useAbility(targetCard);
 		}
 	}
 	public void putOutTheCard(Card cardToUse, Hero targetHero) {
-		Ability ability = getNowPlayer().useCard(cardToUse);
-		if(ability != null){
-			ability.useAbility(targetHero);
+		if(cardToUse.hasAbility()){
+			getNowPlayer().useCard(cardToUse).useAbility(targetHero);
+		}
+	}
+	public void useTheAbilityOfHero(ServantCard targetCard) {
+		HeroSkill heroSkill = getNowPlayer().getHero().getSkill();
+		if(!heroSkill.getUsedAbility()){
+			heroSkill.useAbility(targetCard);
+		}
+	}
+	public void useTheAbilityOfHero(Hero targetHero) {
+		HeroSkill heroSkill = getNowPlayer().getHero().getSkill();
+		if(!heroSkill.getUsedAbility()){
+			heroSkill.useAbility(targetHero);
 		}
 	}
 	

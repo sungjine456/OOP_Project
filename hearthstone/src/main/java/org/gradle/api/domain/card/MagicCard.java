@@ -13,6 +13,10 @@ public final class MagicCard implements Card {
 	}
 
 	@Override
+	public boolean hasAbility(){
+		return true;
+	}
+	@Override
 	public int getMana() {
 		return mana;
 	}

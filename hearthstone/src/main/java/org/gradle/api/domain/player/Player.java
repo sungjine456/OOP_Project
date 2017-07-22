@@ -24,6 +24,7 @@ public final class Player {
 	public void turnOn(Card card){
 		handCards.add(card);
 		mana += 1;
+		hero.getSkill().makeItAvailable();
 	}
 	public void addCard(Card card){
 		handCards.add(card);

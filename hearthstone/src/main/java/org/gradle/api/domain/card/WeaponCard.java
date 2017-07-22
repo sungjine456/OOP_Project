@@ -20,6 +20,10 @@ public final class WeaponCard implements Card, OffensePower {
 	}
 	
 	@Override
+	public boolean hasAbility(){
+		return false;
+	}
+	@Override
 	public int getMana() {
 		return mana;
 	}

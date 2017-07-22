@@ -6,4 +6,5 @@ import org.gradle.api.domain.player.Player;
 
 public interface Card extends Mana {
 	Ability useCard(Player player);
+	boolean hasAbility();
 }

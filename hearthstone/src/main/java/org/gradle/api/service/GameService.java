@@ -10,7 +10,8 @@ public interface GameService {
 	void turnOff();
 	void putOutTheCard(Card cardToUse, ServantCard targetCard);
 	void putOutTheCard(Card cardToUse, Hero targetHero);
-	void useThePowerOfHero();
+	void useTheAbilityOfHero(ServantCard targetCard);
+	void useTheAbilityOfHero(Hero targetHero);
 	int attackWithHero();
 	void attackWithServant();
 	List<Card> showCardsThatPlayerHave();

@@ -28,6 +28,7 @@ public final class ServantCard implements Card, OffensePower, Health {
 		isAttack = true;
 	}
 
+	@Override
 	public boolean hasAbility(){
 		return ability!=null;
 	}

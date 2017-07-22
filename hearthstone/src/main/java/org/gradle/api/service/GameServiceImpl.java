@@ -30,9 +30,12 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public void useThePowerOfHero() {
-		// TODO Auto-generated method stub
-		
+	public void useTheAbilityOfHero(ServantCard targetCard) {
+		referee.useTheAbilityOfHero(targetCard);
+	}
+	@Override
+	public void useTheAbilityOfHero(Hero targetHero) {
+		referee.useTheAbilityOfHero(targetHero);
 	}
 
 	@Override

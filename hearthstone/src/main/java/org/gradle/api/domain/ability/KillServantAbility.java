@@ -6,8 +6,6 @@ import org.gradle.api.exception.MethodInvokeException;
 
 public class KillServantAbility implements Ability {
 	
-	public KillServantAbility(){}
-
 	@Override
 	public void useAbility(Hero hero) {
 		throw new MethodInvokeException("잘못된 대상입니다.");
