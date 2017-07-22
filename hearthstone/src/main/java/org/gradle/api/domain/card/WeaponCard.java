@@ -1,9 +1,8 @@
 package org.gradle.api.domain.card;
 
-import org.gradle.api.domain.ability.Ability;
+import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.common.OffensePower;
-import org.gradle.api.domain.hero.Hero;
-import org.gradle.api.domain.player.Player;
+import org.gradle.api.exception.MethodInvokeException;
 
 public final class WeaponCard implements Card, OffensePower {
 	private final int mana;
@@ -43,11 +42,8 @@ public final class WeaponCard implements Card, OffensePower {
 		return durability;
 	}
 	@Override
-	public Ability useCard(Player player) {
-		Hero hero = player.getHero();
-		hero.setWeapon(this);
-		player.removeCardWithHandCards(this);
-		return null;
+	public void useAbility(Health heroOrServantCard) {
+		throw new MethodInvokeException("무기카드는 능력이 없습니다.");
 	}
 
 	@Override

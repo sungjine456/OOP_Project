@@ -58,9 +58,14 @@ public class Referee {
 		
 		return hero.useWeapon();
 	}
+	public void putOutTheCard(Card cardToUse) {
+		if(cardToUse.hasAbility()){
+			getNowPlayer().useCard(cardToUse);
+		}
+	}
 	public void putOutTheCard(Card cardToUse, Health heroOrServantCard) {
 		if(cardToUse.hasAbility()){
-			getNowPlayer().useCard(cardToUse).useAbility(heroOrServantCard);
+			getNowPlayer().useCard(cardToUse, heroOrServantCard);
 		}
 	}
 	public void useTheAbilityOfHero(Health heroOrServantCard) {

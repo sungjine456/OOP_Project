@@ -1,7 +1,7 @@
 package org.gradle.api.domain.card;
 
 import org.gradle.api.domain.ability.Ability;
-import org.gradle.api.domain.player.Player;
+import org.gradle.api.domain.common.Health;
 
 public final class MagicCard implements Card {
 	private final int mana;
@@ -21,9 +21,8 @@ public final class MagicCard implements Card {
 		return mana;
 	}
 	@Override
-	public Ability useCard(Player player) {
-		player.removeCardWithHandCards(this);
-		return ability;
+	public void useAbility(Health heroOrServantCard) {
+		ability.useAbility(heroOrServantCard);;
 	}
 	
 	@Override

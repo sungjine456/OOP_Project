@@ -8,6 +8,7 @@ import org.gradle.api.domain.hero.Hero;
 
 public interface GameService {
 	void turnOff();
+	void putOutTheCard(Card cardToUse);
 	void putOutTheCard(Card cardToUse, Health heroOrServantCard);
 	void useTheAbilityOfHero(Health heroOrServantCard);
 	int attackWithHero();

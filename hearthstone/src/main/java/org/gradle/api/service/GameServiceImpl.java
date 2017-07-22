@@ -21,6 +21,10 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
+	public void putOutTheCard(Card cardToUse) {
+		referee.putOutTheCard(cardToUse);
+	}
+	@Override
 	public void putOutTheCard(Card cardToUse, Health heroOrServantCard) {
 		referee.putOutTheCard(cardToUse, heroOrServantCard);
 	}

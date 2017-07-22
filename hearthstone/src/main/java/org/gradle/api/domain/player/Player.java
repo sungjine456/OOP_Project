@@ -3,10 +3,13 @@ package org.gradle.api.domain.player;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.gradle.api.domain.ability.Ability;
 import org.gradle.api.domain.card.Card;
+import org.gradle.api.domain.card.ServantCard;
+import org.gradle.api.domain.card.WeaponCard;
+import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.hero.Hero;
 import org.gradle.api.domain.hero.HeroSkill;
+import org.gradle.api.exception.MethodInvokeException;
 
 public final class Player {
 	private final Hero hero;
@@ -32,16 +35,34 @@ public final class Player {
 	public void removeCardWithHandCards(Card card){
 		handCards.remove(card);
 	}
-	public void putInTheField(Card card){
+	public void useCard(Card card){
+		if(card.hasAbility()){
+			throw new MethodInvokeException("능력을 사용할 대상을 지정해주세요.");
+		}
 		if(handCards.contains(card)){
+			if(card instanceof WeaponCard){
+				hero.setWeapon((WeaponCard)card);
+			}
+			if(card instanceof ServantCard){
+				fieldCards.add((ServantCard)card);
+			}
 			handCards.remove(card);
-			fieldCards.add(card);
 		}
 	}
-	public Ability useCard(Card card){
-		return card.useCard(this);
+	public void useCard(Card card, Health heroOrServantCard){
+		if(heroOrServantCard instanceof ServantCard){
+			if(noCardToAttackInField((ServantCard)heroOrServantCard)){
+				throw new MethodInvokeException("공격할 대상이 없습니다.");
+			}
+		}
+		if(handCards.contains(card)){
+			if(card.hasAbility()){
+				card.useAbility(heroOrServantCard);
+			}
+			handCards.remove(card);
+		}
 	}
-	public HeroSkill useHeroSkcill(){
+	public HeroSkill useHeroSkill(){
 		return null;
 	}
 	public int heroAttack(){
@@ -59,5 +80,9 @@ public final class Player {
 	}
 	public int getMana(){
 		return mana;
+	}
+	
+	private boolean noCardToAttackInField(ServantCard targetCard){
+		return fieldCards.stream().filter(card -> targetCard.equals(card)).findAny() == null;
 	}
 }

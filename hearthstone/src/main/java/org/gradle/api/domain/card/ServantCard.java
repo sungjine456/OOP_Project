@@ -4,7 +4,6 @@ import org.gradle.api.domain.ability.Ability;
 import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.common.HealthImpl;
 import org.gradle.api.domain.common.OffensePower;
-import org.gradle.api.domain.player.Player;
 
 public final class ServantCard implements Card, OffensePower, Health {
 	private final int mana;
@@ -18,14 +17,14 @@ public final class ServantCard implements Card, OffensePower, Health {
 		this.offensePower = offensePower;
 		ability = null;
 		this.health = new HealthImpl(health);
-		isAttack = true;
+		isAttack = false;
 	}
 	public ServantCard(int mana, int offensePower, Ability ability, int health) {
 		this.mana = mana;
 		this.offensePower = offensePower;
 		this.ability = ability;
 		this.health = new HealthImpl(health);
-		isAttack = true;
+		isAttack = false;
 	}
 
 	@Override
@@ -69,9 +68,10 @@ public final class ServantCard implements Card, OffensePower, Health {
 		health.beCure(cure);
 	}
 	@Override
-	public Ability useCard(Player player) {
-		player.putInTheField(this);
-		return ability;
+	public void useAbility(Health heroOrServantCard) {
+		if(hasAbility()){
+			ability.useAbility(heroOrServantCard);
+		}
 	}
 
 	@Override
