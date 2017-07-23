@@ -25,7 +25,8 @@ public class HeroRepository {
 	}
 	
 	public Hero getHero(int index){
-		return heroData.get(index);
+		Hero hero = heroData.get(index);
+		return new Hero(hero.getSkill());
 	}
 	public int size(){
 		return heroData.size();

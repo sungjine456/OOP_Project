@@ -45,6 +45,10 @@ public final class WeaponCard implements Card, OffensePower {
 	public void useAbility(Health heroOrServantCard) {
 		throw new MethodInvokeException("무기카드는 능력이 없습니다.");
 	}
+	@Override
+	public Card newCard(){
+		return new WeaponCard(this.mana, this.offensePower, this.durability);
+	}
 
 	@Override
 	public int hashCode() {

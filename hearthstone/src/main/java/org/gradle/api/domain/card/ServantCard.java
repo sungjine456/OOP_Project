@@ -42,6 +42,10 @@ public final class ServantCard implements Card, OffensePower, Health {
 		isAttack = false;
 		return offensePower;
 	}
+	@Override
+	public Card newCard(){
+		return new ServantCard(this.mana, this.offensePower, this.ability, this.health.remainingHealth());
+	}
 	
 	// getter
 	public boolean getIsAttack(){

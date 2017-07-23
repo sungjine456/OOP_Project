@@ -76,6 +76,6 @@ public class CardRepository {
 		return cardData.size();
 	}
 	public Card getCard(int index){
-		return cardData.get(index);
+		return cardData.get(index).newCard();
 	}
 }

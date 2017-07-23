@@ -27,4 +27,13 @@ public class WeaponCardTest {
 		weapon.attack();
 		assertThat(weapon.getDurability(), is(0));
 	}
+	
+	@Test
+	public void newCardTest(){
+		WeaponCard weaponCard1 = (WeaponCard)weapon.newCard();
+		WeaponCard weaponCard2 = (WeaponCard)weapon.newCard();
+		weaponCard1.attack();
+		assertTrue(weaponCard1.getDurability() != weapon.getDurability());
+		assertTrue(weaponCard1.getDurability() != weaponCard2.getDurability());
+	}
 }

@@ -24,6 +24,10 @@ public final class MagicCard implements Card {
 	public void useAbility(Health heroOrServantCard) {
 		ability.useAbility(heroOrServantCard);;
 	}
+	@Override
+	public Card newCard(){
+		return new MagicCard(this.mana, this.ability);
+	}
 	
 	@Override
 	public int hashCode() {
