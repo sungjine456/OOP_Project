@@ -1,7 +1,7 @@
 package org.gradle.api.domain.card;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +24,7 @@ public class WeaponCardTest {
 		assertThat(weapon.getDurability(), is(2));
 		weapon.attack();
 		assertThat(weapon.getDurability(), is(1));
+		weapon.makeUsable();
 		weapon.attack();
 		assertThat(weapon.getDurability(), is(0));
 	}

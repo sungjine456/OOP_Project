@@ -28,6 +28,9 @@ public final class Player {
 		handCards.add(card);
 		mana += 1;
 		hero.getSkill().makeItAvailable();
+		if(hero.hasWeapon()){
+			hero.makeWeaponUsable();
+		}
 	}
 	public void addCard(Card card){
 		handCards.add(card);
@@ -66,10 +69,10 @@ public final class Player {
 		return fieldCards.stream().filter(card -> targetCard.equals(card)).findAny() == null;
 	}
 	public HeroSkill useHeroSkill(){
-		return null;
+		return hero.getSkill();
 	}
 	public int heroAttack(){
-		return -1;
+		return hero.attack();
 	}
 	
 	public List<Card> getHandCards(){

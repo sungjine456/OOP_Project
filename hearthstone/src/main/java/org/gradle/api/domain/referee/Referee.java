@@ -29,6 +29,8 @@ public class Referee {
 	private HeroRepository heroRepository = HeroRepository.getInstance();
 	
 	public Referee(){
+		players = new ArrayList<>();
+		cardDecks = new ArrayList<>();
 		for(int i = 0; i < PLAYER_MAX_NUMBER; i++){
 			players.add(new Player(randomHero()));
 			cardDecks.add(new CardDeck());
@@ -57,7 +59,7 @@ public class Referee {
 	}
 	public void attackWithHero(Health heroOrServantCard){
 		Hero nowHero = getNowPlayer().getHero();
-		heroOrServantCard.beAttack(nowHero.useWeapon());
+		heroOrServantCard.beAttack(nowHero.attack());
 	}
 	public void attackWithServant(ServantCard servantCard, Health heroOrServantCard) {
 		if(getNowPlayer().noCardToAttackInField(servantCard)){

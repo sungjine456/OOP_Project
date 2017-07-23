@@ -25,7 +25,17 @@ public final class Hero implements OffensePower, Health {
 	public HeroSkill getSkill() {
 		return skill;
 	}
-	public int useWeapon(){
+	public boolean hasWeapon(){
+		return weapon!=null;
+	}
+	public void makeWeaponUsable(){
+		if(hasWeapon()){
+			weapon.makeUsable();
+		}
+	}
+	
+	@Override
+	public int attack() {
 		if(!hasWeapon()){
 			return 0;
 		}
@@ -37,11 +47,6 @@ public final class Hero implements OffensePower, Health {
 		}
 		
 		return offensePower;
-	}
-	
-	@Override
-	public int attack() {
-		return weapon==null?0:weapon.attack();
 	}
 	@Override
 	public int remainingHealth() {
@@ -58,9 +63,5 @@ public final class Hero implements OffensePower, Health {
 	@Override
 	public void beCure(int cure) {
 		health.beCure(cure);
-	}
-	
-	private boolean hasWeapon(){
-		return weapon!=null;
 	}
 }

@@ -32,7 +32,7 @@ public class HeroTest {
 		assertThat(hero.attack(), is(0));
 		hero.setWeapon(new WeaponCard(0, 1, 1));
 		assertThat(hero.attack(), is(1));
-		hero.useWeapon();
+		hero.attack();
 		assertThat(hero.attack(), is(0));
 	}
 }
