@@ -62,6 +62,9 @@ public final class Player {
 			handCards.remove(card);
 		}
 	}
+	public boolean noCardToAttackInField(ServantCard targetCard){
+		return fieldCards.stream().filter(card -> targetCard.equals(card)).findAny() == null;
+	}
 	public HeroSkill useHeroSkill(){
 		return null;
 	}
@@ -80,9 +83,5 @@ public final class Player {
 	}
 	public int getMana(){
 		return mana;
-	}
-	
-	private boolean noCardToAttackInField(ServantCard targetCard){
-		return fieldCards.stream().filter(card -> targetCard.equals(card)).findAny() == null;
 	}
 }

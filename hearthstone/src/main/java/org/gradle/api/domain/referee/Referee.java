@@ -7,10 +7,12 @@ import java.util.Random;
 
 import org.gradle.api.domain.card.Card;
 import org.gradle.api.domain.card.CardDeck;
+import org.gradle.api.domain.card.ServantCard;
 import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.hero.Hero;
 import org.gradle.api.domain.hero.HeroSkill;
 import org.gradle.api.domain.player.Player;
+import org.gradle.api.exception.MethodInvokeException;
 import org.gradle.api.repository.HeroRepository;
 
 public class Referee {
@@ -53,10 +55,18 @@ public class Referee {
 	public Hero showHero() {
 		return getNowPlayer().getHero();
 	}
-	public int attackWithHero(){
-		Hero hero = getNowPlayer().getHero();
-		
-		return hero.useWeapon();
+	public void attackWithHero(Health heroOrServantCard){
+		Hero nowHero = getNowPlayer().getHero();
+		heroOrServantCard.beAttack(nowHero.useWeapon());
+	}
+	public void attackWithServant(ServantCard servantCard, Health heroOrServantCard) {
+		if(getNowPlayer().noCardToAttackInField(servantCard)){
+			throw new MethodInvokeException("필드에 없는 카드입니다.");
+		}
+		if(!servantCard.getIsAttack()){
+			throw new MethodInvokeException("이미 공격한 카드입니다.");
+		}
+		heroOrServantCard.beAttack(servantCard.attack());
 	}
 	public void putOutTheCard(Card cardToUse) {
 		if(cardToUse.hasAbility()){

@@ -3,6 +3,7 @@ package org.gradle.api.service;
 import java.util.List;
 
 import org.gradle.api.domain.card.Card;
+import org.gradle.api.domain.card.ServantCard;
 import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.hero.Hero;
 import org.gradle.api.domain.referee.Referee;
@@ -35,14 +36,13 @@ public class GameServiceImpl implements GameService {
 	}
 
 	@Override
-	public int attackWithHero() {
-		return referee.attackWithHero();
+	public void attackWithHero(Health heroOrServantCard) {
+		referee.attackWithHero(heroOrServantCard);
 	}
 
 	@Override
-	public void attackWithServant() {
-		// TODO Auto-generated method stub
-		
+	public void attackWithServant(ServantCard servantCard, Health heroOrServantCard) {
+		referee.attackWithServant(servantCard, heroOrServantCard);
 	}
 
 	@Override
