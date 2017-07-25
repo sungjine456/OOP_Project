@@ -1,8 +1,7 @@
 package org.gradle.api.domain.common;
 
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.*;
 
 import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.common.HealthImpl;
@@ -21,7 +20,7 @@ public class HealthImplTest {
 	}
 	
 	@Test
-	public void getHealthAndBeAttackTest(){
+	public void getRemainingHealthAndBeAttackTest(){
 		assertThat(health.remainingHealth(), is(10));
 		health.beAttack(2);
 		assertThat(health.remainingHealth(), is(8));
@@ -49,6 +48,6 @@ public class HealthImplTest {
 	public void idDeadTest() {
 		assertFalse(health.isDead());
 		health.beAttack(10);
-		assertFalse(health.isDead());
+		assertTrue(health.isDead());
 	}
 }

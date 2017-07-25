@@ -19,7 +19,10 @@ public final class CardDeck {
 	}
 	
 	public boolean add(Card card){
-		return cardDeck.add(card);
+		if(cardDeck.size() < MAX_CARD_DECK_SIZE){
+			return cardDeck.add(card);
+		}
+		return false;
 	}
 	public Card getCard(){
 		return cardDeck.remove(0);

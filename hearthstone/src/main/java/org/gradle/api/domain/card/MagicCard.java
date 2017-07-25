@@ -8,6 +8,9 @@ public final class MagicCard implements Card {
 	private final Ability ability;
 	
 	public MagicCard(int mana, Ability ability) {
+		if(ability == null){
+			throw new NullPointerException("능력이 없으면 안됩니다.");
+		}
 		this.mana = mana;
 		this.ability = ability;
 	}

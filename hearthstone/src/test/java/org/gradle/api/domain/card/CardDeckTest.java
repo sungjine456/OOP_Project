@@ -42,4 +42,22 @@ public class CardDeckTest {
 			}
 		}
 	}
+	
+	@Test
+	public void getCardTest(){
+		assertThat(cardDeck.getCardDeck().size(), is(30));
+		cardDeck.getCard();
+		assertThat(cardDeck.getCardDeck().size(), is(29));
+	}
+	
+	@Test
+	public void addTest(){
+		assertThat(cardDeck.getCardDeck().size(), is(30));
+		cardDeck.getCard();
+		assertThat(cardDeck.getCardDeck().size(), is(29));
+		cardDeck.add(new WeaponCard(1, 1, 1));
+		assertThat(cardDeck.getCardDeck().size(), is(30));
+		cardDeck.add(new WeaponCard(1, 1, 1));
+		assertThat(cardDeck.getCardDeck().size(), is(30));
+	}
 }

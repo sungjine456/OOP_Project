@@ -11,7 +11,7 @@ public class HealthImpl implements Health {
 	
 	@Override
 	public boolean isDead(){
-		return health <= 0;
+		return remainingHealth() <= 0;
 	}
 	@Override
 	public int remainingHealth(){
