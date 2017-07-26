@@ -2,7 +2,9 @@ package org.gradle.api.domain.referee;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import org.gradle.api.domain.card.Card;
@@ -48,42 +50,49 @@ public class Referee {
 		Player player = getNowPlayer();
 		player.turnOn(getNowCardDeck().getCard());
 	}
+	public int getTurn(){
+		return turn;
+	}
 	public List<Card> showCardsThatPlayerHave() {
 		return getNowPlayer().getHandCards();
 	}
-	public List<Card> showCardsInTheField() {
-		return getNowPlayer().getFieldCards();
+	public Map<Integer, List<Card>> showCardsInTheField() {
+		Map<Integer, List<Card>> cardsInFieldMap = new HashMap<>();
+		for(int i = 0; i < PLAYER_MAX_NUMBER; i++){
+			cardsInFieldMap.put(i, getNowPlayer().getFieldCards());
+		}
+		return cardsInFieldMap;
 	}
 	public Hero showHero() {
 		return getNowPlayer().getHero();
 	}
-	public void attackWithHero(Health heroOrServantCard){
+	public void attackWithHero(Health targetHeroOrServantCard){
 		Hero nowHero = getNowPlayer().getHero();
-		heroOrServantCard.beAttack(nowHero.attack());
+		targetHeroOrServantCard.beAttack(nowHero.attack());
 	}
-	public void attackWithServant(ServantCard servantCard, Health heroOrServantCard) {
+	public void attackWithServant(ServantCard servantCard, Health targetHeroOrServantCard) {
 		if(getNowPlayer().noCardToAttackInField(servantCard)){
 			throw new MethodInvokeException("필드에 없는 카드입니다.");
 		}
 		if(!servantCard.getIsAttack()){
 			throw new MethodInvokeException("이미 공격한 카드입니다.");
 		}
-		heroOrServantCard.beAttack(servantCard.attack());
+		targetHeroOrServantCard.beAttack(servantCard.attack());
 	}
 	public void putOutTheCard(Card cardToUse) {
 		if(cardToUse.hasAbility()){
 			getNowPlayer().useCard(cardToUse);
 		}
 	}
-	public void putOutTheCard(Card cardToUse, Health heroOrServantCard) {
+	public void putOutTheCard(Card cardToUse, Health targetHeroOrServantCard) {
 		if(cardToUse.hasAbility()){
-			getNowPlayer().useCard(cardToUse, heroOrServantCard);
+			getNowPlayer().useCard(cardToUse, targetHeroOrServantCard);
 		}
 	}
-	public void useTheAbilityOfHero(Health heroOrServantCard) {
+	public void useTheAbilityOfHero(Health targetHeroOrServantCard) {
 		HeroSkill heroSkill = getNowPlayer().getHero().getSkill();
 		if(!heroSkill.getUsedAbility()){
-			heroSkill.useAbility(heroOrServantCard);
+			heroSkill.useAbility(targetHeroOrServantCard);
 		}
 	}
 	

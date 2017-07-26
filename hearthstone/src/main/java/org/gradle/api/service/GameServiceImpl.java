@@ -1,6 +1,7 @@
 package org.gradle.api.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.gradle.api.domain.card.Card;
 import org.gradle.api.domain.card.ServantCard;
@@ -26,23 +27,23 @@ public class GameServiceImpl implements GameService {
 		referee.putOutTheCard(cardToUse);
 	}
 	@Override
-	public void putOutTheCard(Card cardToUse, Health heroOrServantCard) {
-		referee.putOutTheCard(cardToUse, heroOrServantCard);
+	public void putOutTheCard(Card cardToUse, Health targetHeroOrServantCard) {
+		referee.putOutTheCard(cardToUse, targetHeroOrServantCard);
 	}
 
 	@Override
-	public void useTheAbilityOfHero(Health heroOrServantCard) {
-		referee.useTheAbilityOfHero(heroOrServantCard);
+	public void useTheAbilityOfHero(Health targetHeroOrServantCard) {
+		referee.useTheAbilityOfHero(targetHeroOrServantCard);
 	}
 
 	@Override
-	public void attackWithHero(Health heroOrServantCard) {
-		referee.attackWithHero(heroOrServantCard);
+	public void attackWithHero(Health targetHeroOrServantCard) {
+		referee.attackWithHero(targetHeroOrServantCard);
 	}
 
 	@Override
-	public void attackWithServant(ServantCard servantCard, Health heroOrServantCard) {
-		referee.attackWithServant(servantCard, heroOrServantCard);
+	public void attackWithServant(ServantCard servantCard, Health targetHeroOrServantCard) {
+		referee.attackWithServant(servantCard, targetHeroOrServantCard);
 	}
 
 	@Override
@@ -50,7 +51,11 @@ public class GameServiceImpl implements GameService {
 		return referee.showCardsThatPlayerHave();
 	}
 	@Override
-	public List<Card> showCardsInTheField() {
+	public int getTurn(){
+		return referee.getTurn();
+	}
+	@Override
+	public Map<Integer, List<Card>> showCardsInTheField() {
 		return referee.showCardsInTheField();
 	}
 	@Override
