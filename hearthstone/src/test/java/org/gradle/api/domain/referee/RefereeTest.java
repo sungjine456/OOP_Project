@@ -1,6 +1,5 @@
 package org.gradle.api.domain.referee;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertSame;
 
@@ -21,8 +20,8 @@ public class RefereeTest {
 	public void nextTurnTest() {
 		Hero hero = referee.showHero();
 		referee.changeTurn();
-		assertNotSame(hero, is(referee.showHero()));
+		assertNotSame(hero, referee.showHero());
 		referee.changeTurn();
-		assertSame(hero, is(referee.showHero()));
+		assertSame(hero, referee.showHero());
 	}
 }

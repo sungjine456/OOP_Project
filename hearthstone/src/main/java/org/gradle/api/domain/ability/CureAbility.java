@@ -1,9 +1,8 @@
 package org.gradle.api.domain.ability;
 
-import org.gradle.api.domain.card.ServantCard;
-import org.gradle.api.domain.hero.Hero;
+import org.gradle.api.domain.common.Health;
 
-public class CureAbility extends AbstractAbility {
+public class CureAbility implements Ability {
 	
 	private final int cure;
 	
@@ -12,13 +11,8 @@ public class CureAbility extends AbstractAbility {
 	}
 
 	@Override
-	public void useAbility(Hero hero) {
-		hero.beCure(cure);
-	}
-	
-	@Override
-	public void useAbility(ServantCard servantCard) {
-		servantCard.beCure(cure);
+	public void useAbility(Health health) {
+		health.beCure(cure);
 	}
 
 	@Override

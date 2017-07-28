@@ -1,9 +1,8 @@
 package org.gradle.api.domain.ability;
 
-import org.gradle.api.domain.card.ServantCard;
-import org.gradle.api.domain.hero.Hero;
+import org.gradle.api.domain.common.Health;
 
-public class AttackServantOrHeroAbility extends AbstractAbility {
+public class AttackServantOrHeroAbility implements Ability {
 	
 	private final int attack;
 	
@@ -12,15 +11,10 @@ public class AttackServantOrHeroAbility extends AbstractAbility {
 	}
 
 	@Override
-	public void useAbility(Hero hero) {
-		hero.beAttack(attack);
+	public void useAbility(Health health) {
+		health.beAttack(attack);
 	}
 	
-	@Override
-	public void useAbility(ServantCard servantCard) {
-		servantCard.beAttack(attack);
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
