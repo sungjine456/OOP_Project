@@ -77,12 +77,14 @@ public final class ServantCard implements Card, OffensePower, Health {
 			ability.useAbility(heroOrServantCard);
 		}
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((ability == null) ? 0 : ability.hashCode());
+		result = prime * result + ((health == null) ? 0 : health.hashCode());
+		result = prime * result + (isAttack ? 1231 : 1237);
 		result = prime * result + mana;
 		result = prime * result + offensePower;
 		return result;
@@ -101,6 +103,13 @@ public final class ServantCard implements Card, OffensePower, Health {
 				return false;
 		} else if (!ability.equals(other.ability))
 			return false;
+		if (health == null) {
+			if (other.health != null)
+				return false;
+		} else if (!health.equals(other.health))
+			return false;
+		if (isAttack != other.isAttack)
+			return false;
 		if (mana != other.mana)
 			return false;
 		if (offensePower != other.offensePower)
@@ -110,6 +119,6 @@ public final class ServantCard implements Card, OffensePower, Health {
 	@Override
 	public String toString() {
 		return "ServantCard [mana=" + mana + ", offensePower=" + offensePower + ", ability=" + ability + ", health="
-				+ health + "]";
+				+ health + ", isAttack=" + isAttack + "]";
 	}
 }

@@ -28,4 +28,32 @@ public class HealthImpl implements Health {
 			attackedAmount = 0;
 		}
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + attackedAmount;
+		result = prime * result + health;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		HealthImpl other = (HealthImpl) obj;
+		if (attackedAmount != other.attackedAmount)
+			return false;
+		if (health != other.health)
+			return false;
+		return true;
+	}
+	@Override
+	public String toString() {
+		return "HealthImpl [health=" + health + ", attackedAmount=" + attackedAmount + "]";
+	}
 }
