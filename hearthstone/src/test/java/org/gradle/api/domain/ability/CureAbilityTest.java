@@ -5,7 +5,6 @@ import static org.junit.Assert.assertThat;
 
 import org.gradle.api.domain.card.ServantCard;
 import org.gradle.api.domain.hero.Hero;
-import org.gradle.api.domain.hero.HeroSkill;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -20,7 +19,7 @@ public class CureAbilityTest {
 
 	@Test
 	public void cureHeroTest() {
-		Hero hero = new Hero(new HeroSkill(new AttackOnlyServantAbility(10)));
+		Hero hero = new Hero(new AttackOnlyServantAbility(10));
 		hero.beAttack(10);
 		
 		assertThat(hero.remainingHealth(), is(20));

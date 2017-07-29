@@ -7,7 +7,6 @@ import org.gradle.api.domain.ability.AttackOnlyServantAbility;
 import org.gradle.api.domain.ability.AttackServantOrHeroAbility;
 import org.gradle.api.domain.ability.CureAbility;
 import org.gradle.api.domain.hero.Hero;
-import org.gradle.api.domain.hero.HeroSkill;
 
 public class HeroRepository {
 	private static final HeroRepository INSTANCE = new HeroRepository();
@@ -19,14 +18,14 @@ public class HeroRepository {
 	}
 	
 	static {
-		heroData.add(new Hero(new HeroSkill(new AttackServantOrHeroAbility(1))));
-		heroData.add(new Hero(new HeroSkill(new AttackOnlyServantAbility(1))));
-		heroData.add(new Hero(new HeroSkill(new CureAbility(2))));
+		heroData.add(new Hero(new AttackServantOrHeroAbility(1)));
+		heroData.add(new Hero(new AttackOnlyServantAbility(1)));
+		heroData.add(new Hero(new CureAbility(2)));
 	}
 	
 	public Hero getHero(int index){
 		Hero hero = heroData.get(index);
-		return new Hero(hero.getSkill());
+		return new Hero(hero.getAbility());
 	}
 	public int size(){
 		return heroData.size();

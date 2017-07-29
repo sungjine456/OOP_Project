@@ -5,8 +5,6 @@ import static org.junit.Assert.assertThat;
 
 import org.gradle.api.domain.ability.CureAbility;
 import org.gradle.api.domain.card.WeaponCard;
-import org.gradle.api.domain.hero.Hero;
-import org.gradle.api.domain.hero.HeroSkill;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,8 +16,7 @@ public class HeroTest {
 	
 	@Before
 	public void setUp(){
-		HeroSkill skill = new HeroSkill(new CureAbility(AMOUNT_MANA));
-		hero = new Hero(skill);
+		hero = new Hero(new CureAbility(AMOUNT_MANA));
 	}
 	
 	@Test

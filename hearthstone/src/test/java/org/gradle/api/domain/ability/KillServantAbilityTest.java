@@ -5,7 +5,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.gradle.api.domain.card.ServantCard;
 import org.gradle.api.domain.hero.Hero;
-import org.gradle.api.domain.hero.HeroSkill;
 import org.gradle.api.exception.MethodInvokeException;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +20,7 @@ public class KillServantAbilityTest {
 
 	@Test(expected=MethodInvokeException.class)
 	public void killHeroTest() {
-		Hero hero = new Hero(new HeroSkill(new AttackOnlyServantAbility(10)));
+		Hero hero = new Hero(new AttackOnlyServantAbility(10));
 		
 		killServantAbility.useAbility(hero);
 	}

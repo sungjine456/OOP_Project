@@ -3,12 +3,12 @@ package org.gradle.api.domain.player;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.gradle.api.domain.ability.Ability;
 import org.gradle.api.domain.card.Card;
 import org.gradle.api.domain.card.ServantCard;
 import org.gradle.api.domain.card.WeaponCard;
 import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.hero.Hero;
-import org.gradle.api.domain.hero.HeroSkill;
 import org.gradle.api.exception.MethodInvokeException;
 
 public final class Player {
@@ -27,7 +27,7 @@ public final class Player {
 	public void turnOn(Card card){
 		handCards.add(card);
 		mana += 1;
-		hero.getSkill().makeItAvailable();
+		hero.makeItAvailable();
 		if(hero.hasWeapon()){
 			hero.makeWeaponUsable();
 		}
@@ -68,8 +68,8 @@ public final class Player {
 	public boolean noCardToAttackInField(ServantCard targetCard){
 		return fieldCards.stream().filter(card -> targetCard.equals(card)).findAny() == null;
 	}
-	public HeroSkill useHeroSkill(){
-		return hero.getSkill();
+	public Ability useHeroSkill(){
+		return hero.getAbility();
 	}
 	public int heroAttack(){
 		return hero.attack();

@@ -12,7 +12,6 @@ import org.gradle.api.domain.card.CardDeck;
 import org.gradle.api.domain.card.ServantCard;
 import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.hero.Hero;
-import org.gradle.api.domain.hero.HeroSkill;
 import org.gradle.api.domain.player.Player;
 import org.gradle.api.exception.MethodInvokeException;
 import org.gradle.api.repository.HeroRepository;
@@ -90,9 +89,9 @@ public class Referee {
 		}
 	}
 	public void useTheAbilityOfHero(Health targetHeroOrServantCard) {
-		HeroSkill heroSkill = getNowPlayer().getHero().getSkill();
-		if(!heroSkill.getUsedAbility()){
-			heroSkill.useAbility(targetHeroOrServantCard);
+		Hero hero = getNowPlayer().getHero();
+		if(!hero.isUsedAbility()){
+			hero.useAbility(targetHeroOrServantCard);
 		}
 	}
 	
