@@ -4,7 +4,7 @@ import org.gradle.api.domain.common.Health;
 import org.gradle.api.domain.common.Mana;
 
 public interface Card extends Mana {
-	void useAbility(Health heroOrServantCard);
+	void useCard(Health heroOrServantCard);
 	boolean hasAbility();
 	Card newCard();
 }

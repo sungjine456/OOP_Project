@@ -31,9 +31,6 @@ public final class ServantCard implements Card, OffensePower, Health {
 	public boolean hasAbility(){
 		return ability!=null;
 	}
-	public void killSerant(){
-		health = new HealthImpl(0);
-	}
 	@Override
 	public int attack(){
 		if(!isAttack){
@@ -72,7 +69,7 @@ public final class ServantCard implements Card, OffensePower, Health {
 		health.beCure(cure);
 	}
 	@Override
-	public void useAbility(Health heroOrServantCard) {
+	public void useCard(Health heroOrServantCard) {
 		if(hasAbility()){
 			ability.useAbility(heroOrServantCard);
 		}

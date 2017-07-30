@@ -45,7 +45,7 @@ public final class WeaponCard implements Card, OffensePower {
 		isAttack = true;
 	}
 	@Override
-	public void useAbility(Health heroOrServantCard) {
+	public void useCard(Health heroOrServantCard) {
 		throw new MethodInvokeException("무기카드는 능력이 없습니다.");
 	}
 	@Override

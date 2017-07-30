@@ -60,7 +60,7 @@ public final class Player {
 		}
 		if(handCards.contains(card)){
 			if(card.hasAbility()){
-				card.useAbility(heroOrServantCard);
+				card.useCard(heroOrServantCard);
 			}
 			handCards.remove(card);
 		}

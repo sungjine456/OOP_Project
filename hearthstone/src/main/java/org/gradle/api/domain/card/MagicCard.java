@@ -24,7 +24,7 @@ public final class MagicCard implements Card {
 		return mana;
 	}
 	@Override
-	public void useAbility(Health heroOrServantCard) {
+	public void useCard(Health heroOrServantCard) {
 		ability.useAbility(heroOrServantCard);;
 	}
 	@Override
