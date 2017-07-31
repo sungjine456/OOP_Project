@@ -16,18 +16,21 @@ public final class Player {
 	private final List<Card> handCards;
 	private final List<Card> fieldCards;
 	private int mana;
+	private int useMana;
 	
 	public Player(Hero hero){
 		this.hero = hero;
 		handCards = new ArrayList<>();
 		fieldCards = new ArrayList<>();
 		mana = 1;
+		useMana = 0;
 	}
 	
 	public void turnOn(Card card){
 		handCards.add(card);
 		mana += 1;
 		hero.makeItAvailable();
+		useMana = 0;
 		if(hero.hasWeapon()){
 			hero.makeWeaponUsable();
 		}
@@ -49,6 +52,10 @@ public final class Player {
 			if(card instanceof ServantCard){
 				fieldCards.add((ServantCard)card);
 			}
+			useMana += card.getMana();
+			if(mana < useMana){
+				throw new MethodInvokeException("마나가 모자릅니다.");
+			}
 			handCards.remove(card);
 		}
 	}
@@ -62,6 +69,10 @@ public final class Player {
 			if(card.hasAbility()){
 				card.useCard(heroOrServantCard);
 			}
+			useMana += card.getMana();
+			if(mana < useMana){
+				throw new MethodInvokeException("마나가 모자릅니다.");
+			}
 			handCards.remove(card);
 		}
 	}
@@ -69,6 +80,10 @@ public final class Player {
 		return fieldCards.stream().filter(card -> targetCard.equals(card)).findAny() == null;
 	}
 	public Ability useHeroSkill(){
+		useMana += hero.getMana();
+		if(mana < useMana){
+			throw new MethodInvokeException("마나가 모자릅니다.");
+		}
 		return hero.getAbility();
 	}
 	public int heroAttack(){
@@ -86,5 +101,8 @@ public final class Player {
 	}
 	public int getMana(){
 		return mana;
+	}
+	public int remainingMana(){
+		return mana - useMana;
 	}
 }
