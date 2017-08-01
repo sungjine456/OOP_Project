@@ -52,10 +52,9 @@ public final class Player {
 			if(card instanceof ServantCard){
 				fieldCards.add((ServantCard)card);
 			}
-			useMana += card.getMana();
-			if(mana < useMana){
-				throw new MethodInvokeException("마나가 모자릅니다.");
-			}
+
+			useMana(card.getMana());
+			
 			handCards.remove(card);
 		}
 	}
@@ -69,10 +68,9 @@ public final class Player {
 			if(card.hasAbility()){
 				card.useCard(heroOrServantCard);
 			}
-			useMana += card.getMana();
-			if(mana < useMana){
-				throw new MethodInvokeException("마나가 모자릅니다.");
-			}
+			
+			useMana(card.getMana());
+			
 			handCards.remove(card);
 		}
 	}
@@ -80,10 +78,8 @@ public final class Player {
 		return fieldCards.stream().filter(card -> targetCard.equals(card)).findAny() == null;
 	}
 	public Ability useHeroSkill(){
-		useMana += hero.getMana();
-		if(mana < useMana){
-			throw new MethodInvokeException("마나가 모자릅니다.");
-		}
+		useMana(hero.getMana());
+		
 		return hero.getAbility();
 	}
 	public int heroAttack(){
@@ -104,5 +100,12 @@ public final class Player {
 	}
 	public int remainingMana(){
 		return mana - useMana;
+	}
+	
+	private void useMana(int mana){
+		if(this.mana < useMana + mana){
+			throw new MethodInvokeException("마나가 모자릅니다.");
+		}
+		useMana += mana;
 	}
 }
