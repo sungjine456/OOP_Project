@@ -1,5 +1,5 @@
 package oop.scala.domain.money
 
-class Money {
-
+trait Money {
+  val value: Int
 }
