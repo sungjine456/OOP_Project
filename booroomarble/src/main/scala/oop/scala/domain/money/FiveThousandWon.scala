@@ -1,5 +1,5 @@
 package oop.scala.domain.money
 
 object FiveThousandWon extends Money {
-  override val value = 5000
+  override val value = 5 * thousand
 }
