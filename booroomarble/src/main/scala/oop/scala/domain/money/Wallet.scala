@@ -1,18 +1,14 @@
 package oop.scala.domain.money
 
+/**
+ * 돈을 가지고 있기 위한 클래스
+ */
 class Wallet {
   // 가지고 있는 총 금액
   var maxMoney: Int = 0
 
   // 각 지폐 별로 가지고 있는 갯수
-  private val wallet: Map[Money, Int] = Map (
-    ThousandWon -> 0,
-    FiveThousandWon -> 0,
-    TenThousandWon -> 0,
-    FiftyThousandWon -> 0,
-    HundredThousandWon -> 0,
-    FiveHundredThousandWon -> 0
-  )
+  private val moneyBundle: MoneyBundle = new MoneyBundle
 
   // 현재 가지고 있는 지폐 중 제일 최고가인 지폐
   var topBankNote: Money = {
