@@ -17,12 +17,35 @@ class Wallet {
 
   /**
    * 돈을 받았으면 거슬러 줘야한다.
-   * @param wallet 내가 받은 금액
+   * @param giveMoney 내가 받은 금액
+   * @param maxMoney 내가 받아야하는 총 금액
    * @return 거슬러 줘야하는 금액
    */
-  def put(wallet: Wallet): Int = {
-
-    0
+  def put(giveMoney: Int, maxMoney: Int): MoneyBundle = {
+    var moneyValue = giveMoney
+    
+    while (moneyValue > 0) {
+      if (moneyValue / 500000 > 0) {
+        moneyBundle.put(FiveHundredThousandWon, moneyValue / 500000)
+        moneyValue = moneyValue % 500000
+      } else if (moneyValue / 100000 > 0) {
+        moneyBundle.put(HundredThousandWon, moneyValue / 100000)
+        moneyValue = moneyValue % 100000
+      } else if (moneyValue / 50000 > 0) {
+        moneyBundle.put(FiftyThousandWon, moneyValue / 50000)
+        moneyValue = moneyValue % 50000
+      } else if (moneyValue / 10000 > 0) {
+        moneyBundle.put(TenThousandWon, moneyValue / 10000)
+        moneyValue = moneyValue % 10000
+      } else if (moneyValue / 5000 > 0) {
+        moneyBundle.put(FiveThousandWon, moneyValue / 5000)
+        moneyValue = moneyValue % 5000
+      } else if (moneyValue / 1000 > 0) {
+        moneyBundle.put(ThousandWon, moneyValue / 1000)
+        moneyValue = moneyValue % 1000
+      }
+    }
+    moneyBundle
   }
 
   /**
