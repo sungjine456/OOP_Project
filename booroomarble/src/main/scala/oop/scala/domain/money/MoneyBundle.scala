@@ -20,7 +20,7 @@ class MoneyBundle {
   }
 
   def put[A <: Money](money: A, value: Int) {
-    moneyBundle(money) = value
+    moneyBundle(money) = moneyBundle(money) + value
   }
 
   def get(moneyKind: Money): Int = {
