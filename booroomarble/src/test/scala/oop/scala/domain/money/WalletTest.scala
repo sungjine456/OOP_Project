@@ -57,4 +57,31 @@ class WalletTest extends FlatSpec {
     assert(put.get(HundredThousandWon) === 2)
     assert(put.get(FiveHundredThousandWon) === 1)
   }
+
+  "topBankNote" should "have the highest banknote" in {
+    val wallet = new Wallet
+    var put = wallet.put(1000)
+
+    assert(wallet.topBankNote === Option(ThousandWon))
+
+    put = wallet.put(5000)
+
+    assert(wallet.topBankNote === Option(FiveThousandWon))
+
+    put = wallet.put(10000)
+
+    assert(wallet.topBankNote === Option(TenThousandWon))
+
+    put = wallet.put(50000)
+
+    assert(wallet.topBankNote === Option(FiftyThousandWon))
+
+    put = wallet.put(100000)
+
+    assert(wallet.topBankNote === Option(HundredThousandWon))
+
+    put = wallet.put(500000)
+
+    assert(wallet.topBankNote === Option(FiveHundredThousandWon))
+  }
 }

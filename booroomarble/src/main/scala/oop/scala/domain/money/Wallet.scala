@@ -13,8 +13,8 @@ class Wallet {
   private val moneyBundle: MoneyBundle = new MoneyBundle
 
   // 현재 가지고 있는 지폐 중 제일 최고가인 지폐
-  var topBankNote: Money = {
-    null
+  def topBankNote: Option[Money] = {
+    moneyBundle.keySet.find(key => moneyBundle.get(key) > 0)
   }
 
   /**
