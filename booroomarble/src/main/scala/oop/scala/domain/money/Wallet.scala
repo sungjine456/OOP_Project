@@ -19,35 +19,10 @@ class Wallet {
 
   /**
    * 지갑에 돈을 넣기 위한 함수
-   * @param money 지갑에 넣을 금액
+   * @param giveMoney 지갑에 넣을 금액
    */
-  def put(money: Int) {
-    var moneyValue = money
-
-    if (moneyValue / 500000 > 0) {
-      moneyBundle.put(FiveHundredThousandWon, moneyBundle.get(FiveHundredThousandWon) + moneyValue / 500000)
-      moneyValue = moneyValue % 500000
-    }
-    if (moneyValue / 100000 > 0) {
-      moneyBundle.put(HundredThousandWon, moneyBundle.get(HundredThousandWon) + moneyValue / 100000)
-      moneyValue = moneyValue % 100000
-    }
-    if (moneyValue / 50000 > 0) {
-      moneyBundle.put(FiftyThousandWon, moneyBundle.get(FiftyThousandWon) + moneyValue / 50000)
-      moneyValue = moneyValue % 50000
-    }
-    if (moneyValue / 10000 > 0) {
-      moneyBundle.put(TenThousandWon, moneyBundle.get(TenThousandWon) + moneyValue / 10000)
-      moneyValue = moneyValue % 10000
-    }
-    if (moneyValue / 5000 > 0) {
-      moneyBundle.put(FiveThousandWon, moneyBundle.get(FiveThousandWon) + moneyValue / 5000)
-      moneyValue = moneyValue % 5000
-    }
-    if (moneyValue / 1000 > 0) {
-      moneyBundle.put(ThousandWon, moneyBundle.get(ThousandWon) + moneyValue / 1000)
-      moneyValue = moneyValue % 1000
-    }
+  def put(giveMoney: Int) {
+    addValueToMoneyBundle(giveMoney)
   }
 
   /**
@@ -57,37 +32,14 @@ class Wallet {
    * @return 거슬러 줘야하는 금액
    */
   def receive(giveMoney: Int, maxMoney: Int): MoneyBundle = {
-    var moneyValue = giveMoney
     val backMoney = giveMoney - maxMoney
 
     if (backMoney < 0) {
       // 받아야 하는 돈보다 적게 받았을 때 처리
     }
 
-    if (moneyValue / 500000 > 0) {
-      moneyBundle.put(FiveHundredThousandWon, moneyBundle.get(FiveHundredThousandWon) + moneyValue / 500000)
-      moneyValue = moneyValue % 500000
-    }
-    if (moneyValue / 100000 > 0) {
-      moneyBundle.put(HundredThousandWon, moneyBundle.get(HundredThousandWon) + moneyValue / 100000)
-      moneyValue = moneyValue % 100000
-    }
-    if (moneyValue / 50000 > 0) {
-      moneyBundle.put(FiftyThousandWon, moneyBundle.get(FiftyThousandWon) + moneyValue / 50000)
-      moneyValue = moneyValue % 50000
-    }
-    if (moneyValue / 10000 > 0) {
-      moneyBundle.put(TenThousandWon, moneyBundle.get(TenThousandWon) + moneyValue / 10000)
-      moneyValue = moneyValue % 10000
-    }
-    if (moneyValue / 5000 > 0) {
-      moneyBundle.put(FiveThousandWon, moneyBundle.get(FiveThousandWon) + moneyValue / 5000)
-      moneyValue = moneyValue % 5000
-    }
-    if (moneyValue / 1000 > 0) {
-      moneyBundle.put(ThousandWon, moneyBundle.get(ThousandWon) + moneyValue / 1000)
-      moneyValue = moneyValue % 1000
-    }
+    addValueToMoneyBundle(giveMoney)
+
     moneyBundle
   }
 
@@ -98,5 +50,15 @@ class Wallet {
    */
   def give(money: Int) {
 
+  }
+
+  private def addValueToMoneyBundle(giveMoney: Int) {
+    var moneyValue = giveMoney
+    for (key <- moneyBundle.keySet) {
+      if (moneyValue / key.value > 0) {
+        moneyBundle.put(key, moneyValue / key.value)
+        moneyValue = moneyValue % key.value
+      }
+    }
   }
 }

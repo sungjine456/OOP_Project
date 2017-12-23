@@ -15,6 +15,9 @@ class MoneyBundle {
     FiveHundredThousandWon -> 0
   )
 
+  val keySet: List[Money] = List(FiveHundredThousandWon, HundredThousandWon, FiftyThousandWon,
+    TenThousandWon, FiveThousandWon, ThousandWon)
+
   def put[A <: Money](money: A) {
     put(money, 1)
   }
