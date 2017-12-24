@@ -31,16 +31,16 @@ class Wallet {
    * @param maxMoney 내가 받아야하는 총 금액
    * @return 거슬러 줘야하는 금액
    */
-  def receive(giveMoney: Int, maxMoney: Int): MoneyBundle = {
+  def receive(giveMoney: Int, maxMoney: Int): Option[MoneyBundle] = {
     val backMoney = giveMoney - maxMoney
 
     if (backMoney < 0) {
-      // 받아야 하는 돈보다 적게 받았을 때 처리
+      return None
     }
 
     addValueToMoneyBundle(giveMoney)
 
-    moneyBundle
+    Option(moneyBundle)
   }
 
   /**

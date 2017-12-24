@@ -23,32 +23,35 @@ class WalletTest extends FlatSpec {
 
   "put" should "divide the number into a Money type." in {
     var wallet = new Wallet
-    var put = wallet.receive(1000, 1000)
+
+    assert(wallet.receive(1000, 10000) == None)
+
+    var put: MoneyBundle = wallet.receive(1000, 1000).get
 
     assert(put.get(ThousandWon) === 1)
 
-    put = wallet.receive(10000, 1000)
+    put = wallet.receive(10000, 1000).get
 
     assert(put.get(TenThousandWon) === 1)
 
-    put = wallet.receive(100000, 1000)
+    put = wallet.receive(100000, 1000).get
 
     assert(put.get(HundredThousandWon) === 1)
 
-    put = wallet.receive(5000, 1000)
+    put = wallet.receive(5000, 1000).get
 
     assert(put.get(FiveThousandWon) === 1)
 
-    put = wallet.receive(50000, 1000)
+    put = wallet.receive(50000, 1000).get
 
     assert(put.get(FiftyThousandWon) === 1)
 
-    put = wallet.receive(500000, 1000)
+    put = wallet.receive(500000, 1000).get
 
     assert(put.get(FiveHundredThousandWon) === 1)
 
     wallet = new Wallet
-    put = wallet.receive(774000, 1000)
+    put = wallet.receive(774000, 1000).get
 
     assert(put.get(ThousandWon) === 4)
     assert(put.get(FiveThousandWon) === 0)
