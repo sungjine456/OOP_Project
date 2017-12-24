@@ -21,7 +21,7 @@ class Wallet {
    * 지갑에 돈을 넣기 위한 함수
    * @param giveMoney 지갑에 넣을 금액
    */
-  def put(giveMoney: Int) {
+  def put(giveMoney: Int): Unit = {
     addValueToMoneyBundle(giveMoney)
   }
 
@@ -52,7 +52,7 @@ class Wallet {
 
   }
 
-  private def addValueToMoneyBundle(giveMoney: Int) {
+  private def addValueToMoneyBundle(giveMoney: Int): Unit = {
     var moneyValue = giveMoney
     for (key <- moneyBundle.keySet) {
       if (moneyValue / key.value > 0) {
