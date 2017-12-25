@@ -87,4 +87,15 @@ class WalletTest extends FlatSpec {
 
     assert(wallet.topBankNote === Option(FiveHundredThousandWon))
   }
+
+  "give" should "give money and get change" in {
+    val wallet = new Wallet
+    val otherWallet = new Wallet
+
+    wallet.put(600000)
+    wallet.give(600000, otherWallet)
+
+    assert(wallet.maxMoney === 0)
+    assert(otherWallet.maxMoney === 600000)
+  }
 }

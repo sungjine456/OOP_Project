@@ -26,6 +26,19 @@ class MoneyBundle {
     moneyBundle(money) = moneyBundle(money) + value
   }
 
+  def put(bundle: MoneyBundle): Unit = {
+    for(key <- keySet) {
+      put(key, bundle.get(key))
+    }
+  }
+
+  def withdraw[A <: Money](money: A, value: Int): Unit = {
+    if(false){
+      // 가지고 있는 금액보다 많이 뺄 때
+    }
+    moneyBundle(money) = moneyBundle(money) - value
+  }
+
   def get(moneyKind: Money): Int = {
     moneyBundle(moneyKind)
   }
