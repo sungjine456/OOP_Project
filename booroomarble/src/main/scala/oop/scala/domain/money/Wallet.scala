@@ -22,7 +22,7 @@ class Wallet {
    * @param giveMoney 지갑에 넣을 금액
    */
   def put(giveMoney: Int): Unit = {
-    addValueToMoneyBundle(giveMoney)
+    MoneyCalculation.addValueToMoneyBundle(giveMoney)
   }
   def put(bundle: MoneyBundle): Unit = {
     moneyBundle.put(bundle)
@@ -41,7 +41,7 @@ class Wallet {
       return None
     }
 
-    addValueToMoneyBundle(giveMoney)
+    MoneyCalculation.addValueToMoneyBundle(giveMoney)
 
     Option(moneyBundle)
   }
@@ -52,28 +52,6 @@ class Wallet {
    * @param otherWallet 거슬러 받을 유저의 지갑
    */
   def give(money: Int, otherWallet: Wallet): Unit = {
-    otherWallet.put(minusValueToMoneyBundle(money))
-  }
-
-  private def addValueToMoneyBundle(giveMoney: Int): Unit = {
-    var moneyValue = giveMoney
-    for (key <- moneyBundle.keySet) {
-      if (moneyValue / key.value > 0) {
-        moneyBundle.put(key, moneyValue / key.value)
-        moneyValue = moneyValue % key.value
-      }
-    }
-  }
-  private def minusValueToMoneyBundle(giveMoney: Int): MoneyBundle = {
-    var moneyValue = giveMoney
-    val bundle = new MoneyBundle
-    for (key <- moneyBundle.keySet) {
-      if (moneyValue / key.value > 0) {
-        moneyBundle.withdraw(key, moneyValue / key.value)
-        bundle.put(key, moneyValue / key.value)
-        moneyValue = moneyValue % key.value
-      }
-    }
-    bundle
+    otherWallet.put(MoneyCalculation.minusValueToMoneyBundle(money, moneyBundle))
   }
 }

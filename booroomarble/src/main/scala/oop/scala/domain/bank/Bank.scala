@@ -1,6 +1,6 @@
 package oop.scala.domain.bank
 
-import oop.scala.domain.money.{ Money, MoneyBundle }
+import oop.scala.domain.money.{ Money, MoneyBundle, MoneyCalculation }
 
 /**
  * 은행은 돈을 무제한으로 가지고 있다고 설정한다.
@@ -13,9 +13,7 @@ object Bank {
    * @return 인출하는 금액에 맞춰 돈을 준다.
    */
   def withdraw(money: Int): MoneyBundle = {
-    val moneyBundle: MoneyBundle = new MoneyBundle
-    makeWithdrawMoneyBundle(money, moneyBundle)
-    moneyBundle
+    MoneyCalculation.addValueToMoneyBundle(money)
   }
 
   /**
@@ -23,14 +21,4 @@ object Bank {
    * 돈을 사용하는 사용자의 돈만 깍으면 된다.
    */
   def expenses(money: Money): Unit = {}
-
-  private def makeWithdrawMoneyBundle(giveMoney: Int, moneyBundle: MoneyBundle): Unit = {
-    var moneyValue = giveMoney
-    for (key <- moneyBundle.keySet) {
-      if (moneyValue / key.value > 0) {
-        moneyBundle.put(key, moneyValue / key.value)
-        moneyValue = moneyValue % key.value
-      }
-    }
-  }
 }
