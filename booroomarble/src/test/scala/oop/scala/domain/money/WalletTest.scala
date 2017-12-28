@@ -24,41 +24,44 @@ class WalletTest extends FlatSpec {
   "put" should "divide the number into a Money type." in {
     var wallet = new Wallet
 
-    assert(wallet.receive(1000, 10000) == None)
+    assert(wallet.receive(MoneyBundle(1000), 10000) === None)
+    assert(wallet.topBankNote === None)
 
-    var put: MoneyBundle = wallet.receive(1000, 1000).get
+    wallet.receive(MoneyBundle(1000), 1000).get
 
-    assert(put.get(ThousandWon) === 1)
+    assert(wallet.topBankNote === Option(ThousandWon))
+    assert(wallet.maxMoney === 1000)
 
-    put = wallet.receive(10000, 1000).get
+    wallet.receive(MoneyBundle(5000), 5000).get
 
-    assert(put.get(TenThousandWon) === 1)
+    assert(wallet.topBankNote === Option(FiveThousandWon))
+    assert(wallet.maxMoney === 6000)
 
-    put = wallet.receive(100000, 1000).get
+    wallet.receive(MoneyBundle(10000), 10000).get
 
-    assert(put.get(HundredThousandWon) === 1)
+    assert(wallet.topBankNote === Option(TenThousandWon))
+    assert(wallet.maxMoney === 16000)
 
-    put = wallet.receive(5000, 1000).get
+    wallet.receive(MoneyBundle(50000), 50000).get
 
-    assert(put.get(FiveThousandWon) === 1)
+    assert(wallet.topBankNote === Option(FiftyThousandWon))
+    assert(wallet.maxMoney === 66000)
 
-    put = wallet.receive(50000, 1000).get
+    wallet.receive(MoneyBundle(100000), 100000).get
 
-    assert(put.get(FiftyThousandWon) === 1)
+    assert(wallet.topBankNote === Option(HundredThousandWon))
+    assert(wallet.maxMoney === 166000)
 
-    put = wallet.receive(500000, 1000).get
+    wallet.receive(MoneyBundle(500000), 500000).get
 
-    assert(put.get(FiveHundredThousandWon) === 1)
+    assert(wallet.topBankNote === Option(FiveHundredThousandWon))
+    assert(wallet.maxMoney === 666000)
 
     wallet = new Wallet
-    put = wallet.receive(774000, 1000).get
+    wallet.receive(MoneyBundle(774000), 774000).get
 
-    assert(put.get(ThousandWon) === 4)
-    assert(put.get(FiveThousandWon) === 0)
-    assert(put.get(TenThousandWon) === 2)
-    assert(put.get(FiftyThousandWon) === 1)
-    assert(put.get(HundredThousandWon) === 2)
-    assert(put.get(FiveHundredThousandWon) === 1)
+    assert(wallet.topBankNote === Option(FiveHundredThousandWon))
+    assert(wallet.maxMoney === 774000)
   }
 
   "topBankNote" should "have the highest banknote" in {

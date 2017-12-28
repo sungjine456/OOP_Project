@@ -6,7 +6,7 @@ package oop.scala.domain.money
 class Wallet {
   // 가지고 있는 총 금액
   def maxMoney: Int = {
-    moneyBundle.moneyBundle.map(m => m._1.value * m._2).sum
+    moneyBundle.maxMoney
   }
 
   // 각 지폐 별로 가지고 있는 갯수
@@ -22,8 +22,9 @@ class Wallet {
    * @param giveMoney 지갑에 넣을 금액
    */
   def put(giveMoney: Int): Unit = {
-    MoneyCalculation.addValueToMoneyBundle(giveMoney)
+    put(MoneyCalculation.addValueToMoneyBundle(giveMoney))
   }
+
   def put(bundle: MoneyBundle): Unit = {
     moneyBundle.put(bundle)
   }
@@ -34,16 +35,18 @@ class Wallet {
    * @param maxMoney 내가 받아야하는 총 금액
    * @return 거슬러 줘야하는 금액
    */
-  def receive(receiveMoney: Int, maxMoney: Int): Option[MoneyBundle] = {
-    val backMoney = receiveMoney - maxMoney
+  def receive(receiveMoney: MoneyBundle, maxMoney: Int): Option[MoneyBundle] = {
+    val backMoney = receiveMoney.maxMoney - maxMoney
 
+    // 받을 금액보다 조금 받았을 때
     if (backMoney < 0) {
       return None
     }
 
-    MoneyCalculation.addValueToMoneyBundle(receiveMoney)
+    moneyBundle.put(receiveMoney)
 
-    Option(moneyBundle)
+    if (backMoney == 0) Some(MoneyBundle.apply)
+    else Option(MoneyCalculation.minusValueToMoneyBundle(backMoney, moneyBundle))
   }
 
   /**
