@@ -30,28 +30,28 @@ class Wallet {
 
   /**
    * 돈을 받았으면 거슬러 줘야한다.
-   * @param giveMoney 내가 받은 금액
+   * @param receiveMoney 내가 받은 금액
    * @param maxMoney 내가 받아야하는 총 금액
    * @return 거슬러 줘야하는 금액
    */
-  def receive(giveMoney: Int, maxMoney: Int): Option[MoneyBundle] = {
-    val backMoney = giveMoney - maxMoney
+  def receive(receiveMoney: Int, maxMoney: Int): Option[MoneyBundle] = {
+    val backMoney = receiveMoney - maxMoney
 
     if (backMoney < 0) {
       return None
     }
 
-    MoneyCalculation.addValueToMoneyBundle(giveMoney)
+    MoneyCalculation.addValueToMoneyBundle(receiveMoney)
 
     Option(moneyBundle)
   }
 
   /**
    * 돈을 줬으면 거슬러 받아야한다.
-   * @param money 내가 줘야할 금액
+   * @param giveMoney 내가 줘야할 금액
    * @param otherWallet 거슬러 받을 유저의 지갑
    */
-  def give(money: Int, otherWallet: Wallet): Unit = {
-    otherWallet.put(MoneyCalculation.minusValueToMoneyBundle(money, moneyBundle))
+  def give(giveMoney: Int, otherWallet: Wallet): Unit = {
+    otherWallet.put(MoneyCalculation.minusValueToMoneyBundle(giveMoney, moneyBundle))
   }
 }
