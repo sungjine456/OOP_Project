@@ -10,7 +10,7 @@ class User {
 
   def payMoney(money: Int): Option[MoneyBundle] = {
     if(money > wallet.maxMoney){
-      None
+      return None
     }
     Some(wallet.give(money))
   }
