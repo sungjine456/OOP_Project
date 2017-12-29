@@ -93,12 +93,11 @@ class WalletTest extends FlatSpec {
 
   "give" should "give money and get change" in {
     val wallet = new Wallet
-    val otherWallet = new Wallet
 
     wallet.put(600000)
-    wallet.give(600000, otherWallet)
+    val bundle: MoneyBundle = wallet.give(600000)
 
     assert(wallet.maxMoney === 0)
-    assert(otherWallet.maxMoney === 600000)
+    assert(bundle.maxMoney === 600000)
   }
 }

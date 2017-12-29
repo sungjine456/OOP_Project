@@ -50,11 +50,11 @@ class Wallet {
   }
 
   /**
-   * 돈을 줬으면 거슬러 받아야한다.
+   * 돈을 줘야하는 금액만큼 돈 뭉치에 돈을 넣어 돈 뭉치를 준다.
    * @param giveMoney 내가 줘야할 금액
-   * @param otherWallet 거슬러 받을 유저의 지갑
+   * @return 내가 주는 돈
    */
-  def give(giveMoney: Int, otherWallet: Wallet): Unit = {
-    otherWallet.put(MoneyCalculation.minusValueToMoneyBundle(giveMoney, moneyBundle))
+  def give(giveMoney: Int): MoneyBundle = {
+    MoneyCalculation.minusValueToMoneyBundle(giveMoney, moneyBundle)
   }
 }

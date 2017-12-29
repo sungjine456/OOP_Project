@@ -9,8 +9,10 @@ class User {
   private val countryCard: Set[CountryCard] = Set.empty
 
   def payMoney(money: Int): Option[MoneyBundle] = {
-    // 지불해야하는 금액을 받고 지갑에서 돈을 꺼내 준다.
-    None
+    if(money > wallet.maxMoney){
+      None
+    }
+    Some(wallet.give(money))
   }
 
   def getMoney(money: MoneyBundle): Unit = {
