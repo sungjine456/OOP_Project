@@ -9,7 +9,7 @@ class User {
   private val countryCard: Set[CountryCard] = Set.empty
 
   def payMoney(money: Int): Option[MoneyBundle] = {
-    if(money > wallet.maxMoney){
+    if (money > wallet.maxMoney) {
       return None
     }
     Some(wallet.give(money))

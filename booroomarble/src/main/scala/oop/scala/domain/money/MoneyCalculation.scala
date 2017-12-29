@@ -16,9 +16,11 @@ object MoneyCalculation {
     }
     bundle
   }
+
   def addValueToMoneyBundle(giveMoney: Int): MoneyBundle = {
     calcMoney(giveMoney, None)
   }
+
   def minusValueToMoneyBundle(giveMoney: Int, moneyBundle: MoneyBundle): MoneyBundle = {
     calcMoney(giveMoney, Some(moneyBundle))
   }
