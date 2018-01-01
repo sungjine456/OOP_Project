@@ -11,7 +11,7 @@ class UserTest extends FlatSpec {
 
     assert(user.containsCard(card) === false)
 
-    user.getCard(card)
+    user.addCard(card)
 
     assert(user.containsCard(card) === true)
   }
@@ -20,7 +20,7 @@ class UserTest extends FlatSpec {
     val user: User = new User
     assert(user.payMoney(1000) === None)
 
-    user.getMoney(new MoneyBundle(1000))
+    user.receive(new MoneyBundle(1000))
 
     assert(user.payMoney(1000).get.maxMoney === 1000)
   }

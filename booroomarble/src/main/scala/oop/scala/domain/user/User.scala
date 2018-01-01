@@ -15,7 +15,7 @@ class User {
     Some(wallet.give(money))
   }
 
-  def getMoney(money: MoneyBundle): Unit = {
+  def receive(money: MoneyBundle): Unit = {
     wallet.put(money)
   }
 
@@ -23,7 +23,7 @@ class User {
     countryCard.contains(card)
   }
 
-  def getCard(card: CountryCard): Unit = {
+  def addCard(card: CountryCard): Unit = {
     countryCard add card
   }
 }
