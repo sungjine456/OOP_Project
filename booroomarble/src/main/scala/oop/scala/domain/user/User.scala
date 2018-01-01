@@ -8,6 +8,10 @@ class User {
   private val wallet: Wallet = new Wallet
   private val countryCard: Set[CountryCard] = Set.empty
 
+  def maxMoney: Int = {
+    wallet.maxMoney
+  }
+
   def payMoney(money: Int): Option[MoneyBundle] = {
     if (money > wallet.maxMoney) {
       return None

@@ -1,5 +1,7 @@
 package oop.scala.domain.map
 
-trait Piece {
+import oop.scala.domain.user.User
 
+trait Piece {
+  def visit(user: User): Unit
 }
