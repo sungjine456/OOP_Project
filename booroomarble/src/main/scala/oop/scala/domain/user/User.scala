@@ -23,7 +23,7 @@ class User {
     wallet.put(money)
   }
 
-  def containsCard(card: CountryCard): Boolean = {
+  def haveCard(card: CountryCard): Boolean = {
     countryCard.contains(card)
   }
 

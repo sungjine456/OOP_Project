@@ -5,15 +5,15 @@ import oop.scala.domain.money.MoneyBundle
 import org.scalatest.FlatSpec
 
 class UserTest extends FlatSpec {
-  "getCard" should "add the card" in {
+  "addCard" should "add the card" in {
     val user: User = new User
     val card = CountryCard("서울", 100000, 20000)
 
-    assert(user.containsCard(card) === false)
+    assert(user.haveCard(card) === false)
 
     user.addCard(card)
 
-    assert(user.containsCard(card) === true)
+    assert(user.haveCard(card) === true)
   }
 
   "payMoney" should "get money out of wallet" in {
