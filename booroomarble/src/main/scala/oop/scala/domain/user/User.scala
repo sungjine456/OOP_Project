@@ -4,7 +4,7 @@ import oop.scala.domain.card.CountryCard
 import oop.scala.domain.money.{ MoneyBundle, Wallet }
 import scala.collection.mutable.Set
 
-class User {
+case class User(id: String) {
   private val wallet: Wallet = new Wallet
   private val countryCard: Set[CountryCard] = Set.empty
 

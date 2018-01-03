@@ -5,7 +5,7 @@ import org.scalatest.FlatSpec
 
 class StartPieceTest extends FlatSpec {
   "visit()" should "make people receive money" in {
-    val user = new User
+    val user = User("admin")
 
     assert(user.maxMoney === 0)
 

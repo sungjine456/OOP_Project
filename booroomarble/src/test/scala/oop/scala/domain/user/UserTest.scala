@@ -6,7 +6,7 @@ import org.scalatest.FlatSpec
 
 class UserTest extends FlatSpec {
   "addCard" should "add the card" in {
-    val user: User = new User
+    val user: User = User("admin")
     val card = CountryCard("서울", 100000, 20000)
 
     assert(user.haveCard(card) === false)
@@ -17,7 +17,7 @@ class UserTest extends FlatSpec {
   }
 
   "payMoney" should "get money out of wallet" in {
-    val user: User = new User
+    val user: User = User("admin")
     assert(user.payMoney(1000) === None)
 
     user.receive(new MoneyBundle(1000))
