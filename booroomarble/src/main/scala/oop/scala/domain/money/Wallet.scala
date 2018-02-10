@@ -19,12 +19,8 @@ class Wallet {
 
   /**
    * 지갑에 돈을 넣기 위한 함수
-   * @param giveMoney 지갑에 넣을 금액
+   * @param bundle 지갑에 넣을 금액
    */
-  def put(giveMoney: Int): Unit = {
-    put(MoneyCalculation.addValueToMoneyBundle(giveMoney))
-  }
-
   def put(bundle: MoneyBundle): Unit = {
     moneyBundle.put(bundle)
   }
@@ -35,8 +31,8 @@ class Wallet {
    * @param maxMoney 내가 받아야하는 총 금액
    * @return 거슬러 줘야하는 금액
    */
-  def receive(receiveMoney: MoneyBundle, maxMoney: Int): Option[MoneyBundle] = {
-    val backMoney = receiveMoney.maxMoney - maxMoney
+  def receive(receiveMoney: MoneyBundle, maxMoney: MoneyBundle): Option[MoneyBundle] = {
+    val backMoney = receiveMoney.maxMoney - maxMoney.maxMoney
 
     // 받을 금액보다 조금 받았을 때
     if (backMoney < 0) {
@@ -46,7 +42,7 @@ class Wallet {
     moneyBundle.put(receiveMoney)
 
     if (backMoney == 0) Some(MoneyBundle.apply)
-    else Option(MoneyCalculation.minusValueToMoneyBundle(backMoney, moneyBundle))
+    else Option(MoneyCalculation.minusValueToMoneyBundle(MoneyBundle(backMoney), moneyBundle))
   }
 
   /**
@@ -54,7 +50,7 @@ class Wallet {
    * @param giveMoney 내가 줘야할 금액
    * @return 내가 주는 돈
    */
-  def give(giveMoney: Int): MoneyBundle = {
+  def give(giveMoney: MoneyBundle): MoneyBundle = {
     MoneyCalculation.minusValueToMoneyBundle(giveMoney, moneyBundle)
   }
 }

@@ -1,8 +1,9 @@
 package oop.scala.domain.user
 
+import scala.collection.mutable.Set
+
 import oop.scala.domain.card.CountryCard
 import oop.scala.domain.money.{ MoneyBundle, Wallet }
-import scala.collection.mutable.Set
 
 case class User(id: String) {
   private val wallet: Wallet = new Wallet
@@ -12,8 +13,8 @@ case class User(id: String) {
     wallet.maxMoney
   }
 
-  def payMoney(money: Int): Option[MoneyBundle] = {
-    if (money > wallet.maxMoney) {
+  def payMoney(money: MoneyBundle): Option[MoneyBundle] = {
+    if (money.maxMoney > wallet.maxMoney) {
       return None
     }
     Some(wallet.give(money))
