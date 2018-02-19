@@ -1,8 +1,8 @@
 package oop.scala.domain.money
 
 object MoneyCalculation {
-  private def calcMoney(giveMoney: MoneyBundle, moneyBundle: Option[MoneyBundle]): MoneyBundle = {
-    var moneyValue = giveMoney.maxMoney
+  private def calcMoney(giveMoney: Int, moneyBundle: Option[MoneyBundle]): MoneyBundle = {
+    var moneyValue = giveMoney
     val bundle = new MoneyBundle
     for (key <- bundle.keySet) {
       if (moneyValue / key.value > 0) {
@@ -17,11 +17,15 @@ object MoneyCalculation {
     bundle
   }
 
-  def addValueToMoneyBundle(giveMoney: MoneyBundle): MoneyBundle = {
+  def addValueToMoneyBundle(giveMoney: Int): MoneyBundle = {
     calcMoney(giveMoney, None)
   }
 
+  def addValueToMoneyBundle(giveMoney: MoneyBundle): MoneyBundle = {
+    calcMoney(giveMoney.maxMoney, None)
+  }
+
   def minusValueToMoneyBundle(giveMoney: MoneyBundle, moneyBundle: MoneyBundle): MoneyBundle = {
-    calcMoney(giveMoney, Some(moneyBundle))
+    calcMoney(giveMoney.maxMoney, Some(moneyBundle))
   }
 }

@@ -51,7 +51,7 @@ class MoneyBundle(money: Int = 0) {
   }
 
   private def initialize(money: Int) {
-    if (money != 0) put(MoneyCalculation.addValueToMoneyBundle(MoneyBundle(money)))
+    if (money != 0) put(MoneyCalculation.addValueToMoneyBundle(money))
   }
 }
 

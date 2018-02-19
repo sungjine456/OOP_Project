@@ -1,6 +1,7 @@
 package oop.scala.domain.map
 
 import oop.scala.domain.card.CountryCard
+import oop.scala.domain.money.MoneyBundle
 import oop.scala.domain.user.User
 
 case class CountryPiece(card: CountryCard) extends Piece {
@@ -15,7 +16,7 @@ case class CountryPiece(card: CountryCard) extends Piece {
           card.edificeUpgrade()
         }
       case Some(o) =>
-        user.payMoney(card.totalTollFee) match {
+        user.payMoney(MoneyBundle(card.totalTollFee)) match {
           case Some(m) => o.receive(m)
           case None => // TODO: 방문자는 파산했으며 파산에 대한 기능을 만들어야한다.
         }
