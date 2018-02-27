@@ -1,15 +1,13 @@
 package oop.scala.domain.card
 
-import oop.scala.domain.card.event.{ DepositEvent, WithdrawEvent }
-import oop.scala.domain.money.ThousandWon
+import oop.scala.domain.card.repository.{ CountryCardRepository, GoldCardRepository }
 
 object CardRepository {
-  private val goldCardRepository = {
-    val list: List[GoldCard] = List(GoldCard("천원 이득", new DepositEvent(ThousandWon)))
-    list :+ GoldCard("천원 손해", new WithdrawEvent(ThousandWon))
-  }
+  def getGoldCard(index: Int): GoldCard = GoldCardRepository.get(index)
 
-  def getGoldCardList: List[GoldCard] = {
-    goldCardRepository
-  }
+  def getGoldCardSeq(count: Int): Seq[GoldCard] = GoldCardRepository.getSeq(count)
+
+  def getCountryCard(index: Int): CountryCard = CountryCardRepository.get(index)
+
+  def getCountryCardSeq(count: Int): Seq[CountryCard] = CountryCardRepository.getSeq(count)
 }
