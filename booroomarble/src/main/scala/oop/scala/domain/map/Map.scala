@@ -1,6 +1,7 @@
 package oop.scala.domain.map
 
 import oop.scala.domain.card.CardRepository
+import oop.scala.domain.user.User
 
 object Map {
   // 시작 칸
@@ -13,10 +14,6 @@ object Map {
 
   initialized()
 
-  def piece(index: Int): Piece = {
-    map(index)
-  }
-
   def initialized(): Unit = {
     for (i <- 0 until MaxMapSize) {
       map :+ CountryPiece(CardRepository.getCountryCard(i))
@@ -24,5 +21,13 @@ object Map {
         map :+ GoldCardPiece(CardRepository.getGoldCard(i / 3 - 1))
       }
     }
+  }
+
+  def move(moveCount: Int, user: User): Piece = {
+    val position = moveCount + user.position
+
+    val moveTo = if(position > MaxMapSize) position - MaxMapSize else position
+
+    map(moveTo)
   }
 }
