@@ -8,7 +8,7 @@ import oop.scala.domain.money.{ MoneyBundle, Wallet }
 case class User(id: String) {
   private val wallet: Wallet = new Wallet
   private val countryCard: Set[CountryCard] = Set.empty
-  private val mapPosition: Int = 0
+  private var _position: Int = 0
 
   def maxMoney: Int = {
     wallet.maxMoney
@@ -33,5 +33,9 @@ case class User(id: String) {
     countryCard add card
   }
 
-  def position: Int = mapPosition
+  def position_= (position: Int): Unit = {
+    _position = position
+  }
+
+  def position: Int = _position
 }

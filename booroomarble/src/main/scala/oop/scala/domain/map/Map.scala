@@ -28,6 +28,7 @@ object Map {
 
     val moveTo = if(position > MaxMapSize) position - MaxMapSize else position
 
+    user.position = moveTo
     map(moveTo)
   }
 }
