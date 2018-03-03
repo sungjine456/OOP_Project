@@ -23,12 +23,17 @@ object Map {
     }
   }
 
-  def move(moveCount: Int, user: User): Piece = {
+  def move(moveCount: Int, user: User): Unit = {
     val position = moveCount + user.position
 
-    val moveTo = if(position > MaxMapSize) position - MaxMapSize else position
+    val moveTo = if (position > MaxMapSize) position - MaxMapSize else position
 
     user.position = moveTo
-    map(moveTo)
+
+    map(moveTo).visit(user)
+  }
+
+  def getPosition(piece: Piece): Int = {
+    map.indexOf(piece)
   }
 }

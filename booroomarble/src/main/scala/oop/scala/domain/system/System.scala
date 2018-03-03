@@ -17,13 +17,23 @@ class System(userCount: Int) {
     }
   }
 
+  def activeUser: User = users(activeIndex)
+
   def throwDice: Unit = {
     val cast: Int = Dice.cast
 
-    val user: User = users(activeIndex)
-    val piece: Piece = map.move(cast, user)
+    map.move(cast, activeUser)
 
-    piece.visit(user)
+    changeActiveIndex
+  }
+
+  //TODO: 나중에 골드 카드나 우주선을 통해 사용자가 원하는 혹은 골드 카드가 지정한 장소로 이동하기 위한 메소드
+  def move(piece: Piece): Unit = {
+    val piecePosition = map.getPosition(piece)
+
+    val moveTo = piecePosition - activeUser.position
+
+    map.move(moveTo, activeUser)
 
     changeActiveIndex
   }
