@@ -11,13 +11,13 @@ class System(userCount: Int) {
 
   initialized()
 
-  def initialized(): Unit = {
+  private def initialized(): Unit = {
     for (i <- 0 until userCount) {
       users :+ User(s"$i 번 유저")
     }
   }
 
-  def activeUser: User = users(activeIndex)
+  private def activeUser: User = users(activeIndex)
 
   def throwDice: Unit = {
     val cast: Int = Dice.cast
@@ -39,6 +39,6 @@ class System(userCount: Int) {
   }
 
   private def changeActiveIndex: Unit = {
-    activeIndex = if (activeIndex + 1 >= userCount) 0 else activeIndex + 1
+    activeIndex = if (activeIndex > userCount) 0 else activeIndex + 1
   }
 }

@@ -14,7 +14,7 @@ object Map {
 
   initialized()
 
-  def initialized(): Unit = {
+  private def initialized(): Unit = {
     for (i <- 0 until MaxMapSize) {
       map :+ CountryPiece(CardRepository.getCountryCard(i))
       if (i != 0 && i % 3 == 0) {
