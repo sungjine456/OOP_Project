@@ -38,4 +38,6 @@ case class User(id: String) {
   }
 
   def position: Int = _position
+
+  def finishPlaying: Boolean = maxMoney <= 0 && countryCard.isEmpty
 }

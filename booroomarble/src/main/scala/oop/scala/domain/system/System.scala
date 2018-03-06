@@ -1,5 +1,7 @@
 package oop.scala.domain.system
 
+import scala.annotation.tailrec
+
 import oop.scala.domain.dice.Dice
 import oop.scala.domain.map.{ Map, Piece }
 import oop.scala.domain.user.User
@@ -17,7 +19,14 @@ class System(userCount: Int) {
     }
   }
 
-  private def activeUser: User = users(activeIndex)
+  @tailrec
+  private def activeUser: User = {
+    if(users(activeIndex).finishPlaying) {
+      changeActiveIndex
+
+      activeUser
+    } else users(activeIndex)
+  }
 
   def throwDice: Unit = {
     val cast: Int = Dice.cast
