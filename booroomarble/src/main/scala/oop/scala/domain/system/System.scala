@@ -3,12 +3,15 @@ package oop.scala.domain.system
 import scala.annotation.tailrec
 
 import oop.scala.domain.dice.Dice
-import oop.scala.domain.map.{ Map, Piece }
+import oop.scala.domain.map.Piece
 import oop.scala.domain.user.User
 
+import scala.collection.mutable.Map
+
 class System(userCount: Int) {
-  private val map = Map
+  private val map = oop.scala.domain.map.Map
   private val users: Seq[User] = Nil
+  private val usersPosition: Map[User, Int] = Map.empty
   private var activeIndex = 0
 
   initialized()
@@ -31,7 +34,9 @@ class System(userCount: Int) {
   def throwDice: Unit = {
     val cast: Int = Dice.cast
 
-    map.move(cast, activeUser)
+    usersPosition(activeUser) = usersPosition(activeUser) + cast
+
+    map.moveTo(usersPosition(activeUser), activeUser)
 
     changeActiveIndex
   }
@@ -40,9 +45,11 @@ class System(userCount: Int) {
   def move(piece: Piece): Unit = {
     val piecePosition = map.getPosition(piece)
 
-    val moveTo = piecePosition - activeUser.position
+    val moveTo = map.MaxMapSize + piecePosition - usersPosition(activeUser)
 
-    map.move(moveTo, activeUser)
+    usersPosition(activeUser) = moveTo
+
+    map.moveTo(moveTo, activeUser)
 
     changeActiveIndex
   }

@@ -10,7 +10,7 @@ object Map {
   // 각각의 칸을 담고 있을 하나의 리스트를 가진다.
   // 리스트로 하되 리스트의 크기를 넘어가면 0으로 돌아가게...
   private val map: Seq[Piece] = Seq(new StartPiece)
-  private val MaxMapSize = 12
+  val MaxMapSize = 12
 
   initialized()
 
@@ -23,12 +23,8 @@ object Map {
     }
   }
 
-  def move(moveCount: Int, user: User): Unit = {
-    val position = moveCount + user.position
-
-    val moveTo = if (position > MaxMapSize) position - MaxMapSize else position
-
-    user.position = moveTo
+  def moveTo(movePosition: Int, user: User): Unit = {
+    val moveTo = if (movePosition > MaxMapSize) movePosition - MaxMapSize else movePosition
 
     map(moveTo).visit(user)
   }
