@@ -29,7 +29,13 @@ object Map {
     map(moveTo).visit(user)
   }
 
-  def getPosition(piece: Piece): Int = {
+  def moveTo(piece: Piece, user: User): Int = {
+    if(!map.contains(piece)){
+      throw new IllegalArgumentException("맵에 없는 곳입니다.")
+    }
+
+    piece.visit(user)
+
     map.indexOf(piece)
   }
 }

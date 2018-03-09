@@ -43,13 +43,11 @@ class System(userCount: Int) {
 
   //TODO: 나중에 골드 카드나 우주선을 통해 사용자가 원하는 혹은 골드 카드가 지정한 장소로 이동하기 위한 메소드
   def move(piece: Piece): Unit = {
-    val piecePosition = map.getPosition(piece)
+    val piecePosition = map.moveTo(piece, activeUser)
 
-    val moveTo = map.MaxMapSize + piecePosition - usersPosition(activeUser)
+    val movedPosition = map.MaxMapSize + piecePosition - usersPosition(activeUser)
 
-    usersPosition(activeUser) = moveTo
-
-    map.moveTo(moveTo, activeUser)
+    usersPosition(activeUser) = movedPosition
 
     changeActiveIndex
   }
