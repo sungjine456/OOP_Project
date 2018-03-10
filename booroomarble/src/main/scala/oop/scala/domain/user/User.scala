@@ -1,13 +1,11 @@
 package oop.scala.domain.user
 
-import scala.collection.mutable.Set
-
-import oop.scala.domain.card.CountryCard
+import oop.scala.domain.card.{ CountryCard, CountryCards }
 import oop.scala.domain.money.{ MoneyBundle, Wallet }
 
 case class User(id: String) {
   private val wallet: Wallet = new Wallet
-  private val countryCard: Set[CountryCard] = Set.empty
+  private val countryCards: CountryCards = new CountryCards
 
   def maxMoney: Int = {
     wallet.maxMoney
@@ -25,12 +23,12 @@ case class User(id: String) {
   }
 
   def haveCard(card: CountryCard): Boolean = {
-    countryCard.contains(card)
+    countryCards.contains(card)
   }
 
   def addCard(card: CountryCard): Unit = {
-    countryCard add card
+    countryCards add card
   }
 
-  def finishPlaying: Boolean = maxMoney <= 0 && countryCard.isEmpty
+  def finishPlaying: Boolean = maxMoney <= 0 && countryCards.isEmpty
 }
