@@ -20,4 +20,8 @@ class CountryCards {
   def smallWorth: CountryCard = {
     countryCards.minBy(cc => cc.totalTollFee)
   }
+
+  def totalValue: Int = {
+    countryCards.map(c => c.certificatePrice + c.edificeUpgradePrice).sum
+  }
 }

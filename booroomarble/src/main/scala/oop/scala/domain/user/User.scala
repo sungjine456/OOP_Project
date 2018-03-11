@@ -13,7 +13,10 @@ case class User(id: String) {
 
   def payMoney(money: MoneyBundle): Option[MoneyBundle] = {
     if (money.maxMoney > wallet.maxMoney) {
-      return None
+      if (money.maxMoney > wallet.maxMoney + countryCards.totalValue) {
+        return None
+      }
+      // 지갑에 돈이 없어 나라를 팔아야하는 경우
     }
     Some(wallet.give(money))
   }
