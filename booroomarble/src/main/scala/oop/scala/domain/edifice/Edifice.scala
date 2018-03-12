@@ -8,7 +8,7 @@ trait Edifice {
   // 통행료
   val tollFee: Int
   // 인상률
-  val increaseRate: Int
+  protected val increaseRate: Int
 
   def upgrade: Option[Edifice]
 }

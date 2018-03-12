@@ -13,7 +13,7 @@ case class CountryPiece(card: CountryCard) extends Piece {
       case Some(o) if o == user => // TODO: 사용자가 건물 짓기를 원한다면 건물을 지을 수 있도록 해야한다.
         // 산다고 했을 때
         if(o.maxMoney >= card.edificeUpgradePrice){
-          card.edificeUpgrade()
+          card.edificeUpgrade(o.maxMoney)
         }
       case Some(o) =>
         user.payMoney(MoneyBundle(card.totalTollFee)) match {
