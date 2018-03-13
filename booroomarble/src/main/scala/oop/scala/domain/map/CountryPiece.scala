@@ -10,10 +10,10 @@ case class CountryPiece(card: CountryCard) extends Piece {
   // TODO: 방법1. event와 비슷한 유형을 만들고 event를 반환하도록 하여 시스템에서 처리하도록 한다?
   override def visit(user: User): Unit = {
     owner match {
-      case Some(o) if o == user => // TODO: 사용자가 건물 짓기를 원한다면 건물을 지을 수 있도록 해야한다.
+      case Some(owner) if owner == user => // TODO: 사용자가 건물 짓기를 원한다면 건물을 지을 수 있도록 해야한다.
         // 산다고 했을 때
-        if(o.maxMoney >= card.edificeUpgradePrice){
-          card.edificeUpgrade(o.maxMoney)
+        if(owner.maxMoney >= card.edificeUpgradePrice){
+          card.edificeUpgrade(owner.maxMoney)
         }
       case Some(o) =>
         user.payMoney(MoneyBundle(card.totalTollFee)) match {
