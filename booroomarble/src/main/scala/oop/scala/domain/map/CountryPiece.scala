@@ -21,8 +21,11 @@ case class CountryPiece(card: CountryCard) extends Piece {
           case None => // TODO: 방문자는 파산했으며 파산에 대한 기능을 만들어야한다.
         }
       case None =>
-        user.addCard(card)
-        owner = Some(user)
+        // TODO: 사용자가 땅을 사기를 원할 때 땅을 살 수 있도록 해야한다.
+        if(user.maxMoney >= card.edificeUpgradePrice) {
+          user.addCard(card)
+          owner = Some(user)
+        }
     }
   }
 }
