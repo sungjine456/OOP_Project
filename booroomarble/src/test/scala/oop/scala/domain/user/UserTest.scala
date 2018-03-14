@@ -18,10 +18,10 @@ class UserTest extends FlatSpec {
 
   "payMoney" should "get money out of wallet" in {
     val user: User = User("admin")
-    assert(user.payMoney(MoneyBundle(1000)) === None)
+    assert(user.payMoney(MoneyBundle(1000)).maxMoney === 0)
 
     user.receive(new MoneyBundle(1000))
 
-    assert(user.payMoney(MoneyBundle(1000)).get.maxMoney === 1000)
+    assert(user.payMoney(MoneyBundle(1000)).maxMoney === 1000)
   }
 }

@@ -53,4 +53,6 @@ class Wallet {
   def give(giveMoney: MoneyBundle): MoneyBundle = {
     MoneyCalculation.minusValueToMoneyBundle(giveMoney, moneyBundle)
   }
+
+  def total: MoneyBundle = moneyBundle
 }
