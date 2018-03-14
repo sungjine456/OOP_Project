@@ -16,12 +16,12 @@ case class CountryPiece(card: CountryCard) extends Piece {
           user.addCard(card)
           owner = Some(user)
         }
-      case Some(owner) if owner == user => // TODO: 사용자가 건물 짓기를 원한다면 건물을 지을 수 있도록 해야한다.
+      case Some(ownerUser) if ownerUser == user => // TODO: 사용자가 건물 짓기를 원한다면 건물을 지을 수 있도록 해야한다.
         // 산다고 했을 때
-        if(owner.maxMoney >= card.edificeUpgradePrice){
-          card.edificeUpgrade(owner.maxMoney)
+        if(ownerUser.maxMoney >= card.edificeUpgradePrice){
+          card.edificeUpgrade(ownerUser.maxMoney)
         }
-      case Some(o) => owner.get.receive(user.payMoney(MoneyBundle(card.totalTollFee)))
+      case Some(_) => owner.get.receive(user.payMoney(MoneyBundle(card.totalTollFee)))
     }
   }
 }
