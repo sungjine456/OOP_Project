@@ -1,6 +1,6 @@
 package oop.scala.domain.bank
 
-import oop.scala.domain.money.{ Money, MoneyBundle, MoneyCalculation }
+import oop.scala.domain.money.{ MoneyBundle, MoneyCalculation }
 
 /**
  * 은행은 돈을 무제한으로 가지고 있다고 설정한다.
