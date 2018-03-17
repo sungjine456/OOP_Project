@@ -1,9 +1,9 @@
 package oop.scala.domain.card.event
 
-import oop.scala.domain.money.{ Money, MoneyBundle }
+import oop.scala.domain.money.MoneyBundle
 import oop.scala.domain.user.User
 
-class ReceiveMoneyEvent(range: Money) extends Event {
+trait ReceiveMoneyEvent extends MoneyEvent {
   override def publish(user: User): Unit = {
     user.receive(MoneyBundle(range.value))
   }
