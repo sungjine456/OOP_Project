@@ -11,7 +11,7 @@ class PayMoneyEventTest extends FlatSpec {
 
     assert(user.maxMoney == 1000)
 
-    val event = new PayMoneyEvent(ThousandWon)
+    val event = new PayMoneyToBankEvent(ThousandWon)
     event.publish(user)
 
     assert(user.maxMoney == 0)

@@ -5,31 +5,31 @@ import org.scalatest.FlatSpec
 
 class BankTest extends FlatSpec {
   "withdraw" should "make MoneyBundle with calculate money" in {
-    var bundle = Bank.withdraw(MoneyBundle.apply(100000))
+    var bundle = Bank.withdraw(100000)
 
     assert(bundle.get(HundredThousandWon) === 1)
 
-    bundle = Bank.withdraw(MoneyBundle.apply(500000))
+    bundle = Bank.withdraw(500000)
 
     assert(bundle.get(FiveHundredThousandWon) === 1)
 
-    bundle = Bank.withdraw(MoneyBundle.apply(50000))
+    bundle = Bank.withdraw(50000)
 
     assert(bundle.get(FiftyThousandWon) === 1)
 
-    bundle = Bank.withdraw(MoneyBundle.apply(10000))
+    bundle = Bank.withdraw(10000)
 
     assert(bundle.get(TenThousandWon) === 1)
 
-    bundle = Bank.withdraw(MoneyBundle.apply(5000))
+    bundle = Bank.withdraw(5000)
 
     assert(bundle.get(FiveThousandWon) === 1)
 
-    bundle = Bank.withdraw(MoneyBundle.apply(1000))
+    bundle = Bank.withdraw(1000)
 
     assert(bundle.get(ThousandWon) === 1)
 
-    bundle = Bank.withdraw(MoneyBundle.apply(567000))
+    bundle = Bank.withdraw(567000)
 
     assert(bundle.get(FiveHundredThousandWon) === 1)
     assert(bundle.get(HundredThousandWon) === 0)
