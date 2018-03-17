@@ -50,6 +50,30 @@ class MoneyBundle(money: Int = 0) {
     moneyBundle(moneyKind)
   }
 
+  def +(addMoneyBundle: MoneyBundle): MoneyBundle = {
+    MoneyBundle(addMoneyBundle.maxMoney + maxMoney)
+  }
+
+  def -(minusMoneyBundle: MoneyBundle): MoneyBundle = {
+    MoneyBundle(maxMoney - minusMoneyBundle.maxMoney)
+  }
+
+  def >=(compareMoneyBundle: MoneyBundle): Boolean = {
+    maxMoney >= compareMoneyBundle.maxMoney
+  }
+
+  def <=(compareMoneyBundle: MoneyBundle): Boolean = {
+    maxMoney <= compareMoneyBundle.maxMoney
+  }
+
+  def >(compareMoneyBundle: MoneyBundle): Boolean = {
+    maxMoney > compareMoneyBundle.maxMoney
+  }
+
+  def <(compareMoneyBundle: MoneyBundle): Boolean = {
+    maxMoney < compareMoneyBundle.maxMoney
+  }
+
   private def initialize(money: Int) {
     if (money != 0) put(MoneyCalculation.addValueToMoneyBundle(money))
   }

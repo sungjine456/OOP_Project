@@ -1,7 +1,7 @@
 package oop.scala.domain.bank
 
-import oop.scala.domain.money.{ MoneyBundle, MoneyCalculation }
 import oop.scala.domain.exception.WrongPriceException
+import oop.scala.domain.money.{ MoneyBundle, MoneyCalculation }
 
 /**
  * 은행은 돈을 무제한으로 가지고 있다고 설정한다.
@@ -21,8 +21,7 @@ object Bank {
    * @param receivedMoney 받은 금액
    */
   def expenses(moneyToReceive: MoneyBundle, receivedMoney: MoneyBundle): MoneyBundle = {
-    if(moneyToReceive.maxMoney >= receivedMoney.maxMoney)
-      MoneyBundle(moneyToReceive.maxMoney - receivedMoney.maxMoney)
+    if(moneyToReceive >= receivedMoney) moneyToReceive - receivedMoney
     else throw new WrongPriceException
   }
 }
