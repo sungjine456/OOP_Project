@@ -15,7 +15,6 @@ class MoneyBundle(money: Int = 0) {
     FiveHundredThousandWon -> 0
   )
 
-  // 가지고 있는 총 금액
   def maxMoney: Int = {
     moneyBundle.map(m => m._1.value * m._2).sum
   }
@@ -42,6 +41,8 @@ class MoneyBundle(money: Int = 0) {
   def withdraw[A <: Money](money: A, value: Int): Unit = {
     if (false) {
       // 가지고 있는 금액보다 많이 뺄 때
+      // TODO: 돈에 대한 상위 개념을 추가하여 가지고 있는 money 보다 들어온 금액이 많을 때
+      // TODO: 상위 단위의 돈을 찾을 수 있도록 구조 변경
     }
     moneyBundle(money) = moneyBundle(money) - value
   }
