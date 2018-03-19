@@ -13,25 +13,20 @@ class MoneyBundle(money: Int = 0) {
     FiveHundredThousandWon -> 0
   )
 
-  def maxMoney: Int = {
-    moneyBundle.map(m => m._1.value * m._2).sum
-  }
+  def maxMoney: Int =  moneyBundle.map(m => m._1.value * m._2).sum
+
   val keySet: Set[Money] = moneyBundle.keySet
 
   initialize(money)
 
-  def put[A <: Money](money: A) {
-    put(money, 1)
-  }
+  def put[A <: Money](money: A) = put(money, 1)
 
   def put[A <: Money](money: A, value: Int) {
     moneyBundle(money) = moneyBundle(money) + value
   }
 
   def put(bundle: MoneyBundle): Unit = {
-    for (key <- keySet) {
-      put(key, bundle.get(key))
-    }
+    for (key <- keySet)  put(key, bundle.get(key))
   }
 
   def withdraw[A <: Money](money: A, value: Int): Unit = {
@@ -43,9 +38,7 @@ class MoneyBundle(money: Int = 0) {
     moneyBundle(money) = moneyBundle(money) - value
   }
 
-  def get(moneyKind: Money): Int = {
-    moneyBundle(moneyKind)
-  }
+  def get(moneyKind: Money): Int =  moneyBundle(moneyKind)
 
   def +(addMoneyBundle: MoneyBundle): MoneyBundle = {
     MoneyBundle(addMoneyBundle.maxMoney + maxMoney)

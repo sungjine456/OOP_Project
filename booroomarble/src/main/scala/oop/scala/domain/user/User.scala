@@ -7,9 +7,7 @@ case class User(id: String) {
   private val wallet: Wallet = new Wallet
   private val countryCards: CountryCards = new CountryCards
 
-  def maxMoney: Int = {
-    wallet.maxMoney
-  }
+  def maxMoney: Int = wallet.maxMoney
 
   def payMoney(money: MoneyBundle): MoneyBundle = {
     if (money.maxMoney > wallet.maxMoney) {
@@ -21,17 +19,11 @@ case class User(id: String) {
     wallet.give(money)
   }
 
-  def receive(money: MoneyBundle): Unit = {
-    wallet.put(money)
-  }
+  def receive(money: MoneyBundle): Unit = wallet.put(money)
 
-  def haveCard(card: CountryCard): Boolean = {
-    countryCards.contains(card)
-  }
+  def haveCard(card: CountryCard): Boolean = countryCards.contains(card)
 
-  def addCard(card: CountryCard): Unit = {
-    countryCards add card
-  }
+  def addCard(card: CountryCard): Unit = countryCards add card
 
   def finishPlaying: Boolean = maxMoney <= 0 && countryCards.isEmpty
 }

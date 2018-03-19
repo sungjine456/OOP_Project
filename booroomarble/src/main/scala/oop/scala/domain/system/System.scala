@@ -17,9 +17,7 @@ class System(userCount: Int) {
   initialized()
 
   private def initialized(): Unit = {
-    for (i <- 0 until userCount) {
-      users :+ User(s"$i 번 유저")
-    }
+    for (i <- 0 until userCount) users :+ User(s"$i 번 유저")
   }
 
   @tailrec

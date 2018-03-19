@@ -9,17 +9,11 @@ class CountryCards {
     countryCards.contains(card)
   }
 
-  def add(card: CountryCard): Unit = {
-    countryCards add card
-  }
+  def add(card: CountryCard): Unit = countryCards add card
 
-  def isEmpty: Boolean = {
-    countryCards.isEmpty
-  }
+  def isEmpty: Boolean =  countryCards.isEmpty
 
-  def smallWorth: CountryCard = {
-    countryCards.minBy(cc => cc.totalTollFee)
-  }
+  def smallWorth: CountryCard =  countryCards.minBy(cc => cc.totalTollFee)
 
   def totalValue: Int = {
     countryCards.map(c => c.certificatePrice + c.edificeUpgradePrice).sum
