@@ -1,7 +1,5 @@
 package oop.scala.domain.money
 
-import scala.collection.mutable.Map
-
 /**
  * 돈을 주고 받을 때 사용하기 위한 클래스
  */
@@ -18,9 +16,7 @@ class MoneyBundle(money: Int = 0) {
   def maxMoney: Int = {
     moneyBundle.map(m => m._1.value * m._2).sum
   }
-
-  val keySet: List[Money] = List(FiveHundredThousandWon, HundredThousandWon, FiftyThousandWon,
-    TenThousandWon, FiveThousandWon, ThousandWon)
+  val keySet: Set[Money] = moneyBundle.keySet
 
   initialize(money)
 
