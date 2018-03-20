@@ -25,17 +25,17 @@ class Wallet {
    * @return 거슬러 줘야하는 금액
    */
   def receive(receiveMoney: MoneyBundle, maxMoney: MoneyBundle): Option[MoneyBundle] = {
-    val backMoney = receiveMoney.maxMoney - maxMoney.maxMoney
-
-    // 받을 금액보다 조금 받았을 때
-    if (backMoney < 0) {
+    if (receiveMoney < maxMoney) {
+      // TODO: 돈을 받았으나 거슬러 줄 돈이 부족하다. 은행에 돈을 바꿔주는 기능이 필요하다.
       return None
     }
 
+    val backMoney = receiveMoney - maxMoney
+
     moneyBundle.put(receiveMoney)
 
-    if (backMoney == 0) Some(MoneyBundle.apply)
-    else Option(MoneyCalculation.minusValueToMoneyBundle(MoneyBundle(backMoney), moneyBundle))
+    if (backMoney.isEmpty) Some(MoneyBundle(0))
+    else Option(MoneyCalculation.minusValueToMoneyBundle(backMoney, moneyBundle))
   }
 
   /**

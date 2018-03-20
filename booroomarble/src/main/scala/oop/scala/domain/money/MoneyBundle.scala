@@ -40,6 +40,8 @@ class MoneyBundle(money: Int = 0) {
 
   def get(moneyKind: Money): Int =  moneyBundle(moneyKind)
 
+  def isEmpty: Boolean = maxMoney == 0
+
   def +(addMoneyBundle: MoneyBundle): MoneyBundle = {
     MoneyBundle(addMoneyBundle.maxMoney + maxMoney)
   }
