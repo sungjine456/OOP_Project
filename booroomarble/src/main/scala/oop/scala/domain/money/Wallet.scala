@@ -4,13 +4,10 @@ package oop.scala.domain.money
  * 돈을 가지고 있기 위한 클래스
  */
 class Wallet {
-  // 가지고 있는 총 금액
-  def maxMoney: Int = moneyBundle.maxMoney
-
-  // 각 지폐 별로 가지고 있는 갯수
   private val moneyBundle: MoneyBundle = new MoneyBundle
 
-  // 현재 가지고 있는 지폐 중 제일 최고가인 지폐
+  def maxMoney: Int = moneyBundle.maxMoney
+
   def topBankNote: Option[Money] = {
     moneyBundle.keySet.find(key => moneyBundle.get(key) > 0)
   }
