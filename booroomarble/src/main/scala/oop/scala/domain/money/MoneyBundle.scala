@@ -15,14 +15,17 @@ class MoneyBundle(money: Int = 0) {
 
   def maxMoney: Int =  moneyBundle.map(m => m._1.value * m._2).sum
 
-  val keySet: Set[Money] = moneyBundle.keySet
+  val keySet: Seq[Money] = Seq(FiveHundredThousandWon, HundredThousandWon, FiftyThousandWon,
+    TenThousandWon, FiveThousandWon, ThousandWon)
 
   initialize(money)
 
-  def put[A <: Money](money: A) = put(money, 1)
+  def put[A <: Money](money: A): Unit = put(money, 1)
 
   def put[A <: Money](money: A, value: Int) {
-    moneyBundle(money) = moneyBundle(money) + value
+    val updateValue = moneyBundle(money) + value
+
+    moneyBundle = moneyBundle + (money -> updateValue)
   }
 
   def put(bundle: MoneyBundle): Unit = {
@@ -35,7 +38,9 @@ class MoneyBundle(money: Int = 0) {
       // TODO: 돈에 대한 상위 개념을 추가하여 가지고 있는 money 보다 들어온 금액이 많을 때
       // TODO: 상위 단위의 돈을 찾을 수 있도록 구조 변경
     }
-    moneyBundle(money) = moneyBundle(money) - value
+    val updateValue = moneyBundle(money) - value
+
+    moneyBundle = moneyBundle + (money -> updateValue)
   }
 
   def get(moneyKind: Money): Int =  moneyBundle(moneyKind)
