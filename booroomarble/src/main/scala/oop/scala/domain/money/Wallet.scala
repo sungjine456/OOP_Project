@@ -34,7 +34,7 @@ class Wallet {
 
     moneyBundle.put(receiveMoney)
 
-    if (backMoney.isEmpty) Some(MoneyBundle(0))
+    if (backMoney.isEmpty) Some(MoneyBundle())
     else Option(MoneyCalculation.minusValueToMoneyBundle(backMoney, moneyBundle))
   }
 

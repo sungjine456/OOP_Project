@@ -4,7 +4,7 @@ import org.scalatest.FlatSpec
 
 class MoneyBundleTest extends FlatSpec {
   "put(money: A, value: Int)" should "add money as much as value" in {
-    val moneyBundle: MoneyBundle = MoneyBundle(0)
+    val moneyBundle: MoneyBundle = MoneyBundle()
 
     moneyBundle.put(ThousandWon, 10)
 
@@ -12,7 +12,7 @@ class MoneyBundleTest extends FlatSpec {
   }
 
   "put(money: A)" should "add money as much as value" in {
-    val moneyBundle: MoneyBundle = MoneyBundle(0)
+    val moneyBundle: MoneyBundle = MoneyBundle()
 
     moneyBundle.put(ThousandWon)
 

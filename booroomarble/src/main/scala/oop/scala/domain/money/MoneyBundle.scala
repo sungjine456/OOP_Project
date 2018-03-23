@@ -77,7 +77,7 @@ class MoneyBundle(money: Int = 0) {
 }
 
 object MoneyBundle {
-  def apply: MoneyBundle = new MoneyBundle
+  def apply(): MoneyBundle = new MoneyBundle(0)
 
   def apply(money: Int): MoneyBundle = new MoneyBundle(money)
 }
