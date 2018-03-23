@@ -38,4 +38,16 @@ class BankTest extends FlatSpec {
     assert(bundle.get(FiveThousandWon) === 1)
     assert(bundle.get(ThousandWon) === 2)
   }
+
+  "changeMoney" should "change the money to ten low money" in {
+    var bundle = Bank.changeMoney(TenThousandWon)
+
+    assert(bundle.get(TenThousandWon) === 0)
+    assert(bundle.get(FiveThousandWon) === 2)
+
+    bundle = Bank.changeMoney(FiftyThousandWon)
+
+    assert(bundle.get(FiftyThousandWon) === 0)
+    assert(bundle.get(TenThousandWon) === 5)
+  }
 }
