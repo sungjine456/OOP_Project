@@ -25,14 +25,7 @@ object Bank {
     else throw new WrongPriceException
   }
 
-  def changeMoney(money: Money): MoneyBundle = {
-    money.child match {
-      case Some(child: Money) =>
-        val moneyBundle = MoneyBundle()
-
-        moneyBundle.put(child, money.value / child.value)
-
-        moneyBundle
-    }
+  def changeMoney(money: Money): Option[MoneyBundle] = {
+    money.child.map(child => MoneyBundle(child, money.value / child.value))
   }
 }

@@ -40,14 +40,20 @@ class BankTest extends FlatSpec {
   }
 
   "changeMoney" should "change the money to ten low money" in {
-    var bundle = Bank.changeMoney(TenThousandWon)
+    var bundle = Bank.changeMoney(TenThousandWon).get
 
     assert(bundle.get(TenThousandWon) === 0)
     assert(bundle.get(FiveThousandWon) === 2)
 
-    bundle = Bank.changeMoney(FiftyThousandWon)
+    bundle = Bank.changeMoney(FiftyThousandWon).get
 
     assert(bundle.get(FiftyThousandWon) === 0)
     assert(bundle.get(TenThousandWon) === 5)
+  }
+
+  it should "return none if don't have child money" in {
+    var bundle = Bank.changeMoney(ThousandWon)
+
+    assert(bundle === None)
   }
 }
