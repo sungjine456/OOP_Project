@@ -100,4 +100,24 @@ class WalletTest extends FlatSpec {
     assert(wallet.maxMoney === 0)
     assert(bundle.maxMoney === 600000)
   }
+
+  "receive" should "not give money, If receive as money as should receive" in {
+    val wallet = new Wallet
+
+    assert(wallet.receive(MoneyBundle(), MoneyBundle()).get.maxMoney === 0)
+    assert(wallet.maxMoney === 0)
+  }
+
+  it should "give money, If receive more money than receive" in {
+    val wallet = new Wallet
+
+    assert(wallet.receive(MoneyBundle(1000), MoneyBundle()).get.maxMoney === 1000)
+    assert(wallet.maxMoney === 0)
+  }
+
+  it should "give money, If receive less money than receive" in {
+    val wallet = new Wallet
+
+    assert(wallet.receive(MoneyBundle(0), MoneyBundle(1000)) === None)
+  }
 }
