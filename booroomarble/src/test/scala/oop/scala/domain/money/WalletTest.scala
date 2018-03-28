@@ -120,4 +120,13 @@ class WalletTest extends FlatSpec {
 
     assert(wallet.receive(MoneyBundle(0), MoneyBundle(1000)) === None)
   }
+
+  it should "give money after changing money" in {
+    val wallet = new Wallet
+
+    wallet.put(MoneyBundle(10000))
+
+    assert(wallet.receive(MoneyBundle(10000), MoneyBundle(5000)).get.maxMoney === 5000)
+    assert(wallet.maxMoney === 15000)
+  }
 }

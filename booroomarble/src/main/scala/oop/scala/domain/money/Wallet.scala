@@ -26,7 +26,6 @@ class Wallet {
    */
   def receive(receiveMoney: MoneyBundle, maxMoney: MoneyBundle): Option[MoneyBundle] = {
     if (receiveMoney < maxMoney) {
-      // TODO: 돈을 받았으나 거슬러 줄 돈이 부족하다. 은행에 돈을 바꿔주는 기능이 필요하다.
       return None
     }
 
