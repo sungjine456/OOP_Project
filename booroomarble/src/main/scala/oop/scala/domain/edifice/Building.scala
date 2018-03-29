@@ -5,4 +5,6 @@ class Building(override val tollFee: Int) extends Edifice {
   override protected val increaseRate = 0
 
   override def upgrade: Option[Edifice] = None
+
+  override def subEdifice: Option[Edifice] = Some(new Hotel(0))
 }

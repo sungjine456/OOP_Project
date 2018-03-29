@@ -11,4 +11,6 @@ trait Edifice {
   protected val increaseRate: Int
 
   def upgrade: Option[Edifice]
+
+  def subEdifice: Option[Edifice]
 }

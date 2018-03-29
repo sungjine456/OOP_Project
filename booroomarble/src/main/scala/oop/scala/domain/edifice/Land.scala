@@ -5,4 +5,6 @@ class Land(override val tollFee: Int) extends Edifice {
   override protected val increaseRate = 2
 
   override def upgrade: Option[Edifice] = Some(new Villa(tollFee * increaseRate))
+
+  override def subEdifice: Option[Edifice] = None
 }
