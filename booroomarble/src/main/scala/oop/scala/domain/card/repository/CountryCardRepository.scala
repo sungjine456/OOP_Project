@@ -3,6 +3,8 @@ package oop.scala.domain.card.repository
 import oop.scala.domain.card.CountryCard
 
 object CountryCardRepository extends Repository[CountryCard] {
+  def apply(index: Int): CountryCard = get(index)
+
   override protected val cards: Seq[CountryCard] = Seq(CountryCard("서울", 1000, 1000),
     CountryCard("대전", 1000, 1000), CountryCard("수원", 1000, 1000), CountryCard("거창", 1000, 1000),
     CountryCard("대구", 1000, 1000), CountryCard("광명", 1000, 1000), CountryCard("무주", 1000, 1000),
