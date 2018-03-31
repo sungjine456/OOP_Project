@@ -2,8 +2,8 @@ package oop.scala.domain.card
 
 import oop.scala.domain.edifice.{ Edifice, Land }
 
-case class CountryCard(name: String, certificatePrice: Int, private val tollFee: Int) extends Card {
-  private var edifice: Edifice = Land(tollFee)
+case class CountryCard(name: String, certificatePrice: Int) extends Card {
+  private var edifice: Edifice = Land(certificatePrice)
 
   val edificeUpgradePrice: Int = edifice.price
 

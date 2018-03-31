@@ -7,7 +7,7 @@ import org.scalatest.FlatSpec
 class UserTest extends FlatSpec {
   "addCard" should "add the card" in {
     val user: User = User("admin")
-    val card = CountryCard("서울", 100000, 20000)
+    val card = CountryCard("서울", 100000)
 
     assert(user.haveCard(card) === false)
 

@@ -6,8 +6,8 @@ class CountryCardsTest extends FlatSpec {
   "smallWorth()" should "return small worth" in {
     val countryCards: CountryCards = new CountryCards
 
-    val countryCardOne = CountryCard("1", 1, 1)
-    val countryCardTwo = CountryCard("2", 100, 100)
+    val countryCardOne = CountryCard("1", 1)
+    val countryCardTwo = CountryCard("2", 100)
 
     countryCards.add(countryCardOne)
     countryCards.add(countryCardTwo)

@@ -1,7 +1,6 @@
 package oop.scala.domain.edifice
 
-case class Building(override val tollFee: Int) extends Edifice {
-  override val price = 500000
+case class Building(override val price: Int) extends Edifice {
   override protected val increaseRate = 0
 
   override def upgrade: Option[Edifice] = None
