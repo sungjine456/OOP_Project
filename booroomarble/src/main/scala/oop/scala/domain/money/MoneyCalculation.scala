@@ -3,7 +3,7 @@ package oop.scala.domain.money
 object MoneyCalculation {
   private def calcMoney(giveMoney: Int, moneyBundle: Option[MoneyBundle] = None): MoneyBundle = {
     var moneyValue = giveMoney
-    val bundle = new MoneyBundle
+    val bundle = MoneyBundle(0)
     for (key <- bundle.keySet) {
       if (moneyValue / key.value > 0) {
         moneyBundle match {

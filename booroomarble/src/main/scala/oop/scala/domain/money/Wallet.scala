@@ -4,7 +4,7 @@ package oop.scala.domain.money
  * 돈을 가지고 있기 위한 클래스
  */
 class Wallet {
-  private val moneyBundle: MoneyBundle = new MoneyBundle
+  private val moneyBundle: MoneyBundle = MoneyBundle(0)
 
   def maxMoney: Int = moneyBundle.maxMoney
 
