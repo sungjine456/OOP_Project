@@ -9,6 +9,7 @@ object Map {
   // 황금 카드를 뽑을 수 있는 칸
   // 각각의 칸을 담고 있을 하나의 리스트를 가진다.
   // 리스트로 하되 리스트의 크기를 넘어가면 0으로 돌아가게...
+  // TODO: 나라를 가지고 있는 칸의 경우 순서대로 나라의 땅값이 커지도록 수정할 필요가 있다.
   private val map: Seq[Piece] = Seq(StartPiece())
   val MaxMapSize = 12
 
