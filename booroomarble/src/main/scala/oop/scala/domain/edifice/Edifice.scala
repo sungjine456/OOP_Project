@@ -6,7 +6,7 @@ trait Edifice {
   private val valueToDetermineToll: Int = 3
   val price: Int
   val tollFee: Int = price * valueToDetermineToll
-  protected val increaseRate: Int
+  val increaseRate: Int
 
   def upgrade: Option[Edifice]
 
