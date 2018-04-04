@@ -9,5 +9,6 @@ case class Land(override val price: Int) extends Edifice {
 }
 
 object Land {
-  val increaseRate: Int = increaseRate
+  val land = new Land(0)
+  val increaseRate: Int = land.increaseRate
 }

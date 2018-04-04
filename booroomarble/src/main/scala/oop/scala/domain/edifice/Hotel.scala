@@ -9,5 +9,6 @@ case class Hotel(override val price: Int) extends Edifice {
 }
 
 object Hotel {
-  val increaseRate: Int = increaseRate
+  val hotel = new Hotel(0)
+  val increaseRate: Int = hotel.increaseRate
 }
