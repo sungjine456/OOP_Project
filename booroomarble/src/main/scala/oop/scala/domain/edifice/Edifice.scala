@@ -8,7 +8,7 @@ trait Edifice {
   val tollFee: Int = price * valueToDetermineToll
   val increaseRate: Int
 
-  def upgrade: Option[Edifice]
+  def upperEdifice: Option[Edifice]
 
   def subEdifice: Option[Edifice]
 }

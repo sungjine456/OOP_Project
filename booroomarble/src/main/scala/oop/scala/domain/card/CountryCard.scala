@@ -23,7 +23,7 @@ case class CountryCard(name: String, certificatePrice: Int) extends Card {
   // TODO: 가격보다 높은 돈을 넘겨받을 때 처리 방법 생각하기.
   // TODO: 가격을 Int 형으로 받는게 맞는건가?
   def edificeUpgrade(price: Int): Boolean = {
-    val upgradeEdifice = edifice.upgrade.get
+    val upgradeEdifice = edifice.upperEdifice.get
 
     var result = false
 
