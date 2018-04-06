@@ -20,19 +20,18 @@ case class CountryCard(name: String, certificatePrice: Int) extends Card {
     edificeValue(edifice, 0)
   }
 
-  // TODO: 가격보다 높은 돈을 넘겨받을 때 처리 방법 생각하기.
   // TODO: 가격을 Int 형으로 받는게 맞는건가?
-  def edificeUpgrade(price: Int): Boolean = {
-    val upgradeEdifice = edifice.upperEdifice.get
+  def edificeUpgrade(price: Int): Option[Int] = {
+    if (edifice.upgradeAbility(price)) {
+      val upgradeEdifice = edifice.upperEdifice.get
 
-    var result = false
-
-    if(upgradeEdifice.price == price){
       edifice = upgradeEdifice
 
-      result = true
-    }
-
-    result
+      if (upgradeEdifice.price == price) {
+        Some(0)
+      } else {
+        Some(price - upgradeEdifice.price)
+      }
+    } else None
   }
 }

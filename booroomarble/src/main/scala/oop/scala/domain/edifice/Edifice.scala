@@ -8,6 +8,8 @@ trait Edifice {
   val tollFee: Int = price * valueToDetermineToll
   val increaseRate: Int
 
+  def upgradeAbility(upgradePrice: Int): Boolean = upgradePrice >= price * increaseRate
+
   def upperEdifice: Option[Edifice]
 
   def subEdifice: Option[Edifice]
