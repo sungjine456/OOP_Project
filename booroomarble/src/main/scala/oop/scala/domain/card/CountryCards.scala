@@ -11,6 +11,8 @@ class CountryCards {
 
   def add(card: CountryCard): Unit = countryCards add card
 
+  def remove(card: CountryCard): Unit = countryCards remove card
+
   def isEmpty: Boolean =  countryCards.isEmpty
 
   def smallWorth: CountryCard =  countryCards.minBy(cc => cc.totalTollFee)

@@ -23,5 +23,13 @@ case class User(id: String) {
 
   def addCard(card: CountryCard): Unit = countryCards add card
 
+  def sellCard: CountryCard = {
+    val card = countryCards.smallWorth
+
+    countryCards remove card
+
+    card
+  }
+
   def finishPlaying: Boolean = maxMoney <= 0 && countryCards.isEmpty
 }
