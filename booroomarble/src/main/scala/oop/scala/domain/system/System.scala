@@ -6,12 +6,10 @@ import oop.scala.domain.dice.Dice
 import oop.scala.domain.map.Piece
 import oop.scala.domain.user.User
 
-import scala.collection.mutable.Map
-
 class System(userCount: Int) {
   private val map = oop.scala.domain.map.Map
   private var users: Seq[User] = Nil
-  private val usersPosition: Map[User, Int] = Map.empty
+  private var usersPosition: Map[User, Int] = Map.empty
   private var activeIndex = 0
 
   initialized()
