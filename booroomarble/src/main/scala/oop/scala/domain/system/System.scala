@@ -57,7 +57,7 @@ class System(userCount: Int) {
 
   private def dropUser(index: Int) {
     val user: User = users(index)
-    usersPosition - user
+    usersPosition -= user
     users = users.filter(u => user != u)
   }
 }
