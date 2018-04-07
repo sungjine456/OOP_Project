@@ -27,11 +27,7 @@ case class CountryCard(name: String, certificatePrice: Int) extends Card {
 
       edifice = upgradeEdifice
 
-      if (upgradeEdifice.price == price) {
-        Some(0)
-      } else {
-        Some(price - upgradeEdifice.price)
-      }
+      Some(price - upgradeEdifice.price)
     } else None
   }
 }
