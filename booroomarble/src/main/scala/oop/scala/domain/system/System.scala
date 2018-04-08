@@ -20,7 +20,7 @@ class System(userCount: Int) {
 
   @tailrec
   private def activeUser: User = {
-    if(users(activeIndex).finishPlaying) {
+    if (users(activeIndex).finishPlaying) {
       dropUser(activeIndex)
 
       activeUser
@@ -31,7 +31,7 @@ class System(userCount: Int) {
     val cast: Int = Dice.cast
     val user = activeUser
 
-    usersPosition(user) = usersPosition(user) + cast
+    usersPosition + (user -> (usersPosition(user) + cast))
 
     map.moveTo(usersPosition(user), user)
 
@@ -44,7 +44,7 @@ class System(userCount: Int) {
 
     val movedPosition = map.MaxMapSize + piecePosition - usersPosition(user)
 
-    usersPosition(user) = movedPosition
+    usersPosition + (user -> movedPosition)
 
     changeActiveIndex
   }
