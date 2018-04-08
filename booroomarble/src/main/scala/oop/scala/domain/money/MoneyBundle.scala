@@ -13,7 +13,7 @@ class MoneyBundle(money: Int = 0) {
     FiveHundredThousandWon -> 0
   )
 
-  def maxMoney: Int =  moneyBundle.map(m => m._1.value * m._2).sum
+  def maxMoney: Int = moneyBundle.map(m => m._1.value * m._2).sum
 
   val keySet: Seq[Money] = Seq(FiveHundredThousandWon, HundredThousandWon, FiftyThousandWon,
     TenThousandWon, FiveThousandWon, ThousandWon)
@@ -29,21 +29,23 @@ class MoneyBundle(money: Int = 0) {
   }
 
   def put(bundle: MoneyBundle): Unit = {
-    for (key <- keySet)  put(key, bundle.get(key))
+    for (key <- keySet) put(key, bundle.get(key))
   }
 
-  def withdraw[A <: Money](money: A, value: Int): Unit = {
-    if (false) {
+  def withdraw[A <: Money](money: A, value: Int): MoneyBundle = {
+    if (moneyBundle(money) < value) {
       // 가지고 있는 금액보다 많이 뺄 때
       // TODO: 돈에 대한 상위 개념을 추가하여 가지고 있는 money 보다 들어온 금액이 많을 때
       // TODO: 상위 단위의 돈을 찾을 수 있도록 구조 변경
     }
     val updateValue = moneyBundle(money) - value
 
-    moneyBundle = moneyBundle + (money -> updateValue)
+    moneyBundle += money -> updateValue
+
+    MoneyBundle(money.value * value)
   }
 
-  def get(moneyKind: Money): Int =  moneyBundle(moneyKind)
+  def get(moneyKind: Money): Int = moneyBundle(moneyKind)
 
   def isEmpty: Boolean = maxMoney == 0
 
