@@ -25,4 +25,28 @@ class MoneyBundleTest extends FlatSpec {
     assert(moneyBundle.withdraw(TenThousandWon, 1).maxMoney === 10000)
     assert(moneyBundle.maxMoney === 0)
   }
+
+  "+" should "add each value" in {
+    val moneyBundle: MoneyBundle = MoneyBundle()
+    moneyBundle.put(ThousandWon)
+    moneyBundle.put(ThousandWon)
+    moneyBundle.put(ThousandWon)
+    moneyBundle.put(TenThousandWon)
+    moneyBundle.put(FiveThousandWon)
+
+    val addMoneyBundle: MoneyBundle = MoneyBundle()
+    addMoneyBundle.put(ThousandWon)
+    addMoneyBundle.put(ThousandWon)
+    addMoneyBundle.put(TenThousandWon)
+    addMoneyBundle.put(FiveThousandWon)
+    addMoneyBundle.put(FiveThousandWon)
+
+    val newMoneyBundle = moneyBundle + addMoneyBundle
+    assert(newMoneyBundle.get(FiveHundredThousandWon) === 0)
+    assert(newMoneyBundle.get(HundredThousandWon) === 0)
+    assert(newMoneyBundle.get(FiftyThousandWon) === 0)
+    assert(newMoneyBundle.get(TenThousandWon) === 2)
+    assert(newMoneyBundle.get(FiveThousandWon) === 3)
+    assert(newMoneyBundle.get(ThousandWon) === 5)
+  }
 }

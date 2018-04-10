@@ -50,7 +50,9 @@ class MoneyBundle(money: Int = 0) {
   def isEmpty: Boolean = maxMoney == 0
 
   def +(addMoneyBundle: MoneyBundle): MoneyBundle = {
-    MoneyBundle(addMoneyBundle.maxMoney + maxMoney)
+    keySet.foreach(m => moneyBundle += m -> (moneyBundle(m) + addMoneyBundle.moneyBundle(m)))
+
+    this
   }
 
   def -(minusMoneyBundle: MoneyBundle): MoneyBundle = {
