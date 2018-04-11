@@ -29,12 +29,9 @@ class Wallet {
       return None
     }
 
-    val backMoney = receiveMoney - maxMoney
+    moneyBundle.put(maxMoney)
 
-    moneyBundle.put(receiveMoney)
-
-    if (backMoney.isEmpty) Some(MoneyBundle())
-    else Option(MoneyCalculation.minusValueToMoneyBundle(backMoney, moneyBundle))
+    Some(receiveMoney - maxMoney)
   }
 
   /**
