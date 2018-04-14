@@ -1,5 +1,7 @@
 package oop.scala.domain.money
 
+import oop.scala.domain.bank.Bank
+
 /**
  * 돈을 주고 받을 때 사용하기 위한 클래스
  */
@@ -55,8 +57,48 @@ class MoneyBundle(money: Int = 0) {
     this
   }
 
+  // TODO: 돈이 모자를 때에 대한 전반적인 고민이 필요하다....
   def -(minusMoneyBundle: MoneyBundle): MoneyBundle = {
-    MoneyBundle(maxMoney - minusMoneyBundle.maxMoney)
+    keySet.foreach(m => {
+      def nonEmptyParentMoney(money: Money): Option[Money] = {
+        money.parent match {
+          case parentMoney if moneyBundle(parentMoney.get) != 0 => parentMoney
+          case parentMoney => nonEmptyParentMoney(parentMoney.get)
+          case None => None
+        }
+      }
+
+      def changeMoney(money: Money) {
+        moneyBundle += money -> (moneyBundle(money) - 1)
+        moneyBundle += money.child.get -> Bank.changeMoney(money).get.moneyBundle(money.child.get)
+      }
+
+      val value = moneyBundle(m) - minusMoneyBundle.moneyBundle(m)
+
+      if(value >= 0) {
+        moneyBundle += m -> value
+      } else {
+        def minusMoney(subtractMoney: Money) {
+          subtractMoney match {
+            case money if money.child.isEmpty => None // 돈이 없을 때
+            case money if m != money.child.get =>
+              changeMoney(money)
+              minusMoney(money.child.get)
+            case money =>
+              val childMoney = money.child.get
+              changeMoney(money)
+              moneyBundle += childMoney -> (moneyBundle(childMoney) - minusMoneyBundle.moneyBundle(childMoney))
+          }
+        }
+
+        nonEmptyParentMoney(m) match {
+          case Some(subtractMoney) => minusMoney(subtractMoney)
+          case None => None // 돈이 없을 때...
+        }
+      }
+    })
+
+    this
   }
 
   def >=(compareMoneyBundle: MoneyBundle): Boolean = {
