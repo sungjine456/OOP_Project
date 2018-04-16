@@ -26,6 +26,13 @@ class MoneyBundleTest extends FlatSpec {
     assert(moneyBundle.maxMoney === 0)
   }
 
+  it should "after changing money with an int, withdraw money by int and return moneyBundle" in {
+    val moneyBundle = MoneyBundle(10000)
+
+    assert(moneyBundle.withdraw(FiveThousandWon, 1).get.maxMoney === 5000)
+    assert(moneyBundle.maxMoney === 5000)
+  }
+
   "+" should "add each value" in {
     val moneyBundle: MoneyBundle = MoneyBundle()
     moneyBundle.put(ThousandWon)
